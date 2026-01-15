@@ -81,7 +81,7 @@
 ## 개발 시 꼭 해야할 일
 
 - DEVELOPMENT_PLAN.md 파일에 해야할 일과 완수한 일을 기록할 것
-- AGENT_PM.md 파일의 [현재 업무] 섹션을 확인하여 부여된 업무 수행
+- .claude/agents/manager.md 파일의 [현재 업무] 섹션을 확인하여 부여된 업무 수행
 
 ---
 

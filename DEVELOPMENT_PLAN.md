@@ -67,7 +67,7 @@ src/
 
 ### 6. 프로젝트 매니저 에이전트 설정 ✅
 
-- [x] AGENT_PM.md 파일 생성
+- [x] .claude/agents/manager.md 파일 생성
 - [x] 업무 부여 및 수행 프로토콜 정의
 - [x] 업무 히스토리 관리 체계 구축
 - [x] CLAUDE.md에 에이전트 참조 추가

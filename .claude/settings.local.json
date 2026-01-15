@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nrefact: PM 에이전트 파일 경로 재구성\n\n- AGENT_PM.md → .claude/agents/manager.md 이동 및 이름 변경\n- CLAUDE.md, DEVELOPMENT_PLAN.md 참조 경로 업데이트\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+    ]
+  }
+}
