@@ -1,8 +1,165 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-center p-24">
-      <h1 className="text-4xl font-bold mb-4">Mytem</h1>
-      <p className="text-lg text-gray-600">나의 소유물 관리 서비스</p>
-    </main>
+    <div className="min-h-screen bg-black text-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/10">
+        <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+          <Link href="/" className="text-xl font-semibold tracking-tight">
+            Mytem
+          </Link>
+          <div className="flex items-center gap-4">
+            <Link
+              href="/login"
+              className="text-sm text-white/70 hover:text-white transition-colors"
+            >
+              로그인
+            </Link>
+            <Link
+              href="/signup"
+              className="text-sm px-4 py-2 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-colors"
+            >
+              시작하기
+            </Link>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <main className="relative pt-32 pb-20 px-6">
+        {/* Gradient Background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-blue-600/20 blur-[120px] rounded-full" />
+        </div>
+
+        <div className="relative max-w-4xl mx-auto text-center">
+          {/* Badge */}
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-medium text-white/60 border border-white/10 rounded-full">
+            <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
+            소유물 관리의 새로운 방법
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+            당신의 모든 것을
+            <br />
+            한 곳에서
+          </h1>
+
+          {/* Subheadline */}
+          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
+            소유물을 등록하고, 관리하고, 시각화하세요.
+            <br className="hidden md:block" />
+            AI가 만들어주는 픽토그램으로 더욱 직관적으로.
+          </p>
+
+          {/* CTA Buttons */}
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <Link
+              href="/signup"
+              className="w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-all hover:scale-105"
+            >
+              무료로 시작하기
+            </Link>
+            <Link
+              href="/demo"
+              className="w-full sm:w-auto px-8 py-3 border border-white/20 text-white rounded-full font-medium hover:bg-white/5 transition-all"
+            >
+              데모 둘러보기
+            </Link>
+          </div>
+        </div>
+
+        {/* Features Section */}
+        <section className="relative mt-32 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8">
+            {/* Feature 1 */}
+            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+                <svg
+                  className="w-5 h-5 text-white/80"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">체계적인 관리</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                소유물을 카테고리별로 분류하고 개수와 상세 정보를 한눈에 파악하세요.
+              </p>
+            </div>
+
+            {/* Feature 2 */}
+            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+                <svg
+                  className="w-5 h-5 text-white/80"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">픽토그램 검색</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                키워드로 기본 픽토그램을 검색하고 소유물에 바로 적용하세요.
+              </p>
+            </div>
+
+            {/* Feature 3 */}
+            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+                <svg
+                  className="w-5 h-5 text-white/80"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={1.5}
+                    d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"
+                  />
+                </svg>
+              </div>
+              <h3 className="text-lg font-semibold mb-2">AI 이미지 생성</h3>
+              <p className="text-sm text-white/50 leading-relaxed">
+                원하는 픽토그램이 없다면? AI가 텍스트 설명으로 맞춤 이미지를 만들어드려요.
+              </p>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="border-t border-white/10 py-8 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
+          <p>&copy; 2025 Mytem. All rights reserved.</p>
+          <div className="flex items-center gap-6">
+            <Link href="/privacy" className="hover:text-white/60 transition-colors">
+              개인정보처리방침
+            </Link>
+            <Link href="/terms" className="hover:text-white/60 transition-colors">
+              이용약관
+            </Link>
+          </div>
+        </div>
+      </footer>
+    </div>
   );
 }
