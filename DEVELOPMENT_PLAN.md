@@ -78,6 +78,22 @@ src/
 - [x] CLAUDE.md에 주요 시나리오 정의
 - [x] DEVELOPMENT_PLAN.md 업데이트
 
+### 8. Supabase 연동 및 초기 설정 ✅
+
+- [x] Supabase 패키지 설치 (@supabase/supabase-js, @supabase/ssr)
+- [x] 환경 변수 예제 파일 생성 (.env.local.example)
+- [x] Supabase 클라이언트 설정
+  - [x] src/lib/supabase/client.ts (브라우저용)
+  - [x] src/lib/supabase/server.ts (서버용 + Admin)
+- [x] TypeScript 타입 정의 (src/types/database.types.ts)
+- [x] 데이터베이스 스키마 SQL 마이그레이션 파일 생성
+  - [x] profiles 테이블 (사용자 프로필)
+  - [x] items 테이블 (소유물)
+  - [x] pictograms 테이블 (기본 픽토그램)
+  - [x] custom_pictograms 테이블 (커스텀 픽토그램)
+- [x] RLS(Row Level Security) 정책 설정
+- [x] 자동 트리거 설정 (updated_at 갱신, 사용자 프로필 자동 생성)
+
 ---
 
 ## 진행 중인 작업
@@ -90,13 +106,15 @@ src/
 
 ### Phase 1: 데이터베이스 및 인증
 
-- [ ] Supabase 프로젝트 생성 및 연동
-- [ ] 데이터베이스 스키마 설계
-  - [ ] users 테이블 (사용자 정보)
-  - [ ] items 테이블 (소유물: 이름, 개수, 설명, 이미지ID)
-  - [ ] pictograms 테이블 (픽토그램 이미지: 키워드, 이미지URL, 타입)
-- [ ] Supabase Auth 설정
-- [ ] 환경 변수 설정 (.env.local)
+- [x] Supabase 프로젝트 연동 (클라이언트 설정 완료)
+- [x] 데이터베이스 스키마 설계
+  - [x] profiles 테이블 (사용자 프로필)
+  - [x] items 테이블 (소유물: 이름, 개수, 설명, 이미지URL, 이미지타입)
+  - [x] pictograms 테이블 (기본 픽토그램: 이름, 키워드, 이미지URL, 카테고리)
+  - [x] custom_pictograms 테이블 (커스텀 픽토그램)
+- [ ] Supabase 대시보드에서 프로젝트 생성 (수동 작업 필요)
+- [ ] Supabase 대시보드에서 마이그레이션 SQL 실행 (수동 작업 필요)
+- [x] 환경 변수 설정 (.env.local.example 생성됨)
 
 ### Phase 2: 기본 UI 컴포넌트
 
