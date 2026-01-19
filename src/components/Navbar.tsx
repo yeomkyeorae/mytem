@@ -37,6 +37,12 @@ export default function Navbar() {
               >
                 대시보드
               </Link>
+              <Link
+                href="/items"
+                className="text-sm text-white/70 hover:text-white transition-colors"
+              >
+                내 아이템
+              </Link>
               <button
                 onClick={handleSignOut}
                 className="text-sm px-4 py-2 border border-white/20 text-white/70 rounded-full font-medium hover:bg-white/5 hover:text-white transition-colors"
