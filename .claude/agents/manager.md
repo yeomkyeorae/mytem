@@ -88,7 +88,10 @@
 | 2025-01-19 | Phase 4 픽토그램 API 구현 (백엔드) | 완료 | @backend에게 위임, Iconify API 연동 |
 | 2025-01-19 | Phase 4 픽토그램 UI 구현 (프론트) | 완료 | @frontend에게 위임, PictogramPicker 컴포넌트 |
 | 2025-01-19 | Phase 2-4 PR 생성 및 업로드 | 완료 | PR #3 생성, 4개 논리적 커밋으로 구성 |
-| 2025-01-19 | Phase 5 소유물 관리 CRUD 구현 | 완료 | 백엔드 API + 프론트엔드 UI 완성 |
+| 2025-01-19 | Phase 5 아이템 관리 CRUD 구현 | 완료 | 백엔드 API + 프론트엔드 UI 완성 |
+| 2026-01-19 | Navbar 컴포넌트 재사용 리팩토링 | 완료 | @frontend에게 위임, 모든 페이지에 Navbar 적용, "/" 접근 제어 |
+| 2026-01-19 | "소유물" → "아이템" 용어 통일 | 완료 | @frontend에게 위임, 전체 20개 파일 용어 변경 |
+| 2026-01-19 | Navbar에 "내 아이템" 메뉴 추가 | 완료 | @frontend에게 위임, 로그인 시 "내 아이템" 링크 추가 |
 
 ---
 
@@ -106,7 +109,7 @@
 1. Supabase 프로젝트 연동을 위한 환경 설정
 2. 데이터베이스 스키마 설계 및 생성
    - users 테이블
-   - items 테이블 (소유물)
+   - items 테이블 (아이템)
    - categories 테이블
 3. Supabase 클라이언트 설정
 
@@ -141,10 +144,10 @@
 
 ## 프로젝트 컨텍스트
 
-- **프로젝트명**: Mytem (나의 소유물 관리)
+- **프로젝트명**: Mytem (나의 아이템 관리)
 - **기술 스택**: Next.js 14, React 18, TailwindCSS, shadcn/ui, Supabase, Iconify API
 - **현재 단계**: Phase 6 (AI 픽토그램 생성) 준비 중
-- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램), Phase 5 (소유물 CRUD)
+- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램), Phase 5 (아이템 CRUD)
 
 ### 다음 수동 작업 (사용자 수행 필요)
 

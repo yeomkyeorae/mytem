@@ -2,16 +2,16 @@
 
 ## 프로젝트 개요
 
-인증된 사용자가 본인의 소유물을 체계적으로 관리할 수 있는 웹 애플리케이션
+인증된 사용자가 본인의 아이템을 체계적으로 관리할 수 있는 웹 애플리케이션
 
 ### 주요 기능
 
-1. **소유물 관리 (CRUD)**: 소유물 등록, 조회, 수정, 삭제
+1. **아이템 관리 (CRUD)**: 아이템 등록, 조회, 수정, 삭제
 2. **기본 픽토그램 제공**: 일반적인 소유 항목(티셔츠, 신발, 책 등)에 대한 기본 이미지
 3. **AI 픽토그램 생성**: 텍스트 설명으로 커스텀 픽토그램 이미지 생성
-4. **키워드 검색**: 소유물 키워드 검색으로 픽토그램 이미지 조회
+4. **키워드 검색**: 아이템 키워드 검색으로 픽토그램 이미지 조회
 
-### 소유물 속성
+### 아이템 속성
 
 - 이미지 (픽토그램)
 - 이름
@@ -88,7 +88,7 @@ src/
 - [x] TypeScript 타입 정의 (src/types/database.types.ts)
 - [x] 데이터베이스 스키마 SQL 마이그레이션 파일 생성
   - [x] profiles 테이블 (사용자 프로필)
-  - [x] items 테이블 (소유물)
+  - [x] items 테이블 (아이템)
   - [x] pictograms 테이블 (기본 픽토그램)
   - [x] custom_pictograms 테이블 (커스텀 픽토그램)
 - [x] RLS(Row Level Security) 정책 설정
@@ -161,7 +161,7 @@ src/
 - [x] Supabase 프로젝트 연동 (클라이언트 설정 완료)
 - [x] 데이터베이스 스키마 설계
   - [x] profiles 테이블 (사용자 프로필)
-  - [x] items 테이블 (소유물: 이름, 개수, 설명, 이미지URL, 이미지타입)
+  - [x] items 테이블 (아이템: 이름, 개수, 설명, 이미지URL, 이미지타입)
   - [x] pictograms 테이블 (기본 픽토그램: 이름, 키워드, 이미지URL, 카테고리)
   - [x] custom_pictograms 테이블 (커스텀 픽토그램)
 - [ ] Supabase 대시보드에서 프로젝트 생성 (수동 작업 필요)
@@ -203,25 +203,54 @@ src/
   - [x] 카테고리 필터
   - [x] 테스트 페이지 (/pictograms/test)
 
-### Phase 5: 소유물 관리 (CRUD) ✅
+### Phase 5: 아이템 관리 (CRUD) ✅
 
 **백엔드 API**:
-- [x] GET /api/items - 소유물 목록 조회
-- [x] POST /api/items - 소유물 등록
-- [x] GET /api/items/[id] - 소유물 상세 조회
-- [x] PUT /api/items/[id] - 소유물 수정
-- [x] DELETE /api/items/[id] - 소유물 삭제
+- [x] GET /api/items - 아이템 목록 조회
+- [x] POST /api/items - 아이템 등록
+- [x] GET /api/items/[id] - 아이템 상세 조회
+- [x] PUT /api/items/[id] - 아이템 수정
+- [x] DELETE /api/items/[id] - 아이템 삭제
 
 **프론트엔드**:
-- [x] 소유물 목록 페이지 (/items)
-- [x] 소유물 상세 페이지 (/items/[id])
-- [x] 소유물 등록 기능 (/items/new)
+- [x] 아이템 목록 페이지 (/items)
+- [x] 아이템 상세 페이지 (/items/[id])
+- [x] 아이템 등록 기능 (/items/new)
   - [x] PictogramPicker 연동
   - [x] 이름, 개수, 설명 입력
-- [x] 소유물 수정 기능 (/items/[id]/edit)
-- [x] 소유물 삭제 기능
+- [x] 아이템 수정 기능 (/items/[id]/edit)
+- [x] 아이템 삭제 기능
 - [x] ItemCard 컴포넌트
 - [x] ItemForm 컴포넌트
+
+### 12. Navbar 컴포넌트 리팩토링 ✅
+
+- [x] 모든 페이지에서 Navbar.tsx 재사용
+  - [x] /dashboard 페이지 - 커스텀 header 제거, Navbar 적용
+  - [x] /items 페이지 - 커스텀 header 제거, Navbar 적용
+  - [x] /login 페이지 - 간단한 header 제거, Navbar 적용
+  - [x] /signup 페이지 - header 제거, Navbar 적용
+- [x] 코드 중복 제거 및 일관성 개선
+- [x] "/" 경로 접근 제어 추가
+  - [x] middleware.ts에서 로그인 사용자는 /dashboard로 리다이렉트
+  - [x] 비로그인 사용자만 "/" 접근 가능
+
+### 13. 용어 통일 작업 ✅
+
+- [x] "소유물" → "아이템"으로 전체 용어 변경 (총 20개 파일)
+  - [x] 문서 파일 6개 (CLAUDE.md, DEVELOPMENT_PLAN.md, 에이전트 파일들)
+  - [x] 프론트엔드 페이지 및 컴포넌트 10개
+  - [x] 백엔드 API 2개
+  - [x] 데이터베이스 스키마 및 타입 2개 (주석만 변경)
+- [x] 사용자 UI 텍스트 일관성 확보
+- [x] 데이터베이스 호환성 유지 (테이블명/컬럼명은 변경하지 않음)
+
+### 14. Navbar 네비게이션 개선 ✅
+
+- [x] 로그인 상태 시 "내 아이템" 메뉴 추가
+  - [x] Navbar.tsx에서 "대시보드" 옆에 "내 아이템" 링크 추가
+  - [x] /items 경로로 연결
+  - [x] 일관된 스타일 적용
 
 ### Phase 6: AI 픽토그램 생성
 
