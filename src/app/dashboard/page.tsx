@@ -1,18 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import Navbar from "@/components/Navbar";
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const { user, isLoading, signOut } = useAuth();
-
-  const handleSignOut = async () => {
-    await signOut();
-    router.push("/");
-    router.refresh();
-  };
+  const { isLoading } = useAuth();
 
   if (isLoading) {
     return (
@@ -45,35 +38,19 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Header */}
-      <header className="border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
-            Mytem
-          </Link>
-          <div className="flex items-center gap-4">
-            <span className="text-sm text-white/60">{user?.email}</span>
-            <button
-              onClick={handleSignOut}
-              className="px-4 py-2 text-sm border border-white/10 rounded-lg text-white/70 hover:bg-white/5 hover:text-white transition-all"
-            >
-              로그아웃
-            </button>
-          </div>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-8">
+      <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-8 pt-24">
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">대시보드</h1>
-          <p className="text-white/50">나의 소유물을 관리하세요</p>
+          <p className="text-white/50">나의 아이템을 관리하세요</p>
         </div>
 
         {/* Quick Stats */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
           <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02]">
-            <p className="text-sm text-white/50 mb-1">전체 소유물</p>
+            <p className="text-sm text-white/50 mb-1">전체 아이템</p>
             <p className="text-3xl font-bold">0</p>
           </div>
           <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02]">
@@ -111,8 +88,8 @@ export default function DashboardPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium">소유물 등록</p>
-                  <p className="text-sm text-white/50">새로운 소유물을 추가하세요</p>
+                  <p className="font-medium">아이템 등록</p>
+                  <p className="text-sm text-white/50">새로운 아이템을 추가하세요</p>
                 </div>
               </div>
             </Link>
@@ -162,9 +139,9 @@ export default function DashboardPage() {
               />
             </svg>
           </div>
-          <h3 className="text-lg font-medium mb-2">아직 등록된 소유물이 없습니다</h3>
+          <h3 className="text-lg font-medium mb-2">아직 등록된 아이템이 없습니다</h3>
           <p className="text-white/50 mb-6">
-            첫 번째 소유물을 등록하고 관리를 시작하세요
+            첫 번째 아이템을 등록하고 관리를 시작하세요
           </p>
           <Link
             href="/items/new"
@@ -183,7 +160,7 @@ export default function DashboardPage() {
                 d="M12 4v16m8-8H4"
               />
             </svg>
-            소유물 등록하기
+            아이템 등록하기
           </Link>
         </div>
       </main>

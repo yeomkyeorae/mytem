@@ -6,11 +6,12 @@ import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import ItemCard from "@/components/ItemCard";
+import Navbar from "@/components/Navbar";
 import type { Item } from "@/types/database.types";
 
 export default function ItemsPage() {
   const router = useRouter();
-  const { user, isLoading: authLoading, isAuthenticated } = useAuth();
+  const { isLoading: authLoading, isAuthenticated } = useAuth();
   const [items, setItems] = useState<Item[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -22,7 +23,7 @@ export default function ItemsPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // 소유물 목록 가져오기
+  // 아이템 목록 가져오기
   useEffect(() => {
     if (isAuthenticated) {
       fetchItems();
@@ -41,7 +42,7 @@ export default function ItemsPage() {
           router.push("/login");
           return;
         }
-        throw new Error("소유물 목록을 불러오는데 실패했습니다.");
+        throw new Error("아이템 목록을 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -90,35 +91,18 @@ export default function ItemsPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
-            Mytem
-          </Link>
-          <nav className="flex items-center gap-4">
-            <Link
-              href="/dashboard"
-              className="text-white/60 hover:text-white transition-colors"
-            >
-              대시보드
-            </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-white/60 text-sm">{user?.email}</span>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-8">
+      <main className="max-w-6xl mx-auto px-6 py-8 pt-24">
         {/* Page Header */}
         <div className="flex items-center justify-between mb-8">
           <div>
-            <h1 className="text-2xl font-bold mb-1">내 소유물</h1>
+            <h1 className="text-2xl font-bold mb-1">내 아이템</h1>
             <p className="text-white/50">
               {items.length > 0
-                ? `총 ${items.length}개의 소유물을 관리하고 있습니다.`
-                : "등록된 소유물이 없습니다."}
+                ? `총 ${items.length}개의 아이템을 관리하고 있습니다.`
+                : "등록된 아이템이 없습니다."}
             </p>
           </div>
           <Link href="/items/new">
@@ -132,7 +116,7 @@ export default function ItemsPage() {
               >
                 <path d="M12 5v14M5 12h14" />
               </svg>
-              새 소유물 등록
+              새 아이템 등록
             </Button>
           </Link>
         </div>
@@ -173,7 +157,7 @@ export default function ItemsPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">소유물을 불러오는 중...</span>
+              <span className="text-white/60">아이템을 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -202,9 +186,9 @@ export default function ItemsPage() {
                 <path d="M3 9h18M9 21V9" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold mb-2">아직 등록된 소유물이 없습니다</h2>
+            <h2 className="text-xl font-semibold mb-2">아직 등록된 아이템이 없습니다</h2>
             <p className="text-white/50 mb-6 text-center">
-              첫 번째 소유물을 등록하고 체계적으로 관리해보세요.
+              첫 번째 아이템을 등록하고 체계적으로 관리해보세요.
             </p>
             <Link href="/items/new">
               <Button className="bg-white text-black hover:bg-white/90">
@@ -217,7 +201,7 @@ export default function ItemsPage() {
                 >
                   <path d="M12 5v14M5 12h14" />
                 </svg>
-                첫 소유물 등록하기
+                첫 아이템 등록하기
               </Button>
             </Link>
           </div>

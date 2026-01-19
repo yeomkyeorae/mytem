@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
+import Navbar from "@/components/Navbar";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -56,21 +57,16 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
-      {/* Header */}
-      <header className="p-6">
-        <Link href="/" className="text-xl font-semibold tracking-tight">
-          Mytem
-        </Link>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="flex-1 flex items-center justify-center px-6">
+      <main className="flex-1 flex items-center justify-center px-6 pt-16">
         <div className="w-full max-w-sm">
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">다시 만나서 반가워요</h1>
             <p className="text-white/50 text-sm">
-              계정에 로그인하여 소유물을 관리하세요
+              계정에 로그인하여 아이템을 관리하세요
             </p>
           </div>
 
