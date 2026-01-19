@@ -1,19 +1,57 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState, useEffect } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function LoginPage() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // URL 파라미터에서 에러 확인
+  useEffect(() => {
+    const errorParam = searchParams.get("error");
+    if (errorParam === "auth_callback_error") {
+      setError("인증 처리 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
+  }, [searchParams]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setError("");
     setIsLoading(true);
-    // TODO: Supabase Auth 연동
-    console.log("Login attempt:", { email, password });
-    setTimeout(() => setIsLoading(false), 1000);
+
+    try {
+      const supabase = createClient();
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+
+      if (signInError) {
+        if (signInError.message.includes("Invalid login credentials")) {
+          setError("이메일 또는 비밀번호가 올바르지 않습니다.");
+        } else if (signInError.message.includes("Email not confirmed")) {
+          setError("이메일 인증이 완료되지 않았습니다. 메일함을 확인해주세요.");
+        } else {
+          setError(signInError.message);
+        }
+        return;
+      }
+
+      // 로그인 성공 시 대시보드로 이동
+      router.push("/dashboard");
+      router.refresh();
+    } catch {
+      setError("로그인 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -35,6 +73,13 @@ export default function LoginPage() {
               계정에 로그인하여 소유물을 관리하세요
             </p>
           </div>
+
+          {/* Error Message */}
+          {error && (
+            <div className="mb-4 p-3 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400 text-sm">
+              {error}
+            </div>
+          )}
 
           {/* Login Form */}
           <form onSubmit={handleSubmit} className="space-y-4">

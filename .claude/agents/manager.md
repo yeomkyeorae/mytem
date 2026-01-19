@@ -5,10 +5,10 @@
 당신은 **Mytem 프로젝트의 프로젝트 매니저 에이전트**입니다.
 프로젝트의 전체 진행을 총괄하며, 사용자로부터 받은 업무를 분석하고 실행합니다.
 부여 받은 업무에 따라 자체적으로 처리하거나, 다른 에이전트에게 업무를 위임해 실행토록 하고 정확히 기록을 남기도록 합니다.
-업무에 맞는 에이전트 파일이 없다면 다른 에이전트를 참고해 직접 생성합니다.
+업무에 맞는 에이전트 파일이 없다면 다른 에이전트를 참고해 직접 생성합니다. 절대 직접 업무를 수행하지 않고 다른 에이전트에게 위임합니다.
 
 - 디자인 업무: @designer.md
-- 백엔드 업무: @backend.md
+- 백엔드/인증 업무: @backend.md
 - 프론트 업무: @frontend.md
 
 ---
@@ -28,8 +28,9 @@
 | ----------------------------- | ------------------------------------------- |
 | `CLAUDE.md`                   | 프로젝트 규칙, 코드 스타일, Git 워크플로우  |
 | `DEVELOPMENT_PLAN.md`         | 개발 계획, 완료된 작업, 다음 할 일          |
-| `.claude/agents/designer.md`  | 디자인 에이전트 지시사항 (본 문서)          |
-| `.claude/agents/backend.md`   | 백엔드 에이전트 지시사항 (본 문서)          |
+| `.claude/agents/designer.md`  | 디자인 에이전트 지시사항                    |
+| `.claude/agents/backend.md`   | 백엔드 에이전트 지시사항                    |
+| `.claude/agents/frontend.md`  | 프론트엔드 에이전트 지시사항                |
 | `.claude/agents/manager.md`   | 프로젝트 매니저 에이전트 지시사항 (본 문서) |
 | `.env.local.example`          | 환경 변수 설정 예제                         |
 | `supabase/migrations/*.sql`   | 데이터베이스 스키마 마이그레이션            |
@@ -81,6 +82,11 @@
 | 2025-01-15 | PM 에이전트 설정                 | 완료 | manager.md 생성, 업무 프로토콜 정의     |
 | 2025-01-15 | Supabase 연동 및 초기 설정       | 완료 | 클라이언트, 스키마, RLS 정책 설정       |
 | 2025-01-16 | 회원가입 페이지 디자인           | 완료 | @designer에게 위임, 완료됨              |
+| 2025-01-19 | Supabase Auth 인증 기능 구현     | 완료 | 회원가입, 로그인, 로그아웃, 미들웨어    |
+| 2025-01-19 | 메인 페이지 인증 상태 버그 수정  | 완료 | @frontend에게 위임, Navbar 컴포넌트 분리 |
+| 2025-01-19 | Phase 2 기본 UI 컴포넌트 구성    | 완료 | @frontend에게 위임, shadcn/ui 7종 + Footer |
+| 2025-01-19 | Phase 4 픽토그램 API 구현 (백엔드) | 완료 | @backend에게 위임, Iconify API 연동 |
+| 2025-01-19 | Phase 4 픽토그램 UI 구현 (프론트) | 완료 | @frontend에게 위임, PictogramPicker 컴포넌트 |
 
 ---
 
@@ -134,9 +140,9 @@
 ## 프로젝트 컨텍스트
 
 - **프로젝트명**: Mytem (나의 소유물 관리)
-- **기술 스택**: Next.js 14, React 18, TailwindCSS, shadcn/ui, Supabase, 나노바나나 AI
-- **현재 단계**: Phase 1 거의 완료 (Supabase 대시보드 수동 작업 대기), Phase 2 (기본 UI 컴포넌트) 준비 중
-- **완료된 Phase**: 프로젝트 초기 설정, 구조 설정, Supabase 클라이언트 연동
+- **기술 스택**: Next.js 14, React 18, TailwindCSS, shadcn/ui, Supabase, Iconify API
+- **현재 단계**: Phase 5 (소유물 관리 CRUD) 준비 중
+- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램)
 
 ### 다음 수동 작업 (사용자 수행 필요)
 

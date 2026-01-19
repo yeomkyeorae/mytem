@@ -2,7 +2,17 @@
   "permissions": {
     "allow": [
       "Bash(git add:*)",
-      "Bash(git commit -m \"$\\(cat <<''EOF''\nrefact: PM 에이전트 파일 경로 재구성\n\n- AGENT_PM.md → .claude/agents/manager.md 이동 및 이름 변경\n- CLAUDE.md, DEVELOPMENT_PLAN.md 참조 경로 업데이트\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")"
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nrefact: PM 에이전트 파일 경로 재구성\n\n- AGENT_PM.md → .claude/agents/manager.md 이동 및 이름 변경\n- CLAUDE.md, DEVELOPMENT_PLAN.md 참조 경로 업데이트\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)",
+      "WebFetch(domain:linear.app)",
+      "Bash(yarn build)",
+      "Bash(yarn add:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nfeat: 디자인 에이전트 문서 생성\n\n- 디자인 에이전트 역할 및 핵심 책임 정의\n- Linear.app 스타일 기반 디자인 시스템 구축\n- 색상 팔레트, 타이포그래피, 버튼/폼 스타일 정의\n- 업무 템플릿 및 작성 가이드 포함\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git commit:*)",
+      "Bash(git checkout:*)",
+      "Bash(gh pr create:*)",
+      "mcp__github__create_pull_request",
+      "Bash(npx shadcn@latest add button card input dialog form select toast --yes)"
     ]
   }
 }

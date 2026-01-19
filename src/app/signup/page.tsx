@@ -1,14 +1,18 @@
 "use client";
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
 
 export default function SignupPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -27,10 +31,78 @@ export default function SignupPage() {
     }
 
     setIsLoading(true);
-    // TODO: Supabase Auth 연동
-    console.log("Signup attempt:", { email, password });
-    setTimeout(() => setIsLoading(false), 1000);
+
+    try {
+      const supabase = createClient();
+      const { error: signUpError } = await supabase.auth.signUp({
+        email,
+        password,
+        options: {
+          emailRedirectTo: `${window.location.origin}/auth/callback`,
+        },
+      });
+
+      if (signUpError) {
+        if (signUpError.message.includes("already registered")) {
+          setError("이미 등록된 이메일입니다.");
+        } else {
+          setError(signUpError.message);
+        }
+        return;
+      }
+
+      // 이메일 확인 필요 메시지 표시
+      setSuccess(true);
+    } catch {
+      setError("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  // 회원가입 성공 시 이메일 확인 안내 화면
+  if (success) {
+    return (
+      <div className="min-h-screen bg-black text-white flex flex-col">
+        <header className="p-6">
+          <Link href="/" className="text-xl font-semibold tracking-tight">
+            Mytem
+          </Link>
+        </header>
+        <main className="flex-1 flex items-center justify-center px-6">
+          <div className="w-full max-w-sm text-center">
+            <div className="mb-6">
+              <svg
+                className="w-16 h-16 mx-auto text-green-500"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <h1 className="text-2xl font-bold mb-4">이메일을 확인해주세요</h1>
+            <p className="text-white/60 mb-6">
+              <span className="text-white font-medium">{email}</span>로 확인 메일을 보냈습니다.
+              <br />
+              메일의 링크를 클릭하여 가입을 완료해주세요.
+            </p>
+            <Link
+              href="/login"
+              className="inline-block px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all"
+            >
+              로그인 페이지로 이동
+            </Link>
+          </div>
+        </main>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col">
