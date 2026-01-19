@@ -100,6 +100,58 @@ src/
 
 (현재 없음)
 
+### 9. Supabase Auth 인증 기능 구현 ✅
+
+- [x] 회원가입 기능 구현 (이메일/비밀번호)
+  - [x] src/app/signup/page.tsx에 Supabase Auth 연동
+  - [x] 에러 핸들링 (이미 존재하는 이메일 등)
+  - [x] 이메일 확인 안내 화면 구현
+- [x] 로그인 기능 구현 (이메일/비밀번호)
+  - [x] src/app/login/page.tsx에 Supabase Auth 연동
+  - [x] 에러 핸들링 (잘못된 자격 증명, 이메일 미인증 등)
+- [x] 인증 콜백 처리 (src/app/auth/callback/route.ts)
+- [x] 인증 상태 관리 Hook (src/hooks/useAuth.ts)
+- [x] 미들웨어 설정 (src/middleware.ts)
+  - [x] 보호된 라우트 설정 (/dashboard, /items, /pictogram)
+  - [x] 인증 상태에 따른 리다이렉션
+- [x] 로그아웃 기능 구현
+- [x] 대시보드 페이지 생성 (src/app/dashboard/page.tsx)
+
+### 10. 기본 UI 컴포넌트 구성 ✅
+
+- [x] shadcn/ui 컴포넌트 설치
+  - [x] Button, Card, Input 컴포넌트
+  - [x] Dialog, Form, Select 컴포넌트
+  - [x] Toast, Toaster 컴포넌트
+  - [x] Label 컴포넌트 (자동 설치)
+- [x] 공통 레이아웃 컴포넌트
+  - [x] Navbar 컴포넌트 (인증 상태 반영)
+  - [x] Footer 컴포넌트
+- [x] Root Layout에 Toaster 추가
+
+### 11. Phase 4 픽토그램 시스템 구현 ✅
+
+**백엔드**:
+- [x] Iconify API 클라이언트 설정
+  - [x] src/lib/iconify.ts 헬퍼 함수
+  - [x] src/types/pictogram.types.ts 타입 정의
+  - [x] 5개 인기 컬렉션 연동 (Material Design, Heroicons, Lucide 등)
+- [x] 픽토그램 검색 API
+  - [x] GET /api/pictograms/search?q=keyword
+  - [x] Iconify API 연동, SVG 데이터 반환
+- [x] 기본 픽토그램 목록 API
+  - [x] GET /api/pictograms?category=clothing
+  - [x] 카테고리별 추천 픽토그램 (의류, 전자기기, 생활용품 등)
+
+**프론트엔드**:
+- [x] PictogramPicker 컴포넌트 (src/components/PictogramPicker.tsx)
+  - [x] 실시간 검색 기능 (500ms 디바운스)
+  - [x] 카테고리 탭 필터
+  - [x] 그리드 레이아웃 (반응형)
+  - [x] 선택 상태 표시
+- [x] 테스트 페이지 (/pictograms/test)
+- [x] SVG 렌더링 및 미리보기
+
 ---
 
 ## 다음 할 일
@@ -116,32 +168,40 @@ src/
 - [ ] Supabase 대시보드에서 마이그레이션 SQL 실행 (수동 작업 필요)
 - [x] 환경 변수 설정 (.env.local.example 생성됨)
 
-### Phase 2: 기본 UI 컴포넌트
+### Phase 2: 기본 UI 컴포넌트 ✅
 
-- [ ] shadcn/ui 컴포넌트 추가
-  - [ ] Button, Card, Input, Dialog, Form
-  - [ ] Select, Dropdown, Toast
-- [ ] 레이아웃 컴포넌트
-  - [ ] Header/Navigation
-  - [ ] Sidebar (카테고리 네비게이션)
-  - [ ] Footer
+- [x] shadcn/ui 컴포넌트 추가
+  - [x] Button, Card, Input, Dialog, Form
+  - [x] Select, Toast (Toaster 포함)
+  - [x] Label (자동 설치)
+- [x] 레이아웃 컴포넌트
+  - [x] Header/Navigation (Navbar 컴포넌트)
+  - [x] Footer
+- [ ] Sidebar (카테고리 네비게이션) - Phase 5에서 필요 시 구현
 
-### Phase 3: 인증 기능
+### Phase 3: 인증 기능 ✅
 
-- [ ] 로그인 페이지 (/login)
-- [ ] 회원가입 페이지 (/signup)
-- [ ] 로그아웃 기능
-- [ ] 인증 상태 관리 (Context/Hook)
-- [ ] 보호된 라우트 설정
+- [x] 로그인 페이지 (/login) - 디자인 및 기능 구현 완료
+- [x] 회원가입 페이지 (/signup) - 디자인 및 기능 구현 완료
+- [x] 로그아웃 기능
+- [x] 인증 상태 관리 (useAuth Hook)
+- [x] 보호된 라우트 설정 (미들웨어)
+- [x] 대시보드 페이지 (/dashboard)
 
-### Phase 4: 기본 픽토그램 시스템
+### Phase 4: 기본 픽토그램 시스템 ✅
 
-- [ ] 기본 픽토그램 이미지 준비
-  - [ ] 의류: 티셔츠, 바지, 신발, 모자 등
-  - [ ] 전자기기: 랩탑, 노트북, 스마트폰 등
-  - [ ] 생활용품: 책, 가방, 시계 등
-- [ ] 픽토그램 데이터베이스 시딩
-- [ ] 키워드 검색 API 구현
+- [x] 기본 픽토그램 이미지 준비
+  - [x] Iconify API 연동 (Material Design, Heroicons, Lucide 등)
+  - [x] 카테고리별 추천 아이콘 (의류, 전자기기, 생활용품 등)
+- [x] 키워드 검색 API 구현
+  - [x] GET /api/pictograms/search
+- [x] 기본 픽토그램 목록 API 구현
+  - [x] GET /api/pictograms
+- [x] 픽토그램 검색/선택 UI 구현
+  - [x] PictogramPicker 컴포넌트
+  - [x] 실시간 검색 기능
+  - [x] 카테고리 필터
+  - [x] 테스트 페이지 (/pictograms/test)
 
 ### Phase 5: 소유물 관리 (CRUD)
 
