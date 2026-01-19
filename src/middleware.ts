@@ -61,6 +61,11 @@ export async function middleware(request: NextRequest) {
     return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 
+  // 로그인한 사용자가 홈페이지("/")에 접근하면 대시보드로 리다이렉트
+  if (pathname === "/" && user) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
+
   return supabaseResponse;
 }
 
