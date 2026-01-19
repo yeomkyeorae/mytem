@@ -87,6 +87,8 @@
 | 2025-01-19 | Phase 2 기본 UI 컴포넌트 구성    | 완료 | @frontend에게 위임, shadcn/ui 7종 + Footer |
 | 2025-01-19 | Phase 4 픽토그램 API 구현 (백엔드) | 완료 | @backend에게 위임, Iconify API 연동 |
 | 2025-01-19 | Phase 4 픽토그램 UI 구현 (프론트) | 완료 | @frontend에게 위임, PictogramPicker 컴포넌트 |
+| 2025-01-19 | Phase 2-4 PR 생성 및 업로드 | 완료 | PR #3 생성, 4개 논리적 커밋으로 구성 |
+| 2025-01-19 | Phase 5 소유물 관리 CRUD 구현 | 완료 | 백엔드 API + 프론트엔드 UI 완성 |
 
 ---
 
@@ -141,8 +143,8 @@
 
 - **프로젝트명**: Mytem (나의 소유물 관리)
 - **기술 스택**: Next.js 14, React 18, TailwindCSS, shadcn/ui, Supabase, Iconify API
-- **현재 단계**: Phase 5 (소유물 관리 CRUD) 준비 중
-- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램)
+- **현재 단계**: Phase 6 (AI 픽토그램 생성) 준비 중
+- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램), Phase 5 (소유물 CRUD)
 
 ### 다음 수동 작업 (사용자 수행 필요)
 

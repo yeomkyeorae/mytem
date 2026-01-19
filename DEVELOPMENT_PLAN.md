@@ -203,15 +203,25 @@ src/
   - [x] 카테고리 필터
   - [x] 테스트 페이지 (/pictograms/test)
 
-### Phase 5: 소유물 관리 (CRUD)
+### Phase 5: 소유물 관리 (CRUD) ✅
 
-- [ ] 소유물 목록 페이지 (/items)
-- [ ] 소유물 상세 페이지 (/items/[id])
-- [ ] 소유물 등록 기능
-  - [ ] 픽토그램 검색 및 선택
-  - [ ] 이름, 개수, 설명 입력
-- [ ] 소유물 수정 기능
-- [ ] 소유물 삭제 기능
+**백엔드 API**:
+- [x] GET /api/items - 소유물 목록 조회
+- [x] POST /api/items - 소유물 등록
+- [x] GET /api/items/[id] - 소유물 상세 조회
+- [x] PUT /api/items/[id] - 소유물 수정
+- [x] DELETE /api/items/[id] - 소유물 삭제
+
+**프론트엔드**:
+- [x] 소유물 목록 페이지 (/items)
+- [x] 소유물 상세 페이지 (/items/[id])
+- [x] 소유물 등록 기능 (/items/new)
+  - [x] PictogramPicker 연동
+  - [x] 이름, 개수, 설명 입력
+- [x] 소유물 수정 기능 (/items/[id]/edit)
+- [x] 소유물 삭제 기능
+- [x] ItemCard 컴포넌트
+- [x] ItemForm 컴포넌트
 
 ### Phase 6: AI 픽토그램 생성
 
