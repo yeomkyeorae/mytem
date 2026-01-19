@@ -18,7 +18,7 @@ export default function Home() {
           {/* Badge */}
           <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-medium text-white/60 border border-white/10 rounded-full">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
-            소유물 관리의 새로운 방법
+            아이템 관리의 새로운 방법
           </div>
 
           {/* Headline */}
@@ -30,7 +30,7 @@ export default function Home() {
 
           {/* Subheadline */}
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
-            소유물을 등록하고, 관리하고, 시각화하세요.
+            아이템을 등록하고, 관리하고, 시각화하세요.
             <br className="hidden md:block" />
             AI가 만들어주는 픽토그램으로 더욱 직관적으로.
           </p>
@@ -74,7 +74,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold mb-2">체계적인 관리</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                소유물을 카테고리별로 분류하고 개수와 상세 정보를 한눈에 파악하세요.
+                아이템을 카테고리별로 분류하고 개수와 상세 정보를 한눈에 파악하세요.
               </p>
             </div>
 
@@ -97,7 +97,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold mb-2">픽토그램 검색</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                키워드로 기본 픽토그램을 검색하고 소유물에 바로 적용하세요.
+                키워드로 기본 픽토그램을 검색하고 아이템에 바로 적용하세요.
               </p>
             </div>
 

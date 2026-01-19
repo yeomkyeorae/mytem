@@ -3,10 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import type { ItemInsert } from "@/types/database.types";
 
 /**
- * 소유물 목록 조회 API
+ * 아이템 목록 조회 API
  * GET /api/items
  *
- * 현재 인증된 사용자의 소유물 목록을 반환합니다.
+ * 현재 인증된 사용자의 아이템 목록을 반환합니다.
  * 정렬: 최신순 (created_at DESC)
  */
 export async function GET() {
@@ -26,7 +26,7 @@ export async function GET() {
       );
     }
 
-    // 소유물 목록 조회
+    // 아이템 목록 조회
     const { data: items, error } = await supabase
       .from("items")
       .select("*")
@@ -36,7 +36,7 @@ export async function GET() {
     if (error) {
       console.error("Items fetch error:", error);
       return NextResponse.json(
-        { error: "소유물 목록을 가져오는 중 오류가 발생했습니다." },
+        { error: "아이템 목록을 가져오는 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
@@ -58,11 +58,11 @@ export async function GET() {
 }
 
 /**
- * 소유물 등록 API
+ * 아이템 등록 API
  * POST /api/items
  *
  * Body:
- * - name: string (필수) - 소유물 이름
+ * - name: string (필수) - 아이템 이름
  * - description?: string - 설명
  * - quantity?: number - 개수 (기본값: 1)
  * - image_url?: string - 이미지 URL
@@ -92,7 +92,7 @@ export async function POST(request: NextRequest) {
     // 필수 필드 검증
     if (!name || typeof name !== "string" || name.trim() === "") {
       return NextResponse.json(
-        { error: "소유물 이름은 필수입니다." },
+        { error: "아이템 이름은 필수입니다." },
         { status: 400 }
       );
     }
@@ -113,7 +113,7 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 소유물 데이터 생성
+    // 아이템 데이터 생성
     const itemData: ItemInsert = {
       user_id: user.id,
       name: name.trim(),
@@ -123,7 +123,7 @@ export async function POST(request: NextRequest) {
       image_type: image_type || "default",
     };
 
-    // 소유물 등록
+    // 아이템 등록
     const { data: item, error } = await supabase
       .from("items")
       .insert(itemData)
@@ -133,14 +133,14 @@ export async function POST(request: NextRequest) {
     if (error) {
       console.error("Item create error:", error);
       return NextResponse.json(
-        { error: "소유물 등록 중 오류가 발생했습니다." },
+        { error: "아이템 등록 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
 
     return NextResponse.json(
       {
-        message: "소유물이 등록되었습니다.",
+        message: "아이템이 등록되었습니다.",
         item,
       },
       { status: 201 }

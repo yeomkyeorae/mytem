@@ -34,12 +34,12 @@ export default function NewItemPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "소유물 등록에 실패했습니다.");
+        throw new Error(errorData.error || "아이템 등록에 실패했습니다.");
       }
 
       toast({
         title: "등록 완료",
-        description: "소유물이 성공적으로 등록되었습니다.",
+        description: "아이템이 성공적으로 등록되었습니다.",
       });
 
       router.push("/items");
@@ -102,7 +102,7 @@ export default function NewItemPage() {
               href="/items"
               className="text-white/60 hover:text-white transition-colors"
             >
-              내 소유물
+              내 아이템
             </Link>
             <span className="text-white/30">|</span>
             <span className="text-white/60 text-sm">{user?.email}</span>
@@ -126,14 +126,14 @@ export default function NewItemPage() {
           >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          내 소유물로 돌아가기
+          내 아이템로 돌아가기
         </Link>
 
         {/* Page Header */}
         <div className="mb-8">
-          <h1 className="text-2xl font-bold mb-2">새 소유물 등록</h1>
+          <h1 className="text-2xl font-bold mb-2">새 아이템 등록</h1>
           <p className="text-white/50">
-            새로운 소유물의 정보를 입력해주세요.
+            새로운 아이템의 정보를 입력해주세요.
           </p>
         </div>
 

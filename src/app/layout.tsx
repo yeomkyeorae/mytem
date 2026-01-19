@@ -6,8 +6,8 @@ import { Toaster } from "@/components/ui/toaster";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mytem - 나의 소유물 관리",
-  description: "나의 소유물을 체계적으로 관리하세요",
+  title: "Mytem - 나의 아이템 관리",
+  description: "나의 아이템을 체계적으로 관리하세요",
 };
 
 export default function RootLayout({

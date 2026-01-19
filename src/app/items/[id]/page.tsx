@@ -27,7 +27,7 @@ export default function ItemDetailPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // 소유물 상세 정보 가져오기
+  // 아이템 상세 정보 가져오기
   useEffect(() => {
     if (isAuthenticated && id) {
       fetchItem();
@@ -47,10 +47,10 @@ export default function ItemDetailPage() {
           return;
         }
         if (response.status === 404) {
-          setError("소유물을 찾을 수 없습니다.");
+          setError("아이템을 찾을 수 없습니다.");
           return;
         }
-        throw new Error("소유물을 불러오는데 실패했습니다.");
+        throw new Error("아이템을 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -72,12 +72,12 @@ export default function ItemDetailPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "소유물 삭제에 실패했습니다.");
+        throw new Error(errorData.error || "아이템 삭제에 실패했습니다.");
       }
 
       toast({
         title: "삭제 완료",
-        description: "소유물이 성공적으로 삭제되었습니다.",
+        description: "아이템이 성공적으로 삭제되었습니다.",
       });
 
       router.push("/items");
@@ -176,7 +176,7 @@ export default function ItemDetailPage() {
               href="/items"
               className="text-white/60 hover:text-white transition-colors"
             >
-              내 소유물
+              내 아이템
             </Link>
             <span className="text-white/30">|</span>
             <span className="text-white/60 text-sm">{user?.email}</span>
@@ -200,7 +200,7 @@ export default function ItemDetailPage() {
           >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          내 소유물로 돌아가기
+          내 아이템로 돌아가기
         </Link>
 
         {/* Loading State */}
@@ -226,7 +226,7 @@ export default function ItemDetailPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">소유물 정보를 불러오는 중...</span>
+              <span className="text-white/60">아이템 정보를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -248,7 +248,7 @@ export default function ItemDetailPage() {
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
             <p className="text-white/50 mb-6">
-              요청한 소유물을 찾을 수 없거나 접근할 수 없습니다.
+              요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.
             </p>
             <Link href="/items">
               <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
@@ -336,7 +336,7 @@ export default function ItemDetailPage() {
         {showDeleteConfirm && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
             <div className="bg-zinc-900 border border-white/10 rounded-xl p-6 max-w-sm w-full">
-              <h2 className="text-xl font-bold mb-2">소유물 삭제</h2>
+              <h2 className="text-xl font-bold mb-2">아이템 삭제</h2>
               <p className="text-white/60 mb-6">
                 정말로 &quot;{item?.name}&quot;을(를) 삭제하시겠습니까?
                 <br />

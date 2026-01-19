@@ -50,7 +50,7 @@ export default function ItemForm({
     const newErrors: { [key: string]: string } = {};
 
     if (!name.trim()) {
-      newErrors.name = "소유물 이름을 입력해주세요.";
+      newErrors.name = "아이템 이름을 입력해주세요.";
     }
 
     if (quantity < 1) {
@@ -156,7 +156,7 @@ export default function ItemForm({
       {/* 이름 입력 */}
       <div>
         <Label htmlFor="name" className="text-white/70 mb-2 block">
-          소유물 이름 <span className="text-red-400">*</span>
+          아이템 이름 <span className="text-red-400">*</span>
         </Label>
         <Input
           id="name"
@@ -198,7 +198,7 @@ export default function ItemForm({
           id="description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
-          placeholder="소유물에 대한 간단한 설명을 입력해주세요."
+          placeholder="아이템에 대한 간단한 설명을 입력해주세요."
           rows={4}
           className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors resize-none"
         />

@@ -59,7 +59,7 @@ CREATE TABLE public.profiles (
 );
 ```
 
-#### 3. items (소유물)
+#### 3. items (아이템)
 ```sql
 CREATE TABLE public.items (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -110,15 +110,15 @@ CREATE TABLE public.custom_pictograms (
 | POST   | /api/auth/logout  | 로그아웃       |
 | GET    | /api/auth/me      | 현재 사용자 정보 |
 
-### 소유물 API
+### 아이템 API
 
 | 메서드 | 엔드포인트       | 설명              |
 | ------ | ---------------- | ----------------- |
-| GET    | /api/items       | 소유물 목록 조회  |
-| POST   | /api/items       | 소유물 등록       |
-| GET    | /api/items/:id   | 소유물 상세 조회  |
-| PUT    | /api/items/:id   | 소유물 수정       |
-| DELETE | /api/items/:id   | 소유물 삭제       |
+| GET    | /api/items       | 아이템 목록 조회  |
+| POST   | /api/items       | 아이템 등록       |
+| GET    | /api/items/:id   | 아이템 상세 조회  |
+| PUT    | /api/items/:id   | 아이템 수정       |
+| DELETE | /api/items/:id   | 아이템 삭제       |
 
 ### 픽토그램 API
 
@@ -155,7 +155,7 @@ src/
 │   │   └── admin.ts              # Admin 클라이언트 (서버 전용)
 │   └── validations/
 │       ├── auth.ts               # 인증 스키마
-│       └── items.ts              # 소유물 스키마
+│       └── items.ts              # 아이템 스키마
 └── types/
     ├── database.types.ts         # Supabase 타입 (자동 생성)
     └── api.types.ts              # API 요청/응답 타입
@@ -199,7 +199,7 @@ src/
 | 2025-01-16 | Backend 에이전트 생성         | 완료   | 역할 및 스키마 정의                              |
 | 2025-01-16 | Supabase 연동 및 초기 설정    | 완료   | 클라이언트, 타입, 마이그레이션, RLS 정책 설정 완료 |
 | 2025-01-19 | Phase 4 픽토그램 API 구현     | 완료   | Iconify API 연동, 검색/목록 API 구현             |
-| 2025-01-19 | Phase 5 소유물 CRUD API 구현  | 완료   | /api/items 목록/등록, /api/items/[id] 상세/수정/삭제 API 구현 |
+| 2025-01-19 | Phase 5 아이템 CRUD API 구현  | 완료   | /api/items 목록/등록, /api/items/[id] 상세/수정/삭제 API 구현 |
 
 ---
 
@@ -266,7 +266,7 @@ yarn add @supabase/supabase-js @supabase/ssr
 
 ## 프로젝트 컨텍스트
 
-- **프로젝트명**: Mytem (나의 소유물 관리)
+- **프로젝트명**: Mytem (나의 아이템 관리)
 - **백엔드 스택**: Next.js 14 API Routes, Supabase (PostgreSQL + Auth)
 - **현재 단계**: Supabase 연동 및 초기 설정
-- **주요 기능**: 사용자 인증, 소유물 CRUD, 픽토그램 검색/생성
+- **주요 기능**: 사용자 인증, 아이템 CRUD, 픽토그램 검색/생성

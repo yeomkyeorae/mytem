@@ -50,7 +50,7 @@ export interface Database {
         ];
       };
 
-      /** 소유물 테이블 */
+      /** 아이템 테이블 */
       items: {
         Row: {
           id: string;

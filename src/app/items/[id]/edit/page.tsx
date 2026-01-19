@@ -26,7 +26,7 @@ export default function EditItemPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // 소유물 상세 정보 가져오기
+  // 아이템 상세 정보 가져오기
   useEffect(() => {
     if (isAuthenticated && id) {
       fetchItem();
@@ -46,10 +46,10 @@ export default function EditItemPage() {
           return;
         }
         if (response.status === 404) {
-          setError("소유물을 찾을 수 없습니다.");
+          setError("아이템을 찾을 수 없습니다.");
           return;
         }
-        throw new Error("소유물을 불러오는데 실패했습니다.");
+        throw new Error("아이템을 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -75,12 +75,12 @@ export default function EditItemPage() {
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || "소유물 수정에 실패했습니다.");
+        throw new Error(errorData.error || "아이템 수정에 실패했습니다.");
       }
 
       toast({
         title: "수정 완료",
-        description: "소유물이 성공적으로 수정되었습니다.",
+        description: "아이템이 성공적으로 수정되었습니다.",
       });
 
       router.push(`/items/${id}`);
@@ -143,7 +143,7 @@ export default function EditItemPage() {
               href="/items"
               className="text-white/60 hover:text-white transition-colors"
             >
-              내 소유물
+              내 아이템
             </Link>
             <span className="text-white/30">|</span>
             <span className="text-white/60 text-sm">{user?.email}</span>
@@ -193,7 +193,7 @@ export default function EditItemPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">소유물 정보를 불러오는 중...</span>
+              <span className="text-white/60">아이템 정보를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -215,7 +215,7 @@ export default function EditItemPage() {
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
             <p className="text-white/50 mb-6">
-              요청한 소유물을 찾을 수 없거나 접근할 수 없습니다.
+              요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.
             </p>
             <Link href="/items">
               <button className="px-6 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">
@@ -230,7 +230,7 @@ export default function EditItemPage() {
           <>
             {/* Page Header */}
             <div className="mb-8">
-              <h1 className="text-2xl font-bold mb-2">소유물 수정</h1>
+              <h1 className="text-2xl font-bold mb-2">아이템 수정</h1>
               <p className="text-white/50">
                 &quot;{item.name}&quot;의 정보를 수정합니다.
               </p>

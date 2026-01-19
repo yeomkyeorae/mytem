@@ -22,7 +22,7 @@ COMMENT ON COLUMN public.profiles.display_name IS '표시 이름';
 COMMENT ON COLUMN public.profiles.avatar_url IS '프로필 이미지 URL';
 
 -- ============================================
--- 2. ITEMS 테이블 (소유물)
+-- 2. ITEMS 테이블 (아이템)
 -- ============================================
 CREATE TABLE IF NOT EXISTS public.items (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -37,12 +37,12 @@ CREATE TABLE IF NOT EXISTS public.items (
 );
 
 -- items 테이블 코멘트
-COMMENT ON TABLE public.items IS '사용자의 소유물 정보를 저장하는 테이블';
-COMMENT ON COLUMN public.items.id IS '소유물 고유 식별자';
+COMMENT ON TABLE public.items IS '사용자의 아이템 정보를 저장하는 테이블';
+COMMENT ON COLUMN public.items.id IS '아이템 고유 식별자';
 COMMENT ON COLUMN public.items.user_id IS '소유자 (auth.users 참조)';
-COMMENT ON COLUMN public.items.name IS '소유물 이름';
-COMMENT ON COLUMN public.items.description IS '소유물 설명';
-COMMENT ON COLUMN public.items.quantity IS '소유물 개수';
+COMMENT ON COLUMN public.items.name IS '아이템 이름';
+COMMENT ON COLUMN public.items.description IS '아이템 설명';
+COMMENT ON COLUMN public.items.quantity IS '아이템 개수';
 COMMENT ON COLUMN public.items.image_url IS '픽토그램 이미지 URL';
 COMMENT ON COLUMN public.items.image_type IS '이미지 타입 (default: 기본 픽토그램, custom: 커스텀 생성)';
 
@@ -167,26 +167,26 @@ CREATE POLICY "Users can update own profile"
 -- items 테이블 RLS 활성화
 ALTER TABLE public.items ENABLE ROW LEVEL SECURITY;
 
--- items RLS 정책: 사용자는 자신의 소유물만 조회 가능
+-- items RLS 정책: 사용자는 자신의 아이템만 조회 가능
 CREATE POLICY "Users can view own items"
   ON public.items
   FOR SELECT
   USING (auth.uid() = user_id);
 
--- items RLS 정책: 사용자는 자신의 소유물만 생성 가능
+-- items RLS 정책: 사용자는 자신의 아이템만 생성 가능
 CREATE POLICY "Users can create own items"
   ON public.items
   FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
--- items RLS 정책: 사용자는 자신의 소유물만 수정 가능
+-- items RLS 정책: 사용자는 자신의 아이템만 수정 가능
 CREATE POLICY "Users can update own items"
   ON public.items
   FOR UPDATE
   USING (auth.uid() = user_id)
   WITH CHECK (auth.uid() = user_id);
 
--- items RLS 정책: 사용자는 자신의 소유물만 삭제 가능
+-- items RLS 정책: 사용자는 자신의 아이템만 삭제 가능
 CREATE POLICY "Users can delete own items"
   ON public.items
   FOR DELETE

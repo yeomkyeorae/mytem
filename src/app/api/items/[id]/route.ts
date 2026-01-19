@@ -7,10 +7,10 @@ interface RouteParams {
 }
 
 /**
- * 소유물 상세 조회 API
+ * 아이템 상세 조회 API
  * GET /api/items/[id]
  *
- * 현재 인증된 사용자의 특정 소유물을 반환합니다.
+ * 현재 인증된 사용자의 특정 아이템을 반환합니다.
  */
 export async function GET(request: NextRequest, { params }: RouteParams) {
   try {
@@ -33,12 +33,12 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     // ID 검증
     if (!id || typeof id !== "string") {
       return NextResponse.json(
-        { error: "유효하지 않은 소유물 ID입니다." },
+        { error: "유효하지 않은 아이템 ID입니다." },
         { status: 400 }
       );
     }
 
-    // 소유물 조회
+    // 아이템 조회
     const { data: item, error } = await supabase
       .from("items")
       .select("*")
@@ -49,13 +49,13 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     if (error) {
       if (error.code === "PGRST116") {
         return NextResponse.json(
-          { error: "소유물을 찾을 수 없습니다." },
+          { error: "아이템을 찾을 수 없습니다." },
           { status: 404 }
         );
       }
       console.error("Item fetch error:", error);
       return NextResponse.json(
-        { error: "소유물을 가져오는 중 오류가 발생했습니다." },
+        { error: "아이템을 가져오는 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
@@ -74,11 +74,11 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
 }
 
 /**
- * 소유물 수정 API
+ * 아이템 수정 API
  * PUT /api/items/[id]
  *
  * Body:
- * - name?: string - 소유물 이름
+ * - name?: string - 아이템 이름
  * - description?: string - 설명
  * - quantity?: number - 개수
  * - image_url?: string - 이미지 URL
@@ -105,7 +105,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     // ID 검증
     if (!id || typeof id !== "string") {
       return NextResponse.json(
-        { error: "유효하지 않은 소유물 ID입니다." },
+        { error: "유효하지 않은 아이템 ID입니다." },
         { status: 400 }
       );
     }
@@ -123,7 +123,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     if (name !== undefined) {
       if (typeof name !== "string" || name.trim() === "") {
         return NextResponse.json(
-          { error: "소유물 이름은 비어있을 수 없습니다." },
+          { error: "아이템 이름은 비어있을 수 없습니다." },
           { status: 400 }
         );
       }
@@ -170,7 +170,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // 소유물 수정
+    // 아이템 수정
     const { data: item, error } = await supabase
       .from("items")
       .update(updateData)
@@ -182,19 +182,19 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
     if (error) {
       if (error.code === "PGRST116") {
         return NextResponse.json(
-          { error: "소유물을 찾을 수 없습니다." },
+          { error: "아이템을 찾을 수 없습니다." },
           { status: 404 }
         );
       }
       console.error("Item update error:", error);
       return NextResponse.json(
-        { error: "소유물 수정 중 오류가 발생했습니다." },
+        { error: "아이템 수정 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
-      message: "소유물이 수정되었습니다.",
+      message: "아이템이 수정되었습니다.",
       item,
     });
   } catch (error) {
@@ -219,7 +219,7 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 }
 
 /**
- * 소유물 삭제 API
+ * 아이템 삭제 API
  * DELETE /api/items/[id]
  */
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
@@ -243,12 +243,12 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // ID 검증
     if (!id || typeof id !== "string") {
       return NextResponse.json(
-        { error: "유효하지 않은 소유물 ID입니다." },
+        { error: "유효하지 않은 아이템 ID입니다." },
         { status: 400 }
       );
     }
 
-    // 먼저 소유물이 존재하고 본인 것인지 확인
+    // 먼저 아이템이 존재하고 본인 것인지 확인
     const { data: existingItem, error: fetchError } = await supabase
       .from("items")
       .select("id")
@@ -258,12 +258,12 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
     if (fetchError || !existingItem) {
       return NextResponse.json(
-        { error: "소유물을 찾을 수 없습니다." },
+        { error: "아이템을 찾을 수 없습니다." },
         { status: 404 }
       );
     }
 
-    // 소유물 삭제
+    // 아이템 삭제
     const { error } = await supabase
       .from("items")
       .delete()
@@ -273,13 +273,13 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     if (error) {
       console.error("Item delete error:", error);
       return NextResponse.json(
-        { error: "소유물 삭제 중 오류가 발생했습니다." },
+        { error: "아이템 삭제 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
-      message: "소유물이 삭제되었습니다.",
+      message: "아이템이 삭제되었습니다.",
     });
   } catch (error) {
     console.error("Item delete error:", error);
