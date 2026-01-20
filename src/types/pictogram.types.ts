@@ -33,7 +33,7 @@ export interface IconifyCollectionInfo {
   palette?: boolean;
 }
 
-// 우리 앱에서 사용할 픽토그램 타입
+// 우리 앱에서 사용할 스케치 타입
 export interface Pictogram {
   id: string; // 예: "mdi:account"
   name: string; // 표시 이름
@@ -43,7 +43,7 @@ export interface Pictogram {
   collection: string; // 컬렉션 이름 (Material Design Icons, Heroicons 등)
 }
 
-// 픽토그램 카테고리
+// 스케치 카테고리
 export enum PictogramCategory {
   CLOTHING = "clothing", // 의류
   ELECTRONICS = "electronics", // 전자기기
@@ -54,7 +54,7 @@ export enum PictogramCategory {
   OTHERS = "others", // 기타
 }
 
-// 커스텀 픽토그램 (AI 생성)
+// 커스텀 스케치 (AI 생성)
 export interface CustomPictogram {
   id: string;
   user_id: string;

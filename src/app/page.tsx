@@ -32,7 +32,7 @@ export default function Home() {
           <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
             아이템을 등록하고, 관리하고, 시각화하세요.
             <br className="hidden md:block" />
-            AI가 만들어주는 픽토그램으로 더욱 직관적으로.
+            AI가 만들어주는 스케치으로 더욱 직관적으로.
           </p>
 
           {/* CTA Buttons */}
@@ -95,9 +95,9 @@ export default function Home() {
                   />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold mb-2">픽토그램 검색</h3>
+              <h3 className="text-lg font-semibold mb-2">스케치 검색</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                키워드로 기본 픽토그램을 검색하고 아이템에 바로 적용하세요.
+                키워드로 기본 스케치을 검색하고 아이템에 바로 적용하세요.
               </p>
             </div>
 
@@ -120,7 +120,7 @@ export default function Home() {
               </div>
               <h3 className="text-lg font-semibold mb-2">AI 이미지 생성</h3>
               <p className="text-sm text-white/50 leading-relaxed">
-                원하는 픽토그램이 없다면? AI가 텍스트 설명으로 맞춤 이미지를 만들어드려요.
+                원하는 스케치이 없다면? AI가 텍스트 설명으로 맞춤 이미지를 만들어드려요.
               </p>
             </div>
           </div>

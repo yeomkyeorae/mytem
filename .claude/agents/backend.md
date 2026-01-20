@@ -74,7 +74,7 @@ CREATE TABLE public.items (
 );
 ```
 
-#### 4. pictograms (기본 픽토그램)
+#### 4. pictograms (기본 스케치)
 ```sql
 CREATE TABLE public.pictograms (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -86,7 +86,7 @@ CREATE TABLE public.pictograms (
 );
 ```
 
-#### 5. custom_pictograms (사용자 생성 픽토그램)
+#### 5. custom_pictograms (사용자 생성 스케치)
 ```sql
 CREATE TABLE public.custom_pictograms (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -120,13 +120,13 @@ CREATE TABLE public.custom_pictograms (
 | PUT    | /api/items/:id   | 아이템 수정       |
 | DELETE | /api/items/:id   | 아이템 삭제       |
 
-### 픽토그램 API
+### 스케치 API
 
 | 메서드 | 엔드포인트               | 설명                    |
 | ------ | ------------------------ | ----------------------- |
-| GET    | /api/pictograms          | 기본 픽토그램 목록      |
-| GET    | /api/pictograms/search   | 키워드로 픽토그램 검색  |
-| POST   | /api/pictograms/generate | AI 픽토그램 생성 (예정) |
+| GET    | /api/pictograms          | 기본 스케치 목록      |
+| GET    | /api/pictograms/search   | 키워드로 스케치 검색  |
+| POST   | /api/pictograms/generate | AI 스케치 생성 (예정) |
 
 ---
 
@@ -198,7 +198,7 @@ src/
 | ---------- | ----------------------------- | ------ | ------------------------------------------------ |
 | 2025-01-16 | Backend 에이전트 생성         | 완료   | 역할 및 스키마 정의                              |
 | 2025-01-16 | Supabase 연동 및 초기 설정    | 완료   | 클라이언트, 타입, 마이그레이션, RLS 정책 설정 완료 |
-| 2025-01-19 | Phase 4 픽토그램 API 구현     | 완료   | Iconify API 연동, 검색/목록 API 구현             |
+| 2025-01-19 | Phase 4 스케치 API 구현     | 완료   | Iconify API 연동, 검색/목록 API 구현             |
 | 2025-01-19 | Phase 5 아이템 CRUD API 구현  | 완료   | /api/items 목록/등록, /api/items/[id] 상세/수정/삭제 API 구현 |
 
 ---
@@ -269,4 +269,4 @@ yarn add @supabase/supabase-js @supabase/ssr
 - **프로젝트명**: Mytem (나의 아이템 관리)
 - **백엔드 스택**: Next.js 14 API Routes, Supabase (PostgreSQL + Auth)
 - **현재 단계**: Supabase 연동 및 초기 설정
-- **주요 기능**: 사용자 인증, 아이템 CRUD, 픽토그램 검색/생성
+- **주요 기능**: 사용자 인증, 아이템 CRUD, 스케치 검색/생성

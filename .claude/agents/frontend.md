@@ -97,7 +97,7 @@ src/
 | 2025-01-19 | Frontend 에이전트 생성        | 완료 | 역할 및 구조 정의                             |
 | 2025-01-19 | 메인 페이지 인증 상태 버그 수정 | 완료 | Navbar 컴포넌트 분리, useAuth 연동             |
 | 2025-01-19 | Phase 2 기본 UI 컴포넌트 구성  | 완료 | shadcn/ui 컴포넌트 7종, Footer 컴포넌트 추가 |
-| 2025-01-19 | Phase 4 픽토그램 UI 구현      | 완료 | PictogramPicker 컴포넌트, 테스트 페이지      |
+| 2025-01-19 | Phase 4 스케치 UI 구현      | 완료 | PictogramPicker 컴포넌트, 테스트 페이지      |
 | 2026-01-19 | Phase 5 아이템 관리 UI 구현   | 완료 | ItemCard, ItemForm 컴포넌트, 목록/등록/상세/수정 페이지 |
 | 2026-01-19 | Navbar 컴포넌트 재사용 리팩토링 및 홈페이지 접근 제어 | 완료 | /dashboard, /items, /login, /signup 페이지에 Navbar 적용, middleware에 "/" 리다이렉트 로직 추가 |
 | 2026-01-19 | "소유물" 용어를 "아이템"으로 일괄 변경 | 완료 | 전체 20개 파일에서 "소유물" → "아이템" 변경, DB 스키마는 주석만 변경 |

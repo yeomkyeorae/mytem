@@ -306,7 +306,7 @@ w-10 h-10 flex items-center justify-center rounded-lg bg-white/10
 **상세 요구사항**:
 
 1. 그리드 레이아웃으로 아이템 카드 표시 (3열 기본)
-2. 각 카드에 픽토그램 이미지, 이름, 개수 표시
+2. 각 카드에 스케치 이미지, 이름, 개수 표시
 3. 호버 시 상세보기/수정/삭제 버튼 노출
 4. 빈 상태(Empty State) 디자인 포함
 5. 모바일에서는 2열, 작은 화면에서는 1열로 변경
@@ -314,7 +314,7 @@ w-10 h-10 flex items-center justify-center rounded-lg bg-white/10
 **참고 사항**:
 
 - shadcn/ui Card 컴포넌트 활용
-- 픽토그램 이미지는 1:1 비율 유지
+- 스케치 이미지는 1:1 비율 유지
 - 카드 간격은 gap-4 사용
 
 **기대 결과**:
@@ -419,4 +419,4 @@ w-10 h-10 flex items-center justify-center rounded-lg bg-white/10
 - **디자인 스택**: TailwindCSS, shadcn/ui, Inter Font
 - **디자인 방향**: Linear.app 스타일의 다크 테마 미니멀리즘
 - **주요 색상**: 검정 배경 (#000), 흰색 텍스트, 보라색 그라데이션 포인트
-- **주요 화면**: 랜딩, 로그인, 회원가입, 아이템 목록, 아이템 등록/수정, 픽토그램 검색, AI 이미지 생성
+- **주요 화면**: 랜딩, 로그인, 회원가입, 아이템 목록, 아이템 등록/수정, 스케치 검색, AI 이미지 생성
