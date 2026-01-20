@@ -20,10 +20,7 @@ const CATEGORIES = [
   { id: "books", label: "도서" },
 ];
 
-export default function PictogramPicker({
-  onSelect,
-  selectedPictogram,
-}: PictogramPickerProps) {
+export default function PictogramPicker({ onSelect, selectedPictogram }: PictogramPickerProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("all");
   const [pictograms, setPictograms] = useState<Pictogram[]>([]);
@@ -145,11 +142,7 @@ export default function PictogramPicker({
       {isLoading && (
         <div className="flex items-center justify-center py-12">
           <div className="flex items-center gap-3">
-            <svg
-              className="animate-spin h-5 w-5 text-white"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
+            <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
               <circle
                 className="opacity-25"
                 cx="12"
@@ -176,7 +169,7 @@ export default function PictogramPicker({
             <Card
               key={pictogram.id}
               onClick={() => onSelect(pictogram)}
-              className={`p-4 cursor-pointer transition-all hover:scale-105 hover:shadow-lg ${
+              className={`p-4 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
                 selectedPictogram?.id === pictogram.id
                   ? "ring-2 ring-white bg-white/10"
                   : "bg-white/5 hover:bg-white/10"
