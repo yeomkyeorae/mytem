@@ -5,11 +5,12 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
+import Navbar from "@/components/Navbar";
 import ItemForm, { type ItemFormData } from "@/components/ItemForm";
 
 export default function NewItemPage() {
   const router = useRouter();
-  const { user, isLoading: authLoading, isAuthenticated } = useAuth();
+  const { isLoading: authLoading, isAuthenticated } = useAuth();
   const { toast } = useToast();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -91,27 +92,10 @@ export default function NewItemPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-white/10">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
-            Mytem
-          </Link>
-          <nav className="flex items-center gap-4">
-            <Link
-              href="/items"
-              className="text-white/60 hover:text-white transition-colors"
-            >
-              내 아이템
-            </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-white/60 text-sm">{user?.email}</span>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-6 py-8">
+      <main className="max-w-3xl mx-auto px-6 py-8 pt-24">
         {/* Back Link */}
         <Link
           href="/items"
