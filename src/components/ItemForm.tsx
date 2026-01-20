@@ -4,8 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import PictogramPicker from "@/components/PictogramPicker";
-import type { Pictogram } from "@/types/pictogram.types";
+import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SkecthPicker";
 import type { Item } from "@/types/database.types";
 
 export interface ItemFormData {
@@ -32,15 +31,23 @@ export default function ItemForm({
   const [name, setName] = useState(initialData?.name || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [quantity, setQuantity] = useState(initialData?.quantity || 1);
-  const [selectedPictogram, setSelectedPictogram] = useState<Pictogram | null>(
+  const [selectedSketch, setSelectedSketch] = useState<SelectedSketch | null>(
     initialData?.image_url
-      ? {
-          id: "initial",
-          name: initialData.name || "",
-          svg: initialData.image_url,
-          keywords: [],
-          collection: "",
-        }
+      ? initialData.image_type === "custom"
+        ? {
+            id: "initial",
+            user_id: "",
+            prompt: initialData.name || "",
+            image_url: initialData.image_url,
+            created_at: "",
+          }
+        : {
+            id: "initial",
+            name: initialData.name || "",
+            svg: initialData.image_url,
+            keywords: [],
+            collection: "",
+          }
       : null
   );
   const [showPicker, setShowPicker] = useState(false);
@@ -68,45 +75,90 @@ export default function ItemForm({
       return;
     }
 
+    // 이미지 URL과 타입 결정
+    let imageUrl: string | null = null;
+    let imageType: "default" | "custom" = "default";
+
+    if (selectedSketch) {
+      if (isCustomSketch(selectedSketch)) {
+        imageUrl = selectedSketch.image_url;
+        imageType = "custom";
+      } else {
+        imageUrl = selectedSketch.svg;
+        imageType = "default";
+      }
+    }
+
     await onSubmit({
       name: name.trim(),
       description: description.trim(),
       quantity,
-      image_url: selectedPictogram?.svg || null,
-      image_type: "default",
+      image_url: imageUrl,
+      image_type: imageType,
     });
   };
 
-  const handlePictogramSelect = (pictogram: Pictogram) => {
-    setSelectedPictogram(pictogram);
+  const handleSketchSelect = (sketch: SelectedSketch) => {
+    setSelectedSketch(sketch);
     setShowPicker(false);
   };
 
+  // 선택된 스케치 정보 표시용 함수
+  const getDisplayInfo = () => {
+    if (!selectedSketch) return null;
+
+    if (isCustomSketch(selectedSketch)) {
+      return {
+        imageElement: (
+          <img
+            src={selectedSketch.image_url}
+            alt={selectedSketch.prompt}
+            className="w-full h-full object-contain"
+          />
+        ),
+        name: selectedSketch.prompt,
+        collection: "내 스케치",
+      };
+    } else {
+      return {
+        imageElement: (
+          <div
+            className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+            dangerouslySetInnerHTML={{ __html: selectedSketch.svg }}
+          />
+        ),
+        name: selectedSketch.name,
+        collection: selectedSketch.collection,
+      };
+    }
+  };
+
+  const displayInfo = getDisplayInfo();
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
-      {/* 픽토그램 선택 */}
+      {/* 스케치 선택 */}
       <div>
-        <Label className="text-white/70 mb-2 block">픽토그램 이미지</Label>
+        <Label className="text-white/70 mb-2 block">스케치 이미지</Label>
 
-        {/* 선택된 픽토그램 미리보기 */}
+        {/* 선택된 스케치 미리보기 */}
         <div className="mb-3">
-          {selectedPictogram ? (
+          {selectedSketch && displayInfo ? (
             <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
-              <div
-                className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
-                dangerouslySetInnerHTML={{ __html: selectedPictogram.svg }}
-              />
+              <div className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg">
+                {displayInfo.imageElement}
+              </div>
               <div className="flex-1">
-                <p className="font-medium text-white">{selectedPictogram.name}</p>
-                {selectedPictogram.collection && (
-                  <p className="text-sm text-white/50">{selectedPictogram.collection}</p>
+                <p className="font-medium text-white">{displayInfo.name}</p>
+                {displayInfo.collection && (
+                  <p className="text-sm text-white/50">{displayInfo.collection}</p>
                 )}
               </div>
               <Button
                 type="button"
                 variant="ghost"
                 size="sm"
-                onClick={() => setSelectedPictogram(null)}
+                onClick={() => setSelectedSketch(null)}
                 className="text-white/50 hover:text-white hover:bg-white/10"
               >
                 제거
@@ -127,27 +179,28 @@ export default function ItemForm({
                 <rect x="3" y="3" width="18" height="18" rx="2" />
                 <path d="M12 8v8M8 12h8" />
               </svg>
-              <p className="text-sm text-white/50">픽토그램을 선택해주세요</p>
+              <p className="text-sm text-white/50">스케치를 선택해주세요</p>
             </div>
           )}
         </div>
 
-        {/* 픽토그램 선택/변경 버튼 */}
+        {/* 스케치 선택/변경 버튼 */}
         <Button
           type="button"
           variant="outline"
           onClick={() => setShowPicker(!showPicker)}
           className="w-full border-white/20 text-white/70 hover:bg-white/10 hover:text-white"
         >
-          {showPicker ? "닫기" : selectedPictogram ? "픽토그램 변경" : "픽토그램 선택"}
+          {showPicker ? "닫기" : selectedSketch ? "스케치 변경" : "스케치 선택"}
         </Button>
 
-        {/* 픽토그램 선택기 */}
+        {/* 스케치 선택기 */}
         {showPicker && (
           <div className="mt-4 p-4 border border-white/10 rounded-lg bg-black/50">
-            <PictogramPicker
-              onSelect={handlePictogramSelect}
-              selectedPictogram={selectedPictogram}
+            <SketchPicker
+              onSelect={handleSketchSelect}
+              selectedSketch={selectedSketch}
+              showCustomTab={true}
             />
           </div>
         )}
@@ -166,9 +219,7 @@ export default function ItemForm({
           placeholder="예: 노트북, 가방, 책"
           className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30"
         />
-        {errors.name && (
-          <p className="mt-1 text-sm text-red-400">{errors.name}</p>
-        )}
+        {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
       </div>
 
       {/* 개수 입력 */}
@@ -184,9 +235,7 @@ export default function ItemForm({
           onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
           className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30"
         />
-        {errors.quantity && (
-          <p className="mt-1 text-sm text-red-400">{errors.quantity}</p>
-        )}
+        {errors.quantity && <p className="mt-1 text-sm text-red-400">{errors.quantity}</p>}
       </div>
 
       {/* 설명 입력 */}
@@ -212,11 +261,7 @@ export default function ItemForm({
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">
-            <svg
-              className="animate-spin h-4 w-4"
-              viewBox="0 0 24 24"
-              fill="none"
-            >
+            <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
               <circle
                 className="opacity-25"
                 cx="12"

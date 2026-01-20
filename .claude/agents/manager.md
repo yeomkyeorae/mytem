@@ -85,8 +85,8 @@
 | 2025-01-19 | Supabase Auth 인증 기능 구현     | 완료 | 회원가입, 로그인, 로그아웃, 미들웨어    |
 | 2025-01-19 | 메인 페이지 인증 상태 버그 수정  | 완료 | @frontend에게 위임, Navbar 컴포넌트 분리 |
 | 2025-01-19 | Phase 2 기본 UI 컴포넌트 구성    | 완료 | @frontend에게 위임, shadcn/ui 7종 + Footer |
-| 2025-01-19 | Phase 4 픽토그램 API 구현 (백엔드) | 완료 | @backend에게 위임, Iconify API 연동 |
-| 2025-01-19 | Phase 4 픽토그램 UI 구현 (프론트) | 완료 | @frontend에게 위임, PictogramPicker 컴포넌트 |
+| 2025-01-19 | Phase 4 스케치 API 구현 (백엔드) | 완료 | @backend에게 위임, Iconify API 연동 |
+| 2025-01-19 | Phase 4 스케치 UI 구현 (프론트) | 완료 | @frontend에게 위임, PictogramPicker 컴포넌트 |
 | 2025-01-19 | Phase 2-4 PR 생성 및 업로드 | 완료 | PR #3 생성, 4개 논리적 커밋으로 구성 |
 | 2025-01-19 | Phase 5 아이템 관리 CRUD 구현 | 완료 | 백엔드 API + 프론트엔드 UI 완성 |
 | 2026-01-19 | Navbar 컴포넌트 재사용 리팩토링 | 완료 | @frontend에게 위임, 모든 페이지에 Navbar 적용, "/" 접근 제어 |
@@ -147,8 +147,8 @@
 
 - **프로젝트명**: Mytem (나의 아이템 관리)
 - **기술 스택**: Next.js 14, React 18, TailwindCSS, shadcn/ui, Supabase, Iconify API
-- **현재 단계**: Phase 6 (AI 픽토그램 생성) 준비 중
-- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (픽토그램), Phase 5 (아이템 CRUD)
+- **현재 단계**: Phase 6 (AI 스케치 생성) 준비 중
+- **완료된 Phase**: Phase 1 (DB 스키마), Phase 2 (UI 컴포넌트), Phase 3 (인증), Phase 4 (스케치), Phase 5 (아이템 CRUD)
 
 ### 다음 수동 작업 (사용자 수행 필요)
 

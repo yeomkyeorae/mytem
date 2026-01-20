@@ -40,7 +40,7 @@ export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // 보호된 라우트 목록
-  const protectedRoutes = ["/dashboard", "/items", "/pictogram"];
+  const protectedRoutes = ["/dashboard", "/items", "/sketch"];
   const isProtectedRoute = protectedRoutes.some((route) =>
     pathname.startsWith(route)
   );

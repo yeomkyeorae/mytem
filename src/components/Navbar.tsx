@@ -40,6 +40,12 @@ export default function Navbar() {
               >
                 내 아이템
               </Link>
+              <Link
+                href="/sketch/gallery"
+                className="text-sm text-white/70 hover:text-white transition-colors"
+              >
+                내 스케치
+              </Link>
               <span className="text-sm text-white/50 hidden sm:block">{user.email}</span>
               <button
                 onClick={handleSignOut}

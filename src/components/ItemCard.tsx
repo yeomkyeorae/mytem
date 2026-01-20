@@ -27,7 +27,7 @@ export default function ItemCard({ item }: ItemCardProps) {
       );
     }
 
-    // SVG 문자열인 경우 (픽토그램)
+    // SVG 문자열인 경우 (스케치)
     if (item.image_url.trim().startsWith("<svg")) {
       return (
         <div
@@ -51,7 +51,7 @@ export default function ItemCard({ item }: ItemCardProps) {
   return (
     <Link href={`/items/${item.id}`}>
       <Card className="p-4 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer group">
-        {/* 픽토그램 이미지 */}
+        {/* 스케치 이미지 */}
         <div className="w-full aspect-square flex items-center justify-center bg-white/5 rounded-lg mb-3 group-hover:bg-white/10 transition-colors">
           {renderImage()}
         </div>

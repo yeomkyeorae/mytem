@@ -12,7 +12,9 @@
       "Bash(git checkout:*)",
       "Bash(gh pr create:*)",
       "mcp__github__create_pull_request",
-      "Bash(npx shadcn@latest add button card input dialog form select toast --yes)"
+      "Bash(npx shadcn@latest add button card input dialog form select toast --yes)",
+      "Bash(npx tsc --noEmit)",
+      "WebSearch"
     ]
   }
 }

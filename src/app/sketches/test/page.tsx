@@ -2,36 +2,36 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import PictogramPicker, {
-  SelectedPictogram,
-  isCustomPictogram,
-} from "@/components/PictogramPicker";
+import SketchPicker, {
+  SelectedSketch,
+  isCustomSketch,
+} from "@/components/SketchPicker";
 import { useAuth } from "@/hooks/useAuth";
 
-export default function PictogramTestPage() {
+export default function SketchTestPage() {
   const { user } = useAuth();
-  const [selectedPictogram, setSelectedPictogram] =
-    useState<SelectedPictogram | null>(null);
+  const [selectedSketch, setSelectedSketch] =
+    useState<SelectedSketch | null>(null);
 
   const getDisplayData = () => {
-    if (!selectedPictogram) return null;
+    if (!selectedSketch) return null;
 
-    if (isCustomPictogram(selectedPictogram)) {
+    if (isCustomSketch(selectedSketch)) {
       return {
-        id: selectedPictogram.id,
-        prompt: selectedPictogram.prompt,
+        id: selectedSketch.id,
+        prompt: selectedSketch.prompt,
         type: "custom",
-        imageUrlLength: selectedPictogram.image_url.length,
-        created_at: selectedPictogram.created_at,
+        imageUrlLength: selectedSketch.image_url.length,
+        created_at: selectedSketch.created_at,
       };
     } else {
       return {
-        id: selectedPictogram.id,
-        name: selectedPictogram.name,
-        collection: selectedPictogram.collection,
-        keywords: selectedPictogram.keywords,
+        id: selectedSketch.id,
+        name: selectedSketch.name,
+        collection: selectedSketch.collection,
+        keywords: selectedSketch.keywords,
         type: "default",
-        svgLength: selectedPictogram.svg.length,
+        svgLength: selectedSketch.svg.length,
       };
     }
   };
@@ -60,22 +60,22 @@ export default function PictogramTestPage() {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold mb-2">픽토그램 선택 테스트</h1>
+          <h1 className="text-2xl font-bold mb-2">스케치 선택 테스트</h1>
           <p className="text-white/50">
-            검색하거나 카테고리를 선택하여 픽토그램을 찾아보세요.
+            검색하거나 카테고리를 선택하여 스케치를 찾아보세요.
           </p>
         </div>
 
-        {/* Pictogram Picker */}
+        {/* Sketch Picker */}
         <div className="mb-8">
-          <PictogramPicker
-            onSelect={setSelectedPictogram}
-            selectedPictogram={selectedPictogram}
+          <SketchPicker
+            onSelect={setSelectedSketch}
+            selectedSketch={selectedSketch}
           />
         </div>
 
         {/* 선택 결과 표시 */}
-        {selectedPictogram && (
+        {selectedSketch && (
           <div className="border border-white/10 rounded-xl p-6 bg-white/[0.02]">
             <h2 className="text-lg font-semibold mb-4">선택 결과 (JSON)</h2>
             <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto text-sm text-white/70">

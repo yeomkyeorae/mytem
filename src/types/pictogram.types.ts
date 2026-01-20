@@ -53,3 +53,12 @@ export enum PictogramCategory {
   BOOKS = "books", // 도서
   OTHERS = "others", // 기타
 }
+
+// 커스텀 픽토그램 (AI 생성)
+export interface CustomPictogram {
+  id: string;
+  user_id: string;
+  prompt: string;
+  image_url: string;
+  created_at: string;
+}

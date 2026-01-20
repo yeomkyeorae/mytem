@@ -7,13 +7,13 @@
 ### 주요 기능
 
 1. **아이템 관리 (CRUD)**: 아이템 등록, 조회, 수정, 삭제
-2. **기본 픽토그램 제공**: 일반적인 소유 항목(티셔츠, 신발, 책 등)에 대한 기본 이미지
-3. **AI 픽토그램 생성**: 텍스트 설명으로 커스텀 픽토그램 이미지 생성
-4. **키워드 검색**: 아이템 키워드 검색으로 픽토그램 이미지 조회
+2. **기본 스케치 제공**: 일반적인 소유 항목(티셔츠, 신발, 책 등)에 대한 기본 이미지
+3. **AI 스케치 생성**: 텍스트 설명으로 커스텀 스케치 이미지 생성
+4. **키워드 검색**: 아이템 키워드 검색으로 스케치 이미지 조회
 
 ### 아이템 속성
 
-- 이미지 (픽토그램)
+- 이미지 (스케치)
 - 이름
 - 개수
 - 설명
@@ -89,8 +89,8 @@ src/
 - [x] 데이터베이스 스키마 SQL 마이그레이션 파일 생성
   - [x] profiles 테이블 (사용자 프로필)
   - [x] items 테이블 (아이템)
-  - [x] pictograms 테이블 (기본 픽토그램)
-  - [x] custom_pictograms 테이블 (커스텀 픽토그램)
+  - [x] sketches 테이블 (기본 스케치)
+  - [x] custom_sketches 테이블 (커스텀 스케치)
 - [x] RLS(Row Level Security) 정책 설정
 - [x] 자동 트리거 설정 (updated_at 갱신, 사용자 프로필 자동 생성)
 
@@ -112,7 +112,7 @@ src/
 - [x] 인증 콜백 처리 (src/app/auth/callback/route.ts)
 - [x] 인증 상태 관리 Hook (src/hooks/useAuth.ts)
 - [x] 미들웨어 설정 (src/middleware.ts)
-  - [x] 보호된 라우트 설정 (/dashboard, /items, /pictogram)
+  - [x] 보호된 라우트 설정 (/dashboard, /items, /sketch)
   - [x] 인증 상태에 따른 리다이렉션
 - [x] 로그아웃 기능 구현
 - [x] 대시보드 페이지 생성 (src/app/dashboard/page.tsx)
@@ -129,27 +129,27 @@ src/
   - [x] Footer 컴포넌트
 - [x] Root Layout에 Toaster 추가
 
-### 11. Phase 4 픽토그램 시스템 구현 ✅
+### 11. Phase 4 스케치 시스템 구현 ✅
 
 **백엔드**:
 - [x] Iconify API 클라이언트 설정
   - [x] src/lib/iconify.ts 헬퍼 함수
-  - [x] src/types/pictogram.types.ts 타입 정의
+  - [x] src/types/sketch.types.ts 타입 정의
   - [x] 5개 인기 컬렉션 연동 (Material Design, Heroicons, Lucide 등)
-- [x] 픽토그램 검색 API
-  - [x] GET /api/pictograms/search?q=keyword
+- [x] 스케치 검색 API
+  - [x] GET /api/sketches/search?q=keyword
   - [x] Iconify API 연동, SVG 데이터 반환
-- [x] 기본 픽토그램 목록 API
-  - [x] GET /api/pictograms?category=clothing
-  - [x] 카테고리별 추천 픽토그램 (의류, 전자기기, 생활용품 등)
+- [x] 기본 스케치 목록 API
+  - [x] GET /api/sketches?category=clothing
+  - [x] 카테고리별 추천 스케치 (의류, 전자기기, 생활용품 등)
 
 **프론트엔드**:
-- [x] PictogramPicker 컴포넌트 (src/components/PictogramPicker.tsx)
+- [x] SketchPicker 컴포넌트 (src/components/SketchPicker.tsx)
   - [x] 실시간 검색 기능 (500ms 디바운스)
   - [x] 카테고리 탭 필터
   - [x] 그리드 레이아웃 (반응형)
   - [x] 선택 상태 표시
-- [x] 테스트 페이지 (/pictograms/test)
+- [x] 테스트 페이지 (/sketches/test)
 - [x] SVG 렌더링 및 미리보기
 
 ---
@@ -162,8 +162,8 @@ src/
 - [x] 데이터베이스 스키마 설계
   - [x] profiles 테이블 (사용자 프로필)
   - [x] items 테이블 (아이템: 이름, 개수, 설명, 이미지URL, 이미지타입)
-  - [x] pictograms 테이블 (기본 픽토그램: 이름, 키워드, 이미지URL, 카테고리)
-  - [x] custom_pictograms 테이블 (커스텀 픽토그램)
+  - [x] sketches 테이블 (기본 스케치: 이름, 키워드, 이미지URL, 카테고리)
+  - [x] custom_sketches 테이블 (커스텀 스케치)
 - [ ] Supabase 대시보드에서 프로젝트 생성 (수동 작업 필요)
 - [ ] Supabase 대시보드에서 마이그레이션 SQL 실행 (수동 작업 필요)
 - [x] 환경 변수 설정 (.env.local.example 생성됨)
@@ -188,20 +188,20 @@ src/
 - [x] 보호된 라우트 설정 (미들웨어)
 - [x] 대시보드 페이지 (/dashboard)
 
-### Phase 4: 기본 픽토그램 시스템 ✅
+### Phase 4: 기본 스케치 시스템 ✅
 
-- [x] 기본 픽토그램 이미지 준비
+- [x] 기본 스케치 이미지 준비
   - [x] Iconify API 연동 (Material Design, Heroicons, Lucide 등)
   - [x] 카테고리별 추천 아이콘 (의류, 전자기기, 생활용품 등)
 - [x] 키워드 검색 API 구현
-  - [x] GET /api/pictograms/search
-- [x] 기본 픽토그램 목록 API 구현
-  - [x] GET /api/pictograms
-- [x] 픽토그램 검색/선택 UI 구현
-  - [x] PictogramPicker 컴포넌트
+  - [x] GET /api/sketches/search
+- [x] 기본 스케치 목록 API 구현
+  - [x] GET /api/sketches
+- [x] 스케치 검색/선택 UI 구현
+  - [x] SketchPicker 컴포넌트
   - [x] 실시간 검색 기능
   - [x] 카테고리 필터
-  - [x] 테스트 페이지 (/pictograms/test)
+  - [x] 테스트 페이지 (/sketches/test)
 
 ### Phase 5: 아이템 관리 (CRUD) ✅
 
@@ -216,7 +216,7 @@ src/
 - [x] 아이템 목록 페이지 (/items)
 - [x] 아이템 상세 페이지 (/items/[id])
 - [x] 아이템 등록 기능 (/items/new)
-  - [x] PictogramPicker 연동
+  - [x] SketchPicker 연동
   - [x] 이름, 개수, 설명 입력
 - [x] 아이템 수정 기능 (/items/[id]/edit)
 - [x] 아이템 삭제 기능
@@ -256,19 +256,46 @@ src/
 
 - [x] 대시보드 페이지에 아이템 API 연동
   - [x] /api/items API 호출하여 실제 데이터 표시
-  - [x] 통계 섹션에 전체 아이템 개수, 커스텀 픽토그램 개수 표시
+  - [x] 통계 섹션에 전체 아이템 개수, 커스텀 스케치 개수 표시
   - [x] 최근 등록된 아이템 5개 표시 (ItemCard 컴포넌트 재사용)
   - [x] 카테고리 통계 카드 제거 (기능 미구현)
   - [x] 에러 처리 및 "다시 시도" 버튼 추가
   - [x] 아이템이 없을 때만 Empty State 표시
 
-### Phase 6: AI 픽토그램 생성
+### Phase 6: AI 스케치 생성 ✅
 
-- [ ] AI 이미지 생성 API 연동 (나노바나나 등)
-- [ ] 픽토그램 생성 페이지 (/pictogram/create)
-- [ ] 텍스트 입력 → 이미지 생성 플로우
-- [ ] 생성된 이미지 저장 및 관리
-- [ ] 사용자별 커스텀 픽토그램 목록
+**백엔드**:
+- [x] Replicate API 연동 (Flux Schnell 모델, ~$0.003/image)
+  - [x] src/lib/replicate.ts - API 클라이언트 설정
+  - [x] 스케치 스타일 프롬프트 템플릿 적용
+- [x] 커스텀 스케치 API 구현
+  - [x] GET /api/sketches/custom - 사용자 스케치 목록 조회
+  - [x] POST /api/sketches/custom - AI 이미지 생성 및 저장
+  - [x] DELETE /api/sketches/custom/[id] - 스케치 삭제
+
+**프론트엔드**:
+- [x] 스케치 생성 페이지 (/sketch/create)
+  - [x] 프롬프트 입력 UI
+  - [x] 이미지 생성 로딩 상태
+  - [x] 생성된 이미지 미리보기
+  - [x] 최근 생성한 스케치 목록
+- [x] 스케치 갤러리 페이지 (/sketch/gallery)
+  - [x] 사용자 스케치 그리드 표시
+  - [x] 삭제 기능 (호버 시 버튼 표시)
+- [x] SketchPicker 확장
+  - [x] "내 스케치" 탭 추가
+  - [x] 커스텀 스케치 선택 기능
+  - [x] isCustomSketch 타입 가드 추가
+- [x] ItemForm 개선
+  - [x] 커스텀 스케치 지원
+  - [x] image_type 동적 설정 (default/custom)
+- [x] Navbar 메뉴 추가
+  - [x] "스케치 생성" 링크 추가
+
+**타입 및 설정**:
+- [x] CustomSketch 타입 추가 (src/types/sketch.types.ts)
+- [x] .env.local.example에 REPLICATE_API_TOKEN 추가
+- [x] replicate 패키지 설치
 
 ### Phase 7: 추가 기능
 
@@ -288,7 +315,7 @@ src/
 | Backend  | Next.js API Routes           |
 | Database | Supabase (PostgreSQL)        |
 | Auth     | Supabase Auth                |
-| AI Image | 나노바나나 API (예정)        |
+| AI Image | Replicate Flux Schnell       |
 | Hosting  | Vercel                       |
 | Language | TypeScript (strict mode)     |
 | Icons    | Lucide React                 |

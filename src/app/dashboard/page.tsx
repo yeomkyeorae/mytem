@@ -53,7 +53,7 @@ export default function DashboardPage() {
   // 통계 계산
   const stats = useMemo(() => ({
     totalCount: items.length,
-    customPictogramCount: items.filter(item => item.image_type === "custom").length,
+    customSketchCount: items.filter(item => item.image_type === "custom").length,
   }), [items]);
 
   // 로딩 스피너 컴포넌트
@@ -120,9 +120,9 @@ export default function DashboardPage() {
             </p>
           </div>
           <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02]">
-            <p className="text-sm text-white/50 mb-1">커스텀 픽토그램</p>
+            <p className="text-sm text-white/50 mb-1">커스텀 스케치</p>
             <p className="text-3xl font-bold">
-              {isItemsLoading ? <LoadingSpinner /> : stats.customPictogramCount}
+              {isItemsLoading ? <LoadingSpinner /> : stats.customSketchCount}
             </p>
           </div>
         </div>
@@ -158,7 +158,7 @@ export default function DashboardPage() {
               </div>
             </Link>
             <Link
-              href="/pictogram/create"
+              href="/sketch/create"
               className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
             >
               <div className="flex items-center gap-4">
@@ -178,7 +178,7 @@ export default function DashboardPage() {
                   </svg>
                 </div>
                 <div>
-                  <p className="font-medium">픽토그램 생성</p>
+                  <p className="font-medium">스케치 생성</p>
                   <p className="text-sm text-white/50">AI로 커스텀 이미지를 만드세요</p>
                 </div>
               </div>
