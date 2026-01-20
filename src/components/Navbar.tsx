@@ -28,9 +28,6 @@ export default function Navbar() {
           ) : user ? (
             // 로그인 상태
             <>
-              <span className="text-sm text-white/50 hidden sm:block">
-                {user.email}
-              </span>
               <Link
                 href="/dashboard"
                 className="text-sm text-white/70 hover:text-white transition-colors"
@@ -43,6 +40,7 @@ export default function Navbar() {
               >
                 내 아이템
               </Link>
+              <span className="text-sm text-white/50 hidden sm:block">{user.email}</span>
               <button
                 onClick={handleSignOut}
                 className="text-sm px-4 py-2 border border-white/20 text-white/70 rounded-full font-medium hover:bg-white/5 hover:text-white transition-colors"
