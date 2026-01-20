@@ -87,9 +87,9 @@ export function iconToSvg(icon: IconifyIcon): string {
 }
 
 /**
- * 아이콘 ID로 완전한 픽토그램 데이터 가져오기
+ * 아이콘 ID로 완전한 스케치 데이터 가져오기
  * @param iconId 아이콘 ID
- * @returns 픽토그램 데이터
+ * @returns 스케치 데이터
  */
 export async function getPictogram(iconId: string): Promise<Pictogram | null> {
   const iconData = await getIconData(iconId);
@@ -111,9 +111,9 @@ export async function getPictogram(iconId: string): Promise<Pictogram | null> {
 }
 
 /**
- * 여러 아이콘 ID를 픽토그램 데이터로 변환
+ * 여러 아이콘 ID를 스케치 데이터로 변환
  * @param iconIds 아이콘 ID 배열
- * @returns 픽토그램 배열
+ * @returns 스케치 배열
  */
 export async function getPictograms(
   iconIds: string[]

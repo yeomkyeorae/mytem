@@ -43,15 +43,15 @@ COMMENT ON COLUMN public.items.user_id IS '소유자 (auth.users 참조)';
 COMMENT ON COLUMN public.items.name IS '아이템 이름';
 COMMENT ON COLUMN public.items.description IS '아이템 설명';
 COMMENT ON COLUMN public.items.quantity IS '아이템 개수';
-COMMENT ON COLUMN public.items.image_url IS '픽토그램 이미지 URL';
-COMMENT ON COLUMN public.items.image_type IS '이미지 타입 (default: 기본 픽토그램, custom: 커스텀 생성)';
+COMMENT ON COLUMN public.items.image_url IS '스케치 이미지 URL';
+COMMENT ON COLUMN public.items.image_type IS '이미지 타입 (default: 기본 스케치, custom: 커스텀 생성)';
 
 -- items 테이블 인덱스
 CREATE INDEX IF NOT EXISTS items_user_id_idx ON public.items(user_id);
 CREATE INDEX IF NOT EXISTS items_name_idx ON public.items(name);
 
 -- ============================================
--- 3. PICTOGRAMS 테이블 (기본 픽토그램)
+-- 3. PICTOGRAMS 테이블 (기본 스케치)
 -- ============================================
 CREATE TABLE IF NOT EXISTS public.pictograms (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -63,11 +63,11 @@ CREATE TABLE IF NOT EXISTS public.pictograms (
 );
 
 -- pictograms 테이블 코멘트
-COMMENT ON TABLE public.pictograms IS '시스템 제공 기본 픽토그램 이미지 테이블';
-COMMENT ON COLUMN public.pictograms.id IS '픽토그램 고유 식별자';
-COMMENT ON COLUMN public.pictograms.name IS '픽토그램 이름';
+COMMENT ON TABLE public.pictograms IS '시스템 제공 기본 스케치 이미지 테이블';
+COMMENT ON COLUMN public.pictograms.id IS '스케치 고유 식별자';
+COMMENT ON COLUMN public.pictograms.name IS '스케치 이름';
 COMMENT ON COLUMN public.pictograms.keywords IS '검색 키워드 배열';
-COMMENT ON COLUMN public.pictograms.image_url IS '픽토그램 이미지 URL';
+COMMENT ON COLUMN public.pictograms.image_url IS '스케치 이미지 URL';
 COMMENT ON COLUMN public.pictograms.category IS '카테고리 (의류, 전자기기, 생활용품 등)';
 
 -- pictograms 테이블 인덱스
@@ -76,7 +76,7 @@ CREATE INDEX IF NOT EXISTS pictograms_category_idx ON public.pictograms(category
 CREATE INDEX IF NOT EXISTS pictograms_keywords_idx ON public.pictograms USING GIN(keywords);
 
 -- ============================================
--- 4. CUSTOM_PICTOGRAMS 테이블 (사용자 커스텀 픽토그램)
+-- 4. CUSTOM_PICTOGRAMS 테이블 (사용자 커스텀 스케치)
 -- ============================================
 CREATE TABLE IF NOT EXISTS public.custom_pictograms (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -87,11 +87,11 @@ CREATE TABLE IF NOT EXISTS public.custom_pictograms (
 );
 
 -- custom_pictograms 테이블 코멘트
-COMMENT ON TABLE public.custom_pictograms IS '사용자가 AI로 생성한 커스텀 픽토그램 테이블';
-COMMENT ON COLUMN public.custom_pictograms.id IS '커스텀 픽토그램 고유 식별자';
+COMMENT ON TABLE public.custom_pictograms IS '사용자가 AI로 생성한 커스텀 스케치 테이블';
+COMMENT ON COLUMN public.custom_pictograms.id IS '커스텀 스케치 고유 식별자';
 COMMENT ON COLUMN public.custom_pictograms.user_id IS '생성자 (auth.users 참조)';
 COMMENT ON COLUMN public.custom_pictograms.prompt IS '이미지 생성에 사용된 프롬프트';
-COMMENT ON COLUMN public.custom_pictograms.image_url IS '생성된 픽토그램 이미지 URL';
+COMMENT ON COLUMN public.custom_pictograms.image_url IS '생성된 스케치 이미지 URL';
 
 -- custom_pictograms 테이블 인덱스
 CREATE INDEX IF NOT EXISTS custom_pictograms_user_id_idx ON public.custom_pictograms(user_id);
@@ -195,7 +195,7 @@ CREATE POLICY "Users can delete own items"
 -- pictograms 테이블 RLS 활성화
 ALTER TABLE public.pictograms ENABLE ROW LEVEL SECURITY;
 
--- pictograms RLS 정책: 모든 인증된 사용자가 조회 가능 (기본 픽토그램은 공용)
+-- pictograms RLS 정책: 모든 인증된 사용자가 조회 가능 (기본 스케치은 공용)
 CREATE POLICY "Anyone can view pictograms"
   ON public.pictograms
   FOR SELECT
@@ -205,19 +205,19 @@ CREATE POLICY "Anyone can view pictograms"
 -- custom_pictograms 테이블 RLS 활성화
 ALTER TABLE public.custom_pictograms ENABLE ROW LEVEL SECURITY;
 
--- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 픽토그램만 조회 가능
+-- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 스케치만 조회 가능
 CREATE POLICY "Users can view own custom pictograms"
   ON public.custom_pictograms
   FOR SELECT
   USING (auth.uid() = user_id);
 
--- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 픽토그램만 생성 가능
+-- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 스케치만 생성 가능
 CREATE POLICY "Users can create own custom pictograms"
   ON public.custom_pictograms
   FOR INSERT
   WITH CHECK (auth.uid() = user_id);
 
--- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 픽토그램만 삭제 가능
+-- custom_pictograms RLS 정책: 사용자는 자신의 커스텀 스케치만 삭제 가능
 CREATE POLICY "Users can delete own custom pictograms"
   ON public.custom_pictograms
   FOR DELETE

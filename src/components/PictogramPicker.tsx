@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
 import type { Pictogram, CustomPictogram } from "@/types/pictogram.types";
 
-// 픽토그램 또는 커스텀 픽토그램을 구분하기 위한 유니온 타입
+// 스케치 또는 커스텀 스케치을 구분하기 위한 유니온 타입
 export type SelectedPictogram = Pictogram | CustomPictogram;
 
 interface PictogramPickerProps {
@@ -16,7 +16,7 @@ interface PictogramPickerProps {
 }
 
 const CATEGORIES = [
-  { id: "my", label: "내 픽토그램" },
+  { id: "my", label: "내 스케치" },
   { id: "all", label: "전체" },
   { id: "clothing", label: "의류" },
   { id: "electronics", label: "전자기기" },
@@ -45,7 +45,7 @@ export default function PictogramPicker({
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  // 카테고리 변경 시 픽토그램 로드
+  // 카테고리 변경 시 스케치 로드
   useEffect(() => {
     if (selectedCategory === "my") {
       loadCustomPictograms();
@@ -77,7 +77,7 @@ export default function PictogramPicker({
       const response = await fetch("/api/pictograms/custom");
 
       if (!response.ok) {
-        throw new Error("내 픽토그램을 불러오는데 실패했습니다.");
+        throw new Error("내 스케치을 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -103,7 +103,7 @@ export default function PictogramPicker({
       const response = await fetch(`/api/pictograms?${params}`);
 
       if (!response.ok) {
-        throw new Error("픽토그램을 불러오는데 실패했습니다.");
+        throw new Error("스케치을 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -147,7 +147,7 @@ export default function PictogramPicker({
     setSearchQuery("");
   };
 
-  // 선택된 픽토그램의 ID 가져오기
+  // 선택된 스케치의 ID 가져오기
   const getSelectedId = () => {
     if (!selectedPictogram) return null;
     return selectedPictogram.id;
@@ -160,12 +160,12 @@ export default function PictogramPicker({
 
   return (
     <div className="w-full">
-      {/* 검색 입력 (내 픽토그램 탭이 아닐 때만) */}
+      {/* 검색 입력 (내 스케치 탭이 아닐 때만) */}
       {selectedCategory !== "my" && (
         <div className="mb-4">
           <Input
             type="text"
-            placeholder="픽토그램 검색 (예: 책, 신발, 노트북...)"
+            placeholder="스케치 검색 (예: 책, 신발, 노트북...)"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full"
@@ -223,7 +223,7 @@ export default function PictogramPicker({
         </div>
       )}
 
-      {/* 내 픽토그램 그리드 */}
+      {/* 내 스케치 그리드 */}
       {!isLoading && selectedCategory === "my" && (
         <>
           {customPictograms.length > 0 ? (
@@ -248,19 +248,19 @@ export default function PictogramPicker({
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-white/40 mb-4">아직 생성한 픽토그램이 없습니다.</p>
+              <p className="text-white/40 mb-4">아직 생성한 스케치이 없습니다.</p>
               <Link
                 href="/pictogram/create"
                 className="text-white hover:underline"
               >
-                픽토그램 생성하기 →
+                스케치 생성하기 →
               </Link>
             </div>
           )}
         </>
       )}
 
-      {/* 기본 픽토그램 그리드 */}
+      {/* 기본 스케치 그리드 */}
       {!isLoading && selectedCategory !== "my" && pictograms.length > 0 && (
         <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
           {pictograms.map((pictogram) => (
@@ -290,14 +290,14 @@ export default function PictogramPicker({
           <div className="text-center py-12 text-white/40">
             {searchQuery
               ? `"${searchQuery}"에 대한 검색 결과가 없습니다.`
-              : "픽토그램을 불러오는 중..."}
+              : "스케치을 불러오는 중..."}
           </div>
         )}
 
-      {/* 선택된 픽토그램 정보 */}
+      {/* 선택된 스케치 정보 */}
       {selectedPictogram && (
         <div className="mt-6 p-4 border border-white/10 rounded-lg bg-white/5">
-          <p className="text-sm text-white/50 mb-2">선택된 픽토그램</p>
+          <p className="text-sm text-white/50 mb-2">선택된 스케치</p>
           <div className="flex items-center gap-4">
             {isCustomPictogram(selectedPictogram) ? (
               <>
@@ -308,7 +308,7 @@ export default function PictogramPicker({
                 />
                 <div>
                   <p className="font-medium text-white">{selectedPictogram.prompt}</p>
-                  <p className="text-sm text-white/50">내 픽토그램</p>
+                  <p className="text-sm text-white/50">내 스케치</p>
                 </div>
               </>
             ) : (

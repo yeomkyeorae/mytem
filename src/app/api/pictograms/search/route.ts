@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { searchIcons, getPictograms } from "@/lib/iconify";
 
 /**
- * 픽토그램 검색 API
+ * 스케치 검색 API
  * GET /api/pictograms/search?q=keyword&limit=20
  */
 export async function GET(request: NextRequest) {
@@ -29,7 +29,7 @@ export async function GET(request: NextRequest) {
     // Iconify API로 아이콘 검색
     const searchResult = await searchIcons(query, limit);
 
-    // 아이콘 ID를 픽토그램 데이터로 변환
+    // 아이콘 ID를 스케치 데이터로 변환
     const pictograms = await getPictograms(searchResult.icons);
 
     return NextResponse.json({
@@ -42,7 +42,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "픽토그램 검색 중 오류가 발생했습니다.",
+        error: "스케치 검색 중 오류가 발생했습니다.",
         details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }

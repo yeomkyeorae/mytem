@@ -8,7 +8,7 @@
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
-/** 이미지 타입: 기본 픽토그램 또는 커스텀 생성 */
+/** 이미지 타입: 기본 스케치 또는 커스텀 생성 */
 export type ImageType = "default" | "custom";
 
 export interface Database {
@@ -95,7 +95,7 @@ export interface Database {
         ];
       };
 
-      /** 기본 픽토그램 테이블 */
+      /** 기본 스케치 테이블 */
       pictograms: {
         Row: {
           id: string;
@@ -124,7 +124,7 @@ export interface Database {
         Relationships: [];
       };
 
-      /** 사용자 커스텀 픽토그램 테이블 */
+      /** 사용자 커스텀 스케치 테이블 */
       custom_pictograms: {
         Row: {
           id: string;

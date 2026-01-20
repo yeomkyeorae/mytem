@@ -3,10 +3,10 @@ import { createClient } from "@/lib/supabase/server";
 import { generateSketch } from "@/lib/replicate";
 
 /**
- * 커스텀 픽토그램 목록 조회 API
+ * 커스텀 스케치 목록 조회 API
  * GET /api/pictograms/custom
  *
- * 현재 인증된 사용자의 커스텀 픽토그램 목록을 반환합니다.
+ * 현재 인증된 사용자의 커스텀 스케치 목록을 반환합니다.
  */
 export async function GET() {
   try {
@@ -22,7 +22,7 @@ export async function GET() {
       return NextResponse.json({ error: "인증이 필요합니다." }, { status: 401 });
     }
 
-    // 커스텀 픽토그램 목록 조회
+    // 커스텀 스케치 목록 조회
     const { data: pictograms, error } = await supabase
       .from("custom_pictograms")
       .select("*")
@@ -32,7 +32,7 @@ export async function GET() {
     if (error) {
       console.error("Custom pictograms fetch error:", error);
       return NextResponse.json(
-        { error: "픽토그램 목록을 가져오는 중 오류가 발생했습니다." },
+        { error: "스케치 목록을 가져오는 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
@@ -54,7 +54,7 @@ export async function GET() {
 }
 
 /**
- * 커스텀 픽토그램 생성 API
+ * 커스텀 스케치 생성 API
  * POST /api/pictograms/custom
  *
  * Body:
@@ -113,12 +113,12 @@ export async function POST(request: NextRequest) {
 
     if (error) {
       console.error("Custom pictogram save error:", error);
-      return NextResponse.json({ error: "픽토그램 저장 중 오류가 발생했습니다." }, { status: 500 });
+      return NextResponse.json({ error: "스케치 저장 중 오류가 발생했습니다." }, { status: 500 });
     }
 
     return NextResponse.json(
       {
-        message: "픽토그램이 생성되었습니다.",
+        message: "스케치이 생성되었습니다.",
         pictogram,
       },
       { status: 201 }

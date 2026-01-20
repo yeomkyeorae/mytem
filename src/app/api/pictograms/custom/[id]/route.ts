@@ -6,7 +6,7 @@ interface RouteParams {
 }
 
 /**
- * 커스텀 픽토그램 삭제 API
+ * 커스텀 스케치 삭제 API
  * DELETE /api/pictograms/custom/[id]
  */
 export async function DELETE(request: NextRequest, { params }: RouteParams) {
@@ -24,7 +24,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: "인증이 필요합니다." }, { status: 401 });
     }
 
-    // 픽토그램 소유권 확인 및 삭제
+    // 스케치 소유권 확인 및 삭제
     const { data: pictogram, error: fetchError } = await supabase
       .from("custom_pictograms")
       .select("id, user_id")
@@ -33,7 +33,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
 
     if (fetchError || !pictogram) {
       return NextResponse.json(
-        { error: "픽토그램을 찾을 수 없습니다." },
+        { error: "스케치을 찾을 수 없습니다." },
         { status: 404 }
       );
     }
@@ -55,14 +55,14 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     if (deleteError) {
       console.error("Custom pictogram delete error:", deleteError);
       return NextResponse.json(
-        { error: "픽토그램 삭제 중 오류가 발생했습니다." },
+        { error: "스케치 삭제 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
 
     return NextResponse.json({
       success: true,
-      message: "픽토그램이 삭제되었습니다.",
+      message: "스케치이 삭제되었습니다.",
     });
   } catch (error) {
     console.error("Custom pictogram delete error:", error);

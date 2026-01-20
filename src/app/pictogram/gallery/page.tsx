@@ -26,7 +26,7 @@ export default function PictogramGalleryPage() {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.error || "픽토그램을 불러오는데 실패했습니다.");
+        throw new Error(data.error || "스케치을 불러오는데 실패했습니다.");
       }
 
       setPictograms(data.pictograms || []);
@@ -38,7 +38,7 @@ export default function PictogramGalleryPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("이 픽토그램을 삭제하시겠습니까?")) {
+    if (!confirm("이 스케치을 삭제하시겠습니까?")) {
       return;
     }
 
@@ -81,14 +81,14 @@ export default function PictogramGalleryPage() {
           {/* 헤더 */}
           <div className="flex items-center justify-between mb-8">
             <div>
-              <h1 className="text-3xl font-bold">내 픽토그램</h1>
+              <h1 className="text-3xl font-bold">내 스케치</h1>
               <p className="text-white/60 mt-2">
-                AI로 생성한 픽토그램을 관리하세요.
+                AI로 생성한 스케치을 관리하세요.
               </p>
             </div>
             <Link href="/pictogram/create">
               <Button className="bg-white text-black hover:bg-white/90">
-                새 픽토그램 생성
+                새 스케치 생성
               </Button>
             </Link>
           </div>
@@ -144,19 +144,19 @@ export default function PictogramGalleryPage() {
                   <path d="m21 15-5-5L5 21" />
                 </svg>
               </div>
-              <h2 className="text-xl font-semibold mb-2">아직 생성한 픽토그램이 없습니다</h2>
+              <h2 className="text-xl font-semibold mb-2">아직 생성한 스케치이 없습니다</h2>
               <p className="text-white/50 mb-6">
-                AI를 이용해 나만의 픽토그램을 만들어보세요!
+                AI를 이용해 나만의 스케치을 만들어보세요!
               </p>
               <Link href="/pictogram/create">
                 <Button className="bg-white text-black hover:bg-white/90">
-                  첫 픽토그램 생성하기
+                  첫 스케치 생성하기
                 </Button>
               </Link>
             </div>
           )}
 
-          {/* 픽토그램 그리드 */}
+          {/* 스케치 그리드 */}
           {!isLoading && pictograms.length > 0 && (
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
               {pictograms.map((pictogram) => (

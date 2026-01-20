@@ -18,7 +18,7 @@ export default function PictogramCreatePage() {
   const [error, setError] = useState("");
   const [recentPictograms, setRecentPictograms] = useState<CustomPictogram[]>([]);
 
-  // 최근 생성한 픽토그램 로드
+  // 최근 생성한 스케치 로드
   useEffect(() => {
     loadRecentPictograms();
   }, []);
@@ -59,7 +59,7 @@ export default function PictogramCreatePage() {
       }
 
       setGeneratedImage(data.pictogram.image_url);
-      // 최근 픽토그램 목록 갱신
+      // 최근 스케치 목록 갱신
       loadRecentPictograms();
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
@@ -87,9 +87,9 @@ export default function PictogramCreatePage() {
             >
               ← 갤러리로 돌아가기
             </Link>
-            <h1 className="text-3xl font-bold">AI 픽토그램 생성</h1>
+            <h1 className="text-3xl font-bold">AI 스케치 생성</h1>
             <p className="text-white/60 mt-2">
-              원하는 이미지를 텍스트로 설명하면 AI가 픽토그램을 만들어드립니다.
+              원하는 이미지를 텍스트로 설명하면 AI가 스케치을 만들어드립니다.
             </p>
           </div>
 
@@ -167,7 +167,7 @@ export default function PictogramCreatePage() {
             {generatedImage && (
               <div className="mt-6 space-y-4">
                 <div className="text-center">
-                  <p className="text-sm text-white/50 mb-4">생성된 픽토그램</p>
+                  <p className="text-sm text-white/50 mb-4">생성된 스케치</p>
                   <div className="inline-block p-4 bg-white/10 rounded-xl">
                     <img
                       src={generatedImage}
@@ -196,11 +196,11 @@ export default function PictogramCreatePage() {
             )}
           </div>
 
-          {/* 최근 생성한 픽토그램 */}
+          {/* 최근 생성한 스케치 */}
           {recentPictograms.length > 0 && (
             <div>
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold">최근 생성한 픽토그램</h2>
+                <h2 className="text-lg font-semibold">최근 생성한 스케치</h2>
                 <Link
                   href="/pictogram/gallery"
                   className="text-sm text-white/50 hover:text-white transition-colors"
@@ -231,7 +231,7 @@ export default function PictogramCreatePage() {
             <ul className="space-y-2 text-sm text-white/60">
               <li>• 단일 물체를 간단히 설명하세요 (예: "가방", "노트북")</li>
               <li>• 구체적인 설명이 더 좋은 결과를 만듭니다</li>
-              <li>• 생성된 픽토그램은 아이템 등록 시 사용할 수 있습니다</li>
+              <li>• 생성된 스케치은 아이템 등록 시 사용할 수 있습니다</li>
               <li>• 마음에 들지 않으면 "다시 생성"을 클릭하세요</li>
             </ul>
           </div>

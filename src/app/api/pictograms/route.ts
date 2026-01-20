@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { getPictograms, RECOMMENDED_ICONS } from "@/lib/iconify";
 
 /**
- * 기본 픽토그램 목록 API
+ * 기본 스케치 목록 API
  * GET /api/pictograms?category=clothing
  */
 export async function GET(request: NextRequest) {
@@ -41,7 +41,7 @@ export async function GET(request: NextRequest) {
 
     return NextResponse.json(
       {
-        error: "픽토그램 목록을 가져오는 중 오류가 발생했습니다.",
+        error: "스케치 목록을 가져오는 중 오류가 발생했습니다.",
         details: error instanceof Error ? error.message : "Unknown error",
       },
       { status: 500 }

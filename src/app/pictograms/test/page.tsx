@@ -60,9 +60,9 @@ export default function PictogramTestPage() {
       {/* Main Content */}
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
-          <h1 className="text-2xl font-bold mb-2">픽토그램 선택 테스트</h1>
+          <h1 className="text-2xl font-bold mb-2">스케치 선택 테스트</h1>
           <p className="text-white/50">
-            검색하거나 카테고리를 선택하여 픽토그램을 찾아보세요.
+            검색하거나 카테고리를 선택하여 스케치을 찾아보세요.
           </p>
         </div>
 
