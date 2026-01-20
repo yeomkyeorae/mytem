@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { deleteImageFromStorage } from "@/lib/storage";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -27,7 +28,7 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
     // 스케치 소유권 확인 및 삭제
     const { data: sketch, error: fetchError } = await supabase
       .from("custom_pictograms")
-      .select("id, user_id")
+      .select("id, user_id, image_url")
       .eq("id", id)
       .single();
 
@@ -58,6 +59,14 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
         { error: "스케치 삭제 중 오류가 발생했습니다." },
         { status: 500 }
       );
+    }
+
+    // Storage에서 이미지 파일 삭제 (실패해도 DB 삭제는 완료됨)
+    if (sketch.image_url) {
+      const storageDeleted = await deleteImageFromStorage(supabase, sketch.image_url);
+      if (!storageDeleted) {
+        console.warn("Storage 파일 삭제 실패 (DB 삭제는 완료됨):", sketch.image_url);
+      }
     }
 
     return NextResponse.json({

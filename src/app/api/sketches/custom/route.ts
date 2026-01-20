@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { generateSketch } from "@/lib/replicate";
+import { transferImageToStorage } from "@/lib/storage";
 
 /**
  * 커스텀 스케치 목록 조회 API
@@ -95,13 +96,25 @@ export async function POST(request: NextRequest) {
     }
 
     // Replicate API로 이미지 생성
-    let imageUrl: string;
+    let tempImageUrl: string;
     try {
-      imageUrl = await generateSketch(prompt.trim());
+      tempImageUrl = await generateSketch(prompt.trim());
     } catch (genError) {
       console.error("Image generation error:", genError);
       return NextResponse.json(
         { error: "이미지 생성에 실패했습니다. 잠시 후 다시 시도해주세요." },
+        { status: 500 }
+      );
+    }
+
+    // Supabase Storage에 이미지 영구 저장
+    let imageUrl: string;
+    try {
+      imageUrl = await transferImageToStorage(supabase, tempImageUrl, user.id);
+    } catch (storageError) {
+      console.error("Storage transfer error:", storageError);
+      return NextResponse.json(
+        { error: "이미지 저장에 실패했습니다. 잠시 후 다시 시도해주세요." },
         { status: 500 }
       );
     }

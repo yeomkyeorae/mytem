@@ -4,7 +4,7 @@ import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SkecthPicker";
+import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SketchPicker";
 import type { Item } from "@/types/database.types";
 
 export interface ItemFormData {

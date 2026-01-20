@@ -129,6 +129,9 @@ export async function getPictograms(
     .map((result) => result.value);
 }
 
+// Alias for backward compatibility
+export const getSketches = getPictograms;
+
 /**
  * 컬렉션 prefix를 사람이 읽을 수 있는 이름으로 변환
  */
