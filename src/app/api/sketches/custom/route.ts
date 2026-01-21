@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { generateSketch } from "@/lib/replicate";
 
 /**
  * 커스텀 스케치 목록 조회 API
@@ -54,11 +53,12 @@ export async function GET() {
 }
 
 /**
- * 커스텀 스케치 생성 API
+ * 커스텀 스케치 저장 API
  * POST /api/sketches/custom
  *
  * Body:
- * - prompt: string (필수) - 이미지 생성 프롬프트
+ * - imageUrl: string (필수) - 생성된 이미지 URL
+ * - prompt: string (필수) - 이미지 생성에 사용된 프롬프트
  */
 export async function POST(request: NextRequest) {
   try {
@@ -76,12 +76,29 @@ export async function POST(request: NextRequest) {
 
     // 요청 본문 파싱
     const body = await request.json();
-    const { prompt } = body;
+    const { imageUrl, prompt } = body;
 
     // 필수 필드 검증
+    if (!imageUrl || typeof imageUrl !== "string" || imageUrl.trim() === "") {
+      return NextResponse.json(
+        { error: "이미지 URL은 필수입니다." },
+        { status: 400 }
+      );
+    }
+
     if (!prompt || typeof prompt !== "string" || prompt.trim() === "") {
       return NextResponse.json(
         { error: "프롬프트는 필수입니다." },
+        { status: 400 }
+      );
+    }
+
+    // URL 형식 검증
+    try {
+      new URL(imageUrl);
+    } catch {
+      return NextResponse.json(
+        { error: "올바른 이미지 URL 형식이 아닙니다." },
         { status: 400 }
       );
     }
@@ -94,25 +111,13 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Replicate API로 이미지 생성
-    let imageUrl: string;
-    try {
-      imageUrl = await generateSketch(prompt.trim());
-    } catch (genError) {
-      console.error("Image generation error:", genError);
-      return NextResponse.json(
-        { error: "이미지 생성에 실패했습니다. 잠시 후 다시 시도해주세요." },
-        { status: 500 }
-      );
-    }
-
     // 데이터베이스에 저장
     const { data: sketch, error } = await supabase
       .from("custom_pictograms")
       .insert({
         user_id: user.id,
         prompt: prompt.trim(),
-        image_url: imageUrl,
+        image_url: imageUrl.trim(),
       })
       .select()
       .single();

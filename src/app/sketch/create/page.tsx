@@ -7,13 +7,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 import Navbar from "@/components/Navbar";
 import type { CustomSketch } from "@/types/sketch.types";
 
 export default function SketchCreatePage() {
   const router = useRouter();
+  const { toast } = useToast();
   const [prompt, setPrompt] = useState("");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [generatedImage, setGeneratedImage] = useState<string | null>(null);
   const [error, setError] = useState("");
   const [recentSketches, setRecentSketches] = useState<CustomSketch[]>([]);
@@ -46,7 +49,7 @@ export default function SketchCreatePage() {
     setGeneratedImage(null);
 
     try {
-      const response = await fetch("/api/sketches/custom", {
+      const response = await fetch("/api/sketches/generate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ prompt: prompt.trim() }),
@@ -58,13 +61,57 @@ export default function SketchCreatePage() {
         throw new Error(data.error || "이미지 생성에 실패했습니다.");
       }
 
-      setGeneratedImage(data.sketch.image_url);
-      // 최근 스케치 목록 갱신
-      loadRecentSketches();
+      setGeneratedImage(data.imageUrl);
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
     } finally {
       setIsGenerating(false);
+    }
+  };
+
+  const handleAddToGallery = async () => {
+    if (!generatedImage || !prompt.trim()) {
+      return;
+    }
+
+    setIsSaving(true);
+    setError("");
+
+    try {
+      const response = await fetch("/api/sketches/custom", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          imageUrl: generatedImage,
+          prompt: prompt.trim()
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || "스케치 저장에 실패했습니다.");
+      }
+
+      toast({
+        title: "저장 완료",
+        description: "스케치가 갤러리에 저장되었습니다.",
+      });
+
+      // 성공 시 초기화
+      setGeneratedImage(null);
+      setPrompt("");
+      // 최근 스케치 목록 갱신
+      loadRecentSketches();
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
+      toast({
+        title: "저장 실패",
+        description: err instanceof Error ? err.message : "오류가 발생했습니다.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSaving(false);
     }
   };
 
@@ -179,15 +226,42 @@ export default function SketchCreatePage() {
 
                 <div className="flex gap-3">
                   <Button
-                    onClick={() => router.push("/sketch/gallery")}
-                    className="flex-1 py-3 bg-white text-black hover:bg-white/90"
+                    onClick={handleAddToGallery}
+                    disabled={isSaving}
+                    className="flex-1 py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
                   >
-                    갤러리에서 확인
+                    {isSaving ? (
+                      <span className="flex items-center justify-center gap-2">
+                        <svg
+                          className="animate-spin h-4 w-4"
+                          viewBox="0 0 24 24"
+                          fill="none"
+                        >
+                          <circle
+                            className="opacity-25"
+                            cx="12"
+                            cy="12"
+                            r="10"
+                            stroke="currentColor"
+                            strokeWidth="4"
+                          />
+                          <path
+                            className="opacity-75"
+                            fill="currentColor"
+                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                          />
+                        </svg>
+                        저장 중...
+                      </span>
+                    ) : (
+                      "추가하기"
+                    )}
                   </Button>
                   <Button
                     onClick={handleReset}
+                    disabled={isSaving}
                     variant="outline"
-                    className="flex-1 py-3 border-white/20 text-white hover:bg-white/10"
+                    className="flex-1 py-3 border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
                   >
                     다시 생성
                   </Button>

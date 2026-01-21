@@ -297,6 +297,20 @@ src/
 - [x] .env.local.example에 REPLICATE_API_TOKEN 추가
 - [x] replicate 패키지 설치
 
+### 16. 스케치 생성 흐름 개선 ✅
+
+- [x] 백엔드 API 분리
+  - [x] POST /api/sketches/generate 생성 (AI 이미지만 생성, DB 저장 안 함)
+  - [x] POST /api/sketches/custom 수정 (이미지 URL + 프롬프트 받아서 DB에만 저장)
+- [x] 프론트엔드 UI 개선
+  - [x] /sketch/create 페이지 수정
+  - [x] "생성하기" 버튼 → /api/sketches/generate 호출
+  - [x] "추가하기" 버튼 추가 → /api/sketches/custom 호출하여 DB 저장
+  - [x] 토스트 알림 추가 (useToast hook 사용)
+- [x] 사용자 경험 개선
+  - [x] 생성된 이미지 확인 후 저장 여부 결정 가능
+  - [x] 불필요한 이미지가 DB에 저장되지 않음
+
 ### Phase 7: 추가 기능
 
 - [x] 대시보드/통계 페이지
