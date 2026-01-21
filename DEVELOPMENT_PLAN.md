@@ -311,6 +311,25 @@ src/
   - [x] 생성된 이미지 확인 후 저장 여부 결정 가능
   - [x] 불필요한 이미지가 DB에 저장되지 않음
 
+### 17. Supabase Storage 이미지 저장 구현 ✅
+
+- [x] Supabase Storage 설정
+  - [x] custom-pictograms 버킷 생성 마이그레이션 파일
+  - [x] RLS 정책 설정 (업로드, 조회, 삭제)
+  - [x] 파일 타입 제한 (image/png, image/jpeg, image/webp)
+  - [x] 파일 크기 제한 (5MB)
+- [x] Storage 헬퍼 함수 구현
+  - [x] src/lib/supabase/storage.ts 생성
+  - [x] uploadImageFromUrl() - Replicate URL에서 다운로드 후 Storage 업로드
+  - [x] deleteImageFromStorage() - Storage 이미지 삭제
+  - [x] getPublicUrl() - Storage public URL 생성
+- [x] 백엔드 API 수정
+  - [x] POST /api/sketches/generate - Storage 업로드 로직 추가
+  - [x] DELETE /api/sketches/custom/[id] - Storage 이미지 삭제 로직 추가
+- [x] 이미지 영구 저장
+  - [x] Replicate URL 만료 문제 해결
+  - [x] 사용자별 폴더 구조 ({userId}/{uuid}.png)
+
 ### Phase 7: 추가 기능
 
 - [x] 대시보드/통계 페이지

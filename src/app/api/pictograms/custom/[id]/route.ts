@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { deleteImageFromStorage } from "@/lib/supabase/storage";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -24,10 +25,10 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       return NextResponse.json({ error: "인증이 필요합니다." }, { status: 401 });
     }
 
-    // 스케치 소유권 확인 및 삭제
+    // 스케치 소유권 확인 및 이미지 URL 가져오기
     const { data: pictogram, error: fetchError } = await supabase
       .from("custom_pictograms")
-      .select("id, user_id")
+      .select("id, user_id, image_url")
       .eq("id", id)
       .single();
 
@@ -46,7 +47,16 @@ export async function DELETE(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // 삭제 수행
+    // Storage에서 이미지 삭제 (실패해도 계속 진행)
+    try {
+      await deleteImageFromStorage(pictogram.image_url);
+      console.log("Image deleted from storage:", pictogram.image_url);
+    } catch (storageError) {
+      console.error("Storage deletion error (continuing):", storageError);
+      // Storage 삭제 실패는 무시하고 DB 레코드는 삭제
+    }
+
+    // DB 레코드 삭제
     const { error: deleteError } = await supabase
       .from("custom_pictograms")
       .delete()

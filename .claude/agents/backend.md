@@ -200,6 +200,7 @@ src/
 | 2025-01-16 | Supabase 연동 및 초기 설정    | 완료   | 클라이언트, 타입, 마이그레이션, RLS 정책 설정 완료 |
 | 2025-01-19 | Phase 4 스케치 API 구현     | 완료   | Iconify API 연동, 검색/목록 API 구현             |
 | 2025-01-19 | Phase 5 아이템 CRUD API 구현  | 완료   | /api/items 목록/등록, /api/items/[id] 상세/수정/삭제 API 구현 |
+| 2026-01-21 | Supabase Storage 이미지 저장 구현 | 완료 | Storage 마이그레이션, 헬퍼 함수, API 수정 완료 |
 
 ---
 
