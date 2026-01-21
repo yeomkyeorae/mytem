@@ -46,6 +46,12 @@ export default function Navbar() {
               >
                 내 스케치
               </Link>
+              <Link
+                href="/categories"
+                className="text-sm text-white/70 hover:text-white transition-colors"
+              >
+                카테고리 관리
+              </Link>
               <span className="text-sm text-white/50 hidden sm:block">{user.email}</span>
               <button
                 onClick={handleSignOut}

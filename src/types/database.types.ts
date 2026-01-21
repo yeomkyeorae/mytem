@@ -50,6 +50,36 @@ export interface Database {
         ];
       };
 
+      /** 카테고리 테이블 */
+      categories: {
+        Row: {
+          id: string;
+          user_id: string;
+          name: string;
+          created_at: string;
+        };
+        Insert: {
+          id?: string;
+          user_id: string;
+          name: string;
+          created_at?: string;
+        };
+        Update: {
+          id?: string;
+          user_id?: string;
+          name?: string;
+          created_at?: string;
+        };
+        Relationships: [
+          {
+            foreignKeyName: "categories_user_id_fkey";
+            columns: ["user_id"];
+            referencedRelation: "users";
+            referencedColumns: ["id"];
+          }
+        ];
+      };
+
       /** 아이템 테이블 */
       items: {
         Row: {
@@ -60,6 +90,7 @@ export interface Database {
           quantity: number;
           image_url: string | null;
           image_type: ImageType | null;
+          category_id: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -71,6 +102,7 @@ export interface Database {
           quantity?: number;
           image_url?: string | null;
           image_type?: ImageType | null;
+          category_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -82,6 +114,7 @@ export interface Database {
           quantity?: number;
           image_url?: string | null;
           image_type?: ImageType | null;
+          category_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -90,6 +123,12 @@ export interface Database {
             foreignKeyName: "items_user_id_fkey";
             columns: ["user_id"];
             referencedRelation: "users";
+            referencedColumns: ["id"];
+          },
+          {
+            foreignKeyName: "items_category_id_fkey";
+            columns: ["category_id"];
+            referencedRelation: "categories";
             referencedColumns: ["id"];
           }
         ];
@@ -182,18 +221,21 @@ export type UpdateTables<T extends keyof Database["public"]["Tables"]> =
 
 // 개별 테이블 타입 (자주 사용되는 타입)
 export type Profile = Tables<"profiles">;
+export type Category = Tables<"categories">;
 export type Item = Tables<"items">;
 export type Pictogram = Tables<"pictograms">;
 export type CustomPictogram = Tables<"custom_pictograms">;
 
 // Insert 타입
 export type ProfileInsert = InsertTables<"profiles">;
+export type CategoryInsert = InsertTables<"categories">;
 export type ItemInsert = InsertTables<"items">;
 export type PictogramInsert = InsertTables<"pictograms">;
 export type CustomPictogramInsert = InsertTables<"custom_pictograms">;
 
 // Update 타입
 export type ProfileUpdate = UpdateTables<"profiles">;
+export type CategoryUpdate = UpdateTables<"categories">;
 export type ItemUpdate = UpdateTables<"items">;
 export type PictogramUpdate = UpdateTables<"pictograms">;
 export type CustomPictogramUpdate = UpdateTables<"custom_pictograms">;

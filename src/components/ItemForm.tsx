@@ -1,11 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import Link from "next/link";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SkecthPicker";
-import type { Item } from "@/types/database.types";
+import type { Item, Category } from "@/types/database.types";
 
 export interface ItemFormData {
   name: string;
@@ -13,6 +21,7 @@ export interface ItemFormData {
   quantity: number;
   image_url: string | null;
   image_type: "default" | "custom";
+  category_id: string;
 }
 
 interface ItemFormProps {
@@ -28,6 +37,10 @@ export default function ItemForm({
   isLoading,
   submitLabel = "등록하기",
 }: ItemFormProps) {
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>(
+    initialData?.category_id || ""
+  );
   const [name, setName] = useState(initialData?.name || "");
   const [description, setDescription] = useState(initialData?.description || "");
   const [quantity, setQuantity] = useState(initialData?.quantity || 1);
@@ -53,8 +66,29 @@ export default function ItemForm({
   const [showPicker, setShowPicker] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
+  // 카테고리 목록 로드
+  useEffect(() => {
+    fetchCategories();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("/api/categories");
+      if (response.ok) {
+        const data = await response.json();
+        setCategories(data.categories || []);
+      }
+    } catch (error) {
+      console.error("카테고리 로드 실패:", error);
+    }
+  };
+
   const validate = (): boolean => {
     const newErrors: { [key: string]: string } = {};
+
+    if (!selectedCategoryId) {
+      newErrors.category = "카테고리를 선택해주세요.";
+    }
 
     if (!name.trim()) {
       newErrors.name = "아이템 이름을 입력해주세요.";
@@ -95,6 +129,7 @@ export default function ItemForm({
       quantity,
       image_url: imageUrl,
       image_type: imageType,
+      category_id: selectedCategoryId,
     });
   };
 
@@ -203,6 +238,42 @@ export default function ItemForm({
               showCustomTab={true}
             />
           </div>
+        )}
+      </div>
+
+      {/* 카테고리 선택 */}
+      <div>
+        <Label htmlFor="category" className="text-white/70 mb-2 block">
+          카테고리 <span className="text-red-400">*</span>
+        </Label>
+        <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
+          <SelectTrigger className="bg-white/5 border-white/10 text-white">
+            <SelectValue placeholder="카테고리를 선택하세요" />
+          </SelectTrigger>
+          <SelectContent>
+            {categories.length === 0 ? (
+              <SelectItem value="empty" disabled>
+                카테고리가 없습니다
+              </SelectItem>
+            ) : (
+              categories.map((cat) => (
+                <SelectItem key={cat.id} value={cat.id}>
+                  {cat.name}
+                </SelectItem>
+              ))
+            )}
+          </SelectContent>
+        </Select>
+        {errors.category && (
+          <p className="mt-1 text-sm text-red-400">{errors.category}</p>
+        )}
+        {categories.length === 0 && (
+          <Link
+            href="/categories"
+            className="mt-2 inline-block text-sm text-white/50 hover:text-white underline"
+          >
+            카테고리를 먼저 생성하세요
+          </Link>
         )}
       </div>
 

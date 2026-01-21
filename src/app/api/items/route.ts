@@ -87,12 +87,35 @@ export async function POST(request: NextRequest) {
 
     // 요청 본문 파싱
     const body = await request.json();
-    const { name, description, quantity, image_url, image_type } = body;
+    const { name, description, quantity, image_url, image_type, category_id } = body;
 
     // 필수 필드 검증
     if (!name || typeof name !== "string" || name.trim() === "") {
       return NextResponse.json(
         { error: "아이템 이름은 필수입니다." },
+        { status: 400 }
+      );
+    }
+
+    // category_id 검증
+    if (!category_id || typeof category_id !== "string") {
+      return NextResponse.json(
+        { error: "카테고리를 선택해주세요." },
+        { status: 400 }
+      );
+    }
+
+    // 카테고리 존재 여부 및 소유권 검증
+    const { data: category, error: categoryError } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("id", category_id)
+      .eq("user_id", user.id)
+      .single();
+
+    if (categoryError || !category) {
+      return NextResponse.json(
+        { error: "유효하지 않은 카테고리입니다." },
         { status: 400 }
       );
     }
@@ -121,6 +144,7 @@ export async function POST(request: NextRequest) {
       quantity: quantity || 1,
       image_url: image_url || null,
       image_type: image_type || "default",
+      category_id: category_id,
     };
 
     // 아이템 등록

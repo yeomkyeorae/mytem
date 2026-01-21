@@ -112,12 +112,40 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     // 요청 본문 파싱
     const body = await request.json();
-    const { name, description, quantity, image_url, image_type } = body;
+    const { name, description, quantity, image_url, image_type, category_id } = body;
 
     // 업데이트 데이터 구성
     const updateData: ItemUpdate = {
       updated_at: new Date().toISOString(),
     };
+
+    // category_id 검증 및 추가
+    if (category_id !== undefined) {
+      if (category_id !== null) {
+        if (typeof category_id !== "string") {
+          return NextResponse.json(
+            { error: "유효하지 않은 카테고리입니다." },
+            { status: 400 }
+          );
+        }
+
+        // 카테고리 존재 여부 및 소유권 검증
+        const { data: category, error: categoryError } = await supabase
+          .from("categories")
+          .select("id")
+          .eq("id", category_id)
+          .eq("user_id", user.id)
+          .single();
+
+        if (categoryError || !category) {
+          return NextResponse.json(
+            { error: "유효하지 않은 카테고리입니다." },
+            { status: 400 }
+          );
+        }
+      }
+      updateData.category_id = category_id;
+    }
 
     // name 검증 및 추가
     if (name !== undefined) {

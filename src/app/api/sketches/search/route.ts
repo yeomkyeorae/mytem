@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchIcons, getSketches } from "@/lib/iconify";
+import { searchIcons, getPictograms } from "@/lib/iconify";
 
 /**
  * 스케치 검색 API
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
     const searchResult = await searchIcons(query, limit);
 
     // 아이콘 ID를 스케치 데이터로 변환
-    const sketches = await getSketches(searchResult.icons);
+    const sketches = await getPictograms(searchResult.icons);
 
     return NextResponse.json({
       sketches,
