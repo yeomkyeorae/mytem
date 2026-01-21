@@ -201,6 +201,7 @@ src/
 | 2025-01-19 | Phase 4 스케치 API 구현     | 완료   | Iconify API 연동, 검색/목록 API 구현             |
 | 2025-01-19 | Phase 5 아이템 CRUD API 구현  | 완료   | /api/items 목록/등록, /api/items/[id] 상세/수정/삭제 API 구현 |
 | 2026-01-21 | Supabase Storage 이미지 저장 구현 | 완료 | Storage 마이그레이션, 헬퍼 함수, API 수정 완료 |
+| 2026-01-21 | Storage 업로드 시점 최적화 | 완료 | "추가하기" 시에만 Storage 업로드, 비용 절감 |
 
 ---
 

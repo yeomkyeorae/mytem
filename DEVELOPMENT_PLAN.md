@@ -324,11 +324,16 @@ src/
   - [x] deleteImageFromStorage() - Storage 이미지 삭제
   - [x] getPublicUrl() - Storage public URL 생성
 - [x] 백엔드 API 수정
-  - [x] POST /api/sketches/generate - Storage 업로드 로직 추가
+  - [x] POST /api/sketches/generate - Replicate URL만 반환
+  - [x] POST /api/sketches/custom - "추가하기" 시 Storage 업로드
   - [x] DELETE /api/sketches/custom/[id] - Storage 이미지 삭제 로직 추가
 - [x] 이미지 영구 저장
   - [x] Replicate URL 만료 문제 해결
   - [x] 사용자별 폴더 구조 ({userId}/{uuid}.png)
+- [x] Storage 업로드 시점 최적화
+  - [x] "생성하기" 시 Storage 업로드 안 함 (Replicate URL만 반환)
+  - [x] "추가하기" 시 Storage 업로드 및 DB 저장
+  - [x] 불필요한 이미지가 Storage에 쌓이지 않음
 
 ### Phase 7: 추가 기능
 

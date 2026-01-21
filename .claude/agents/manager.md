@@ -91,6 +91,7 @@
 | 2026-01-21 | 스케치 생성 흐름 개선 | 완료 | @backend + @frontend에게 위임, API 분리 및 UI 개선 |
 | 2026-01-21 | ItemCard 이미지 크기 수정 | 완료 | @frontend에게 위임, 카드에 꽉 차게 표시 |
 | 2026-01-21 | Supabase Storage 이미지 저장 구현 | 완료 | @backend에게 위임, Replicate URL 만료 문제 해결 |
+| 2026-01-21 | Storage 업로드 시점 최적화 | 완료 | @backend에게 위임, "추가하기" 시에만 Storage 저장 |
 
 ---
 

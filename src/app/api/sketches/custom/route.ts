@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { uploadImageFromUrl } from "@/lib/supabase/storage";
 
 /**
  * 커스텀 스케치 목록 조회 API
@@ -53,12 +54,37 @@ export async function GET() {
 }
 
 /**
+ * 이미지 URL이 Replicate URL인지 확인합니다.
+ * Replicate URL 패턴:
+ * - https://replicate.delivery/...
+ * - URL에 "pbxt" 포함
+ */
+function isReplicateUrl(url: string): boolean {
+  return url.includes("replicate.delivery") || url.includes("pbxt");
+}
+
+/**
+ * 이미지 URL이 Supabase Storage URL인지 확인합니다.
+ */
+function isStorageUrl(url: string): boolean {
+  const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+  if (!supabaseUrl) {
+    return false;
+  }
+  return url.includes(supabaseUrl) || url.includes("/storage/v1/object/public/");
+}
+
+/**
  * 커스텀 스케치 저장 API
  * POST /api/sketches/custom
  *
  * Body:
- * - imageUrl: string (필수) - 생성된 이미지 URL
+ * - imageUrl: string (필수) - 생성된 이미지 URL (Replicate URL 또는 Storage URL)
  * - prompt: string (필수) - 이미지 생성에 사용된 프롬프트
+ *
+ * 동작:
+ * 1. imageUrl이 Replicate URL이면 → Storage에 업로드 후 DB에 저장
+ * 2. imageUrl이 Storage URL이면 → 그대로 DB에 저장
  */
 export async function POST(request: NextRequest) {
   try {
@@ -111,24 +137,60 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // 데이터베이스에 저장
+    // 이미지 URL 처리: Replicate URL이면 Storage에 업로드
+    let finalImageUrl = imageUrl.trim();
+
+    if (isReplicateUrl(finalImageUrl)) {
+      console.log("[Custom] Replicate URL detected. Uploading to Storage:", finalImageUrl);
+
+      try {
+        finalImageUrl = await uploadImageFromUrl(finalImageUrl, user.id);
+        console.log("[Custom] Image uploaded to Storage successfully:", finalImageUrl);
+      } catch (uploadError) {
+        console.error("[Custom] Storage upload error:", uploadError);
+        return NextResponse.json(
+          { error: "이미지 저장에 실패했습니다. 잠시 후 다시 시도해주세요." },
+          { status: 500 }
+        );
+      }
+    } else if (isStorageUrl(finalImageUrl)) {
+      console.log("[Custom] Storage URL detected. Using as is:", finalImageUrl);
+    } else {
+      console.log("[Custom] Unknown URL type. Attempting to upload:", finalImageUrl);
+
+      // URL 타입을 알 수 없는 경우에도 업로드 시도
+      try {
+        finalImageUrl = await uploadImageFromUrl(finalImageUrl, user.id);
+        console.log("[Custom] Image uploaded to Storage successfully:", finalImageUrl);
+      } catch (uploadError) {
+        console.error("[Custom] Storage upload error:", uploadError);
+        return NextResponse.json(
+          { error: "이미지 저장에 실패했습니다. 잠시 후 다시 시도해주세요." },
+          { status: 500 }
+        );
+      }
+    }
+
+    // 데이터베이스에 저장 (Storage URL 사용)
     const { data: sketch, error } = await supabase
       .from("custom_pictograms")
       .insert({
         user_id: user.id,
         prompt: prompt.trim(),
-        image_url: imageUrl.trim(),
+        image_url: finalImageUrl,
       })
       .select()
       .single();
 
     if (error) {
-      console.error("Custom sketch save error:", error);
+      console.error("[Custom] Database save error:", error);
       return NextResponse.json(
         { error: "스케치 저장 중 오류가 발생했습니다." },
         { status: 500 }
       );
     }
+
+    console.log("[Custom] Sketch saved to database successfully:", sketch.id);
 
     return NextResponse.json(
       {
