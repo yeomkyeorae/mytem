@@ -15,7 +15,7 @@ export default function ItemCard({ item }: ItemCardProps) {
       // 기본 아이콘 (이미지가 없는 경우)
       return (
         <svg
-          className="w-12 h-12 text-white/30"
+          className="w-3/4 h-3/4 text-white/30"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -31,7 +31,7 @@ export default function ItemCard({ item }: ItemCardProps) {
     if (item.image_url.trim().startsWith("<svg")) {
       return (
         <div
-          className="w-16 h-16 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+          className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
           dangerouslySetInnerHTML={{ __html: item.image_url }}
         />
       );
@@ -43,7 +43,7 @@ export default function ItemCard({ item }: ItemCardProps) {
       <img
         src={item.image_url}
         alt={item.name}
-        className="w-16 h-16 object-contain"
+        className="w-full h-full object-contain"
       />
     );
   };
