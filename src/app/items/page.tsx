@@ -16,6 +16,8 @@ export default function ItemsPage() {
   const [items, setItems] = useState<Item[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
+  const [sortBy, setSortBy] = useState<"name" | "created_at">("created_at");
+  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -35,12 +37,12 @@ export default function ItemsPage() {
     }
   }, [isAuthenticated]);
 
-  // 카테고리 선택 변경 시 아이템 재로드
+  // 카테고리 선택 또는 정렬 변경 시 아이템 재로드
   useEffect(() => {
     if (isAuthenticated) {
       fetchItems();
     }
-  }, [selectedCategoryId]);
+  }, [selectedCategoryId, sortBy, sortOrder]);
 
   const fetchCategories = async () => {
     try {
@@ -63,11 +65,17 @@ export default function ItemsPage() {
     setError("");
 
     try {
-      // categoryId 쿼리 파라미터 추가
-      const url = selectedCategoryId === "all"
-        ? "/api/items"
-        : `/api/items?categoryId=${selectedCategoryId}`;
+      // 쿼리 파라미터 구성
+      const params = new URLSearchParams();
 
+      if (selectedCategoryId !== "all") {
+        params.append("categoryId", selectedCategoryId);
+      }
+
+      params.append("sortBy", sortBy);
+      params.append("sortOrder", sortOrder);
+
+      const url = `/api/items?${params.toString()}`;
       const response = await fetch(url);
 
       if (!response.ok) {
@@ -143,20 +151,50 @@ export default function ItemsPage() {
                 : "등록된 아이템이 없습니다."}
             </p>
           </div>
-          <Link href="/items/new">
-            <Button className="bg-white text-black hover:bg-white/90">
+          <div className="flex items-center gap-3">
+            {/* 정렬 드롭다운 */}
+            <div className="relative">
+              <select
+                value={`${sortBy}-${sortOrder}`}
+                onChange={(e) => {
+                  const [newSortBy, newSortOrder] = e.target.value.split("-") as ["name" | "created_at", "asc" | "desc"];
+                  setSortBy(newSortBy);
+                  setSortOrder(newSortOrder);
+                }}
+                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white appearance-none cursor-pointer hover:bg-white/20 transition-colors pr-10"
+              >
+                <option value="created_at-desc" className="bg-black">최신순</option>
+                <option value="created_at-asc" className="bg-black">오래된순</option>
+                <option value="name-asc" className="bg-black">이름순 (가나다)</option>
+                <option value="name-desc" className="bg-black">이름순 (가나다 역순)</option>
+              </select>
+              {/* 드롭다운 아이콘 */}
               <svg
-                className="w-4 h-4 mr-2"
+                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
                 strokeWidth="2"
               >
-                <path d="M12 5v14M5 12h14" />
+                <path d="M6 9l6 6 6-6" />
               </svg>
-              새 아이템 등록
-            </Button>
-          </Link>
+            </div>
+
+            <Link href="/items/new">
+              <Button className="bg-white text-black hover:bg-white/90">
+                <svg
+                  className="w-4 h-4 mr-2"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path d="M12 5v14M5 12h14" />
+                </svg>
+                새 아이템 등록
+              </Button>
+            </Link>
+          </div>
         </div>
 
         {/* 카테고리 필터 */}

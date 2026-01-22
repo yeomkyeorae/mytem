@@ -7,9 +7,10 @@ import type { ItemInsert } from "@/types/database.types";
  * GET /api/items
  * GET /api/items?categoryId=all (전체 아이템)
  * GET /api/items?categoryId={uuid} (특정 카테고리 아이템)
+ * GET /api/items?sortBy=name&sortOrder=asc (정렬 옵션)
  *
  * 현재 인증된 사용자의 아이템 목록을 반환합니다.
- * 정렬: 최신순 (created_at DESC)
+ * 정렬: sortBy (name | created_at), sortOrder (asc | desc)
  */
 export async function GET(request: NextRequest) {
   try {
@@ -31,6 +32,16 @@ export async function GET(request: NextRequest) {
     // 쿼리 파라미터 파싱
     const { searchParams } = new URL(request.url);
     const categoryId = searchParams.get("categoryId");
+    const sortBy = searchParams.get("sortBy") || "created_at";
+    const sortOrder = searchParams.get("sortOrder") || "desc";
+
+    // sortBy 검증
+    const validSortBy = ["name", "created_at"];
+    const sortColumn = validSortBy.includes(sortBy) ? sortBy : "created_at";
+
+    // sortOrder 검증
+    const validSortOrder = ["asc", "desc"];
+    const ascending = validSortOrder.includes(sortOrder) ? sortOrder === "asc" : false;
 
     // 아이템 목록 조회 (카테고리 JOIN)
     let query = supabase
@@ -43,7 +54,8 @@ export async function GET(request: NextRequest) {
       query = query.eq("category_id", categoryId);
     }
 
-    const { data: items, error } = await query.order("created_at", { ascending: false });
+    // 정렬 적용
+    const { data: items, error } = await query.order(sortColumn, { ascending });
 
     if (error) {
       console.error("Items fetch error:", error);
