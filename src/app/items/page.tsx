@@ -29,11 +29,11 @@ export default function ItemsPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // 카테고리 및 아이템 목록 가져오기
+  // 카테고리 및 아이템 목록 가져오기 (병렬 실행)
   useEffect(() => {
     if (isAuthenticated) {
-      fetchCategories();
-      fetchItems();
+      // 독립적인 요청들을 병렬로 실행하여 로딩 시간 단축
+      Promise.all([fetchCategories(), fetchItems()]);
     }
   }, [isAuthenticated]);
 
