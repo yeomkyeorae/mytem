@@ -7,8 +7,22 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import ItemCard from "@/components/ItemCard";
 import Navbar from "@/components/Navbar";
+import LoadingSpinner from "@/components/LoadingSpinner";
 import { cn } from "@/lib/utils";
 import type { Item, Category } from "@/types/database.types";
+
+// 정적 JSX를 컴포넌트 외부로 호이스팅하여 리렌더링 시 재생성 방지
+const DropdownIcon = (
+  <svg
+    className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+  >
+    <path d="M6 9l6 6 6-6" />
+  </svg>
+);
 
 export default function ItemsPage() {
   const router = useRouter();
@@ -105,25 +119,7 @@ export default function ItemsPage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <svg
-            className="animate-spin h-5 w-5 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <circle
-              className="opacity-25"
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              strokeWidth="4"
-            />
-            <path
-              className="opacity-75"
-              fill="currentColor"
-              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-            />
-          </svg>
+          <LoadingSpinner className="h-5 w-5 text-white" />
           <span className="text-white/60">로딩 중...</span>
         </div>
       </div>
@@ -169,15 +165,7 @@ export default function ItemsPage() {
                 <option value="name-desc" className="bg-black text-white">이름순 (가나다 역순)</option>
               </select>
               {/* 드롭다운 아이콘 */}
-              <svg
-                className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-              >
-                <path d="M6 9l6 6 6-6" />
-              </svg>
+              {DropdownIcon}
             </div>
 
             <Link href="/items/new">
@@ -262,25 +250,7 @@ export default function ItemsPage() {
         {isLoading && (
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
-                <circle
-                  className="opacity-25"
-                  cx="12"
-                  cy="12"
-                  r="10"
-                  stroke="currentColor"
-                  strokeWidth="4"
-                />
-                <path
-                  className="opacity-75"
-                  fill="currentColor"
-                  d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-                />
-              </svg>
+              <LoadingSpinner className="h-5 w-5 text-white" />
               <span className="text-white/60">아이템을 불러오는 중...</span>
             </div>
           </div>
