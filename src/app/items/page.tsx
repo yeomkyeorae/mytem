@@ -7,12 +7,16 @@ import { useAuth } from "@/hooks/useAuth";
 import { Button } from "@/components/ui/button";
 import ItemCard from "@/components/ItemCard";
 import Navbar from "@/components/Navbar";
-import type { Item } from "@/types/database.types";
+import { cn } from "@/lib/utils";
+import type { Item, Category } from "@/types/database.types";
 
 export default function ItemsPage() {
   const router = useRouter();
   const { isLoading: authLoading, isAuthenticated } = useAuth();
   const [items, setItems] = useState<Item[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [selectedCategoryId, setSelectedCategoryId] = useState<string>("all");
+  const [totalCount, setTotalCount] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
 
@@ -23,19 +27,48 @@ export default function ItemsPage() {
     }
   }, [authLoading, isAuthenticated, router]);
 
-  // 아이템 목록 가져오기
+  // 카테고리 및 아이템 목록 가져오기
+  useEffect(() => {
+    if (isAuthenticated) {
+      fetchCategories();
+      fetchItems();
+    }
+  }, [isAuthenticated]);
+
+  // 카테고리 선택 변경 시 아이템 재로드
   useEffect(() => {
     if (isAuthenticated) {
       fetchItems();
     }
-  }, [isAuthenticated]);
+  }, [selectedCategoryId]);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("/api/categories");
+
+      if (!response.ok) {
+        console.error("카테고리 목록을 불러오는데 실패했습니다.");
+        return;
+      }
+
+      const data = await response.json();
+      setCategories(data.categories || []);
+    } catch (err) {
+      console.error("카테고리 로드 에러:", err);
+    }
+  };
 
   const fetchItems = async () => {
     setIsLoading(true);
     setError("");
 
     try {
-      const response = await fetch("/api/items");
+      // categoryId 쿼리 파라미터 추가
+      const url = selectedCategoryId === "all"
+        ? "/api/items"
+        : `/api/items?categoryId=${selectedCategoryId}`;
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         if (response.status === 401) {
@@ -47,6 +80,11 @@ export default function ItemsPage() {
 
       const data = await response.json();
       setItems(data.items || []);
+
+      // "전체" 선택 시 총 개수 업데이트
+      if (selectedCategoryId === "all") {
+        setTotalCount(data.count || 0);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
     } finally {
@@ -121,6 +159,54 @@ export default function ItemsPage() {
           </Link>
         </div>
 
+        {/* 카테고리 필터 */}
+        {categories.length > 0 && (
+          <div className="mb-6">
+            <div className="flex items-center gap-2 overflow-x-auto pb-2">
+              {/* "전체" 버튼 */}
+              <button
+                onClick={() => setSelectedCategoryId("all")}
+                className={cn(
+                  "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+                  selectedCategoryId === "all"
+                    ? "bg-white text-black"
+                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                )}
+              >
+                전체 ({totalCount})
+              </button>
+
+              {/* 각 카테고리 버튼 */}
+              {categories.map((category) => (
+                <button
+                  key={category.id}
+                  onClick={() => setSelectedCategoryId(category.id)}
+                  className={cn(
+                    "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
+                    selectedCategoryId === category.id
+                      ? "bg-white text-black"
+                      : "bg-white/10 text-white/70 hover:bg-white/20"
+                  )}
+                >
+                  {category.name}
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* 카테고리가 없을 때 안내 메시지 */}
+        {categories.length === 0 && items.length > 0 && !isLoading && (
+          <div className="mb-6 p-4 bg-white/5 border border-white/10 rounded-lg">
+            <p className="text-white/60 text-sm">
+              카테고리를 생성하여 아이템을 분류해보세요.{" "}
+              <Link href="/categories" className="underline hover:text-white">
+                카테고리 관리
+              </Link>
+            </p>
+          </div>
+        )}
+
         {/* Error Message */}
         {error && (
           <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 rounded-lg text-red-400">
@@ -186,24 +272,58 @@ export default function ItemsPage() {
                 <path d="M3 9h18M9 21V9" />
               </svg>
             </div>
-            <h2 className="text-xl font-semibold mb-2">아직 등록된 아이템이 없습니다</h2>
-            <p className="text-white/50 mb-6 text-center">
-              첫 번째 아이템을 등록하고 체계적으로 관리해보세요.
-            </p>
-            <Link href="/items/new">
-              <Button className="bg-white text-black hover:bg-white/90">
-                <svg
-                  className="w-4 h-4 mr-2"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                >
-                  <path d="M12 5v14M5 12h14" />
-                </svg>
-                첫 아이템 등록하기
-              </Button>
-            </Link>
+            {selectedCategoryId === "all" ? (
+              <>
+                <h2 className="text-xl font-semibold mb-2">아직 등록된 아이템이 없습니다</h2>
+                <p className="text-white/50 mb-6 text-center">
+                  첫 번째 아이템을 등록하고 체계적으로 관리해보세요.
+                </p>
+                <Link href="/items/new">
+                  <Button className="bg-white text-black hover:bg-white/90">
+                    <svg
+                      className="w-4 h-4 mr-2"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                    >
+                      <path d="M12 5v14M5 12h14" />
+                    </svg>
+                    첫 아이템 등록하기
+                  </Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <h2 className="text-xl font-semibold mb-2">이 카테고리에 아이템이 없습니다</h2>
+                <p className="text-white/50 mb-6 text-center">
+                  {categories.find((c) => c.id === selectedCategoryId)?.name} 카테고리에 아이템을 추가해보세요.
+                </p>
+                <div className="flex gap-3">
+                  <Button
+                    onClick={() => setSelectedCategoryId("all")}
+                    variant="outline"
+                    className="border-white/10 text-white hover:bg-white/10"
+                  >
+                    전체 아이템 보기
+                  </Button>
+                  <Link href="/items/new">
+                    <Button className="bg-white text-black hover:bg-white/90">
+                      <svg
+                        className="w-4 h-4 mr-2"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M12 5v14M5 12h14" />
+                      </svg>
+                      아이템 등록하기
+                    </Button>
+                  </Link>
+                </div>
+              </>
+            )}
           </div>
         )}
       </main>

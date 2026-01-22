@@ -4,8 +4,16 @@ import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import type { Item } from "@/types/database.types";
 
+// API에서 categories JOIN한 결과를 포함한 아이템 타입
+interface ItemWithCategory extends Item {
+  categories?: {
+    id: string;
+    name: string;
+  } | null;
+}
+
 interface ItemCardProps {
-  item: Item;
+  item: ItemWithCategory;
 }
 
 export default function ItemCard({ item }: ItemCardProps) {
@@ -59,10 +67,15 @@ export default function ItemCard({ item }: ItemCardProps) {
         {/* 이름 */}
         <h3 className="font-medium text-white truncate mb-1">{item.name}</h3>
 
-        {/* 개수 */}
-        <p className="text-sm text-white/50">
-          {item.quantity}개
-        </p>
+        {/* 개수 및 카테고리 */}
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-sm text-white/50">{item.quantity}개</p>
+          {item.categories && (
+            <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/60">
+              {item.categories.name}
+            </span>
+          )}
+        </div>
       </Card>
     </Link>
   );

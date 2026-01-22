@@ -5,11 +5,13 @@ import type { ItemInsert } from "@/types/database.types";
 /**
  * 아이템 목록 조회 API
  * GET /api/items
+ * GET /api/items?categoryId=all (전체 아이템)
+ * GET /api/items?categoryId={uuid} (특정 카테고리 아이템)
  *
  * 현재 인증된 사용자의 아이템 목록을 반환합니다.
  * 정렬: 최신순 (created_at DESC)
  */
-export async function GET() {
+export async function GET(request: NextRequest) {
   try {
     const supabase = await createClient();
 
@@ -26,12 +28,22 @@ export async function GET() {
       );
     }
 
-    // 아이템 목록 조회
-    const { data: items, error } = await supabase
+    // 쿼리 파라미터 파싱
+    const { searchParams } = new URL(request.url);
+    const categoryId = searchParams.get("categoryId");
+
+    // 아이템 목록 조회 (카테고리 JOIN)
+    let query = supabase
       .from("items")
-      .select("*")
-      .eq("user_id", user.id)
-      .order("created_at", { ascending: false });
+      .select("*, categories(id, name)")
+      .eq("user_id", user.id);
+
+    // 카테고리 필터링
+    if (categoryId && categoryId !== "all") {
+      query = query.eq("category_id", categoryId);
+    }
+
+    const { data: items, error } = await query.order("created_at", { ascending: false });
 
     if (error) {
       console.error("Items fetch error:", error);
