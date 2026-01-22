@@ -25,13 +25,45 @@ export default function NewItemPage() {
     setIsSubmitting(true);
 
     try {
-      const response = await fetch("/api/items", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
+      let response;
+
+      if (data.uploaded_file) {
+        // FormData 사용 (파일 업로드)
+        const formData = new FormData();
+        formData.append("name", data.name);
+        formData.append("description", data.description);
+        formData.append("quantity", data.quantity.toString());
+        formData.append("image_type", data.image_type);
+        formData.append("category_id", data.category_id);
+
+        if (data.image_url) {
+          formData.append("image_url", data.image_url);
+        }
+
+        formData.append("uploaded_file", data.uploaded_file);
+
+        response = await fetch("/api/items", {
+          method: "POST",
+          body: formData,
+          // Content-Type은 브라우저가 자동 설정
+        });
+      } else {
+        // JSON 사용 (스케치만 선택)
+        response = await fetch("/api/items", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: data.name,
+            description: data.description,
+            quantity: data.quantity,
+            image_url: data.image_url,
+            image_type: data.image_type,
+            category_id: data.category_id,
+          }),
+        });
+      }
 
       if (!response.ok) {
         const errorData = await response.json();

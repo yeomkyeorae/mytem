@@ -15,7 +15,16 @@
       "Bash(npx shadcn@latest add button card input dialog form select toast --yes)",
       "Bash(npx tsc --noEmit)",
       "WebSearch",
-      "Bash(tree:*)"
+      "Bash(tree:*)",
+      "Bash(yarn dev)",
+      "mcp__playwright__playwright_navigate",
+      "Bash(npx playwright:*)",
+      "mcp__playwright__playwright_screenshot",
+      "mcp__playwright__playwright_get_visible_html",
+      "mcp__playwright__playwright_close",
+      "Bash(git reset:*)",
+      "Bash(git restore:*)",
+      "Bash(timeout:*)"
     ]
   }
 }

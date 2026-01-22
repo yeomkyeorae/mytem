@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS public.items (
   description TEXT,
   quantity INTEGER DEFAULT 1 NOT NULL CHECK (quantity >= 0),
   image_url TEXT,
-  image_type TEXT CHECK (image_type IN ('default', 'custom')),
+  image_type TEXT CHECK (image_type IN ('default', 'custom', 'uploaded')),
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
   updated_at TIMESTAMPTZ DEFAULT NOW() NOT NULL
 );
@@ -44,7 +44,7 @@ COMMENT ON COLUMN public.items.name IS '아이템 이름';
 COMMENT ON COLUMN public.items.description IS '아이템 설명';
 COMMENT ON COLUMN public.items.quantity IS '아이템 개수';
 COMMENT ON COLUMN public.items.image_url IS '스케치 이미지 URL';
-COMMENT ON COLUMN public.items.image_type IS '이미지 타입 (default: 기본 스케치, custom: 커스텀 생성)';
+COMMENT ON COLUMN public.items.image_type IS '이미지 타입 (default: 기본 스케치, custom: 커스텀 생성, uploaded: 이미지 파일 업로드)';
 
 -- items 테이블 인덱스
 CREATE INDEX IF NOT EXISTS items_user_id_idx ON public.items(user_id);

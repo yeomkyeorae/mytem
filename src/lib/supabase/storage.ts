@@ -192,3 +192,54 @@ function extractStoragePath(url: string): string | null {
     return null;
   }
 }
+
+/**
+ * File 객체를 Supabase Storage에 직접 업로드합니다.
+ *
+ * @param file - 업로드할 File 객체
+ * @param userId - 사용자 ID (폴더명으로 사용)
+ * @returns Supabase Storage의 public URL
+ * @throws 파일 타입 검증 또는 업로드 실패 시 에러
+ */
+export async function uploadImageFile(
+  file: File,
+  userId: string
+): Promise<string> {
+  try {
+    // 1. 파일 타입 검증
+    if (!file.type.startsWith("image/")) {
+      throw new Error("이미지 파일만 업로드할 수 있습니다.");
+    }
+
+    // 2. 파일 크기 제한 확인 (5MB)
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      throw new Error("파일 크기는 5MB 이하여야 합니다.");
+    }
+
+    // 3. 파일명 생성
+    const fileExtension = getFileExtension(file.type);
+    const fileName = `${randomUUID()}.${fileExtension}`;
+    const filePath = `${userId}/${fileName}`;
+
+    // 4. Supabase Storage에 업로드
+    const supabase = await createClient();
+    const { data, error } = await supabase.storage
+      .from(BUCKET_NAME)
+      .upload(filePath, file, {
+        contentType: file.type,
+        upsert: false,
+      });
+
+    if (error) {
+      throw new Error(`Storage 업로드 실패: ${error.message}`);
+    }
+
+    // 5. Public URL 생성 및 반환
+    return getPublicUrl(data.path);
+  } catch (error) {
+    throw new Error(
+      `파일 업로드 실패: ${error instanceof Error ? error.message : "알 수 없는 오류"}`
+    );
+  }
+}

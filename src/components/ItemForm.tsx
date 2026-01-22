@@ -20,8 +20,9 @@ export interface ItemFormData {
   description: string;
   quantity: number;
   image_url: string | null;
-  image_type: "default" | "custom";
+  image_type: "default" | "custom" | "uploaded";
   category_id: string;
+  uploaded_file?: File;
 }
 
 interface ItemFormProps {
@@ -65,6 +66,9 @@ export default function ItemForm({
   );
   const [showPicker, setShowPicker] = useState(false);
   const [errors, setErrors] = useState<{ [key: string]: string }>({});
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const [uploadedFilePreview, setUploadedFilePreview] = useState<string | null>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
   // 카테고리 목록 로드
   useEffect(() => {
@@ -98,8 +102,91 @@ export default function ItemForm({
       newErrors.quantity = "개수는 1 이상이어야 합니다.";
     }
 
+    // 이미지 필수 검증: 파일 업로드 또는 스케치 선택 중 하나는 필수
+    if (!uploadedFile && !selectedSketch) {
+      newErrors.image = "이미지 파일 또는 스케치 이미지를 선택해주세요.";
+      alert("이미지 파일 또는 스케치 이미지를 선택해주세요.");
+    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
+  };
+
+  // 파일 검증
+  const validateFile = (file: File): string | null => {
+    if (!file.type.startsWith("image/")) {
+      return "이미지 파일만 업로드할 수 있습니다.";
+    }
+    const MAX_SIZE = 5 * 1024 * 1024;
+    if (file.size > MAX_SIZE) {
+      return "파일 크기는 5MB 이하여야 합니다.";
+    }
+    return null;
+  };
+
+  // 파일 선택 핸들러
+  const handleFileSelect = (file: File) => {
+    const error = validateFile(file);
+    if (error) {
+      setErrors({ ...errors, uploadedFile: error });
+      return;
+    }
+
+    // 스케치가 이미 선택되어 있는 경우 확인
+    if (selectedSketch) {
+      const confirmed = confirm(
+        "스케치 이미지가 이미 선택되어 있습니다.\n이미지 파일로 변경하시겠습니까?"
+      );
+      if (!confirmed) {
+        return;
+      }
+      // 스케치 제거
+      setSelectedSketch(null);
+    }
+
+    setUploadedFile(file);
+    setErrors({ ...errors, uploadedFile: "", image: "" });
+
+    // 미리보기 생성
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      setUploadedFilePreview(e.target?.result as string);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  // 드래그앤드롭 핸들러
+  const handleDragOver = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+  };
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault();
+    setIsDragging(false);
+    const files = e.dataTransfer.files;
+    if (files && files[0]) {
+      handleFileSelect(files[0]);
+    }
+  };
+
+  // 파일 입력 변경
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (files && files[0]) {
+      handleFileSelect(files[0]);
+    }
+  };
+
+  // 업로드된 파일 제거
+  const handleRemoveUploadedFile = () => {
+    setUploadedFile(null);
+    setUploadedFilePreview(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -109,11 +196,17 @@ export default function ItemForm({
       return;
     }
 
-    // 이미지 URL과 타입 결정
+    // 이미지 우선순위: 업로드된 파일 > 선택된 스케치
     let imageUrl: string | null = null;
-    let imageType: "default" | "custom" = "default";
+    let imageType: "default" | "custom" | "uploaded" = "default";
+    let fileToUpload: File | undefined = undefined;
 
-    if (selectedSketch) {
+    if (uploadedFile) {
+      // 업로드된 파일이 최우선
+      imageType = "uploaded";
+      fileToUpload = uploadedFile;
+    } else if (selectedSketch) {
+      // 스케치 선택
       if (isCustomSketch(selectedSketch)) {
         imageUrl = selectedSketch.image_url;
         imageType = "custom";
@@ -130,12 +223,27 @@ export default function ItemForm({
       image_url: imageUrl,
       image_type: imageType,
       category_id: selectedCategoryId,
+      uploaded_file: fileToUpload,
     });
   };
 
   const handleSketchSelect = (sketch: SelectedSketch) => {
+    // 파일이 이미 업로드되어 있는 경우 확인
+    if (uploadedFile) {
+      const confirmed = confirm(
+        "이미지 파일이 이미 업로드되어 있습니다.\n스케치 이미지로 변경하시겠습니까?"
+      );
+      if (!confirmed) {
+        return;
+      }
+      // 업로드된 파일 제거
+      setUploadedFile(null);
+      setUploadedFilePreview(null);
+    }
+
     setSelectedSketch(sketch);
     setShowPicker(false);
+    setErrors({ ...errors, image: "" });
   };
 
   // 선택된 스케치 정보 표시용 함수
@@ -172,9 +280,90 @@ export default function ItemForm({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* 이미지 파일 업로드 */}
+      <div>
+        <Label className="text-white/70 mb-2 block">
+          이미지 파일 <span className="text-white/40 text-xs">(스케치와 둘 중 하나 필수)</span>
+        </Label>
+
+        {uploadedFile && uploadedFilePreview ? (
+          // 업로드된 파일 미리보기
+          <div className="mb-3">
+            <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
+              <div className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg overflow-hidden">
+                <img
+                  src={uploadedFilePreview}
+                  alt="업로드된 이미지"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="flex-1">
+                <p className="font-medium text-white">{uploadedFile.name}</p>
+                <p className="text-sm text-white/50">
+                  {(uploadedFile.size / 1024).toFixed(1)} KB
+                </p>
+              </div>
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={handleRemoveUploadedFile}
+                className="text-white/50 hover:text-white hover:bg-white/10"
+              >
+                제거
+              </Button>
+            </div>
+          </div>
+        ) : (
+          // 드래그앤드롭 영역
+          <div
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+            className={`mb-3 flex flex-col items-center justify-center gap-3 p-8 bg-white/5 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+              isDragging
+                ? "border-white/50 bg-white/10"
+                : "border-white/20 hover:border-white/30 hover:bg-white/[0.07]"
+            }`}
+            onClick={() => document.getElementById("file-input")?.click()}
+          >
+            <svg
+              className="w-12 h-12 text-white/30"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            >
+              <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
+            </svg>
+            <div className="text-center">
+              <p className="text-sm text-white/70 mb-1">
+                이미지를 드래그하거나 클릭하여 업로드
+              </p>
+              <p className="text-xs text-white/40">
+                PNG, JPG, WEBP (최대 5MB)
+              </p>
+            </div>
+            <input
+              id="file-input"
+              type="file"
+              accept="image/*"
+              onChange={handleFileInputChange}
+              className="hidden"
+            />
+          </div>
+        )}
+
+        {errors.uploadedFile && (
+          <p className="mt-1 text-sm text-red-400">{errors.uploadedFile}</p>
+        )}
+      </div>
+
       {/* 스케치 선택 */}
       <div>
-        <Label className="text-white/70 mb-2 block">스케치 이미지</Label>
+        <Label className="text-white/70 mb-2 block">
+          스케치 이미지 <span className="text-white/40 text-xs">(파일과 둘 중 하나 필수)</span>
+        </Label>
 
         {/* 선택된 스케치 미리보기 */}
         <div className="mb-3">
@@ -238,6 +427,10 @@ export default function ItemForm({
               showCustomTab={true}
             />
           </div>
+        )}
+
+        {errors.image && !uploadedFile && !selectedSketch && (
+          <p className="mt-2 text-sm text-red-400">{errors.image}</p>
         )}
       </div>
 

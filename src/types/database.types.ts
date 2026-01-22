@@ -8,8 +8,8 @@
 
 export type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
 
-/** 이미지 타입: 기본 스케치 또는 커스텀 생성 */
-export type ImageType = "default" | "custom";
+/** 이미지 타입: 기본 스케치, 커스텀 생성, 또는 업로드된 파일 */
+export type ImageType = "default" | "custom" | "uploaded";
 
 export interface Database {
   public: {
