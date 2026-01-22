@@ -282,7 +282,7 @@ export default function SketchCreatePage() {
                   전체 보기 →
                 </Link>
               </div>
-              <div className="grid grid-cols-3 sm:grid-cols-6 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
                 {recentSketches.map((sketch) => (
                   <Card
                     key={sketch.id}
