@@ -223,7 +223,7 @@ export default function SketchPicker({
       {!isLoading && selectedCategory === "my" && (
         <>
           {customSketchs.length > 0 ? (
-            <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
               {customSketchs.map((pictogram) => (
                 <Card
                   key={pictogram.id}
@@ -257,7 +257,7 @@ export default function SketchPicker({
 
       {/* 기본 스케치 그리드 */}
       {!isLoading && selectedCategory !== "my" && pictograms.length > 0 && (
-        <div className="grid grid-cols-4 sm:grid-cols-6 md:grid-cols-8 gap-3">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
           {pictograms.map((pictogram) => (
             <Card
               key={pictogram.id}
