@@ -7,6 +7,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useToast } from "@/hooks/use-toast";
 import { Button } from "@/components/ui/button";
 import type { Item } from "@/types/database.types";
+import Navbar from "@/components/Navbar";
 
 export default function ItemDetailPage() {
   const router = useRouter();
@@ -120,11 +121,7 @@ export default function ItemDetailPage() {
 
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img
-        src={item.image_url}
-        alt={item.name}
-        className="w-32 h-32 object-contain"
-      />
+      <img src={item.image_url} alt={item.name} className="w-32 h-32 object-contain" />
     );
   };
 
@@ -133,11 +130,7 @@ export default function ItemDetailPage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <svg
-            className="animate-spin h-5 w-5 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
+          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
             <circle
               className="opacity-25"
               cx="12"
@@ -165,27 +158,10 @@ export default function ItemDetailPage() {
 
   return (
     <div className="min-h-screen bg-black text-white">
-      {/* Header */}
-      <header className="border-b border-white/10">
-        <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
-          <Link href="/" className="text-xl font-semibold tracking-tight">
-            Mytem
-          </Link>
-          <nav className="flex items-center gap-4">
-            <Link
-              href="/items"
-              className="text-white/60 hover:text-white transition-colors"
-            >
-              내 아이템
-            </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-white/60 text-sm">{user?.email}</span>
-          </nav>
-        </div>
-      </header>
+      <Navbar />
 
       {/* Main Content */}
-      <main className="max-w-3xl mx-auto px-6 py-8">
+      <main className="max-w-3xl mx-auto px-6 py-8 pt-24">
         {/* Back Link */}
         <Link
           href="/items"
@@ -200,18 +176,14 @@ export default function ItemDetailPage() {
           >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          내 아이템로 돌아가기
+          내 아이템으로 돌아가기
         </Link>
 
         {/* Loading State */}
         {isLoading && (
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
-              <svg
-                className="animate-spin h-5 w-5 text-white"
-                viewBox="0 0 24 24"
-                fill="none"
-              >
+              <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
                 <circle
                   className="opacity-25"
                   cx="12"
@@ -247,9 +219,7 @@ export default function ItemDetailPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
-            <p className="text-white/50 mb-6">
-              요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.
-            </p>
+            <p className="text-white/50 mb-6">요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.</p>
             <Link href="/items">
               <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
                 목록으로 돌아가기
@@ -262,9 +232,7 @@ export default function ItemDetailPage() {
         {item && !isLoading && (
           <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
             {/* Item Image */}
-            <div className="flex items-center justify-center py-12 bg-white/5">
-              {renderImage()}
-            </div>
+            <div className="flex items-center justify-center py-12 bg-white/5">{renderImage()}</div>
 
             {/* Item Info */}
             <div className="p-6">
@@ -296,7 +264,7 @@ export default function ItemDetailPage() {
               <Link href={`/items/${id}/edit`} className="flex-1">
                 <Button
                   variant="outline"
-                  className="w-full border-white/20 text-white hover:bg-white/10"
+                  className="w-full border-white/20 text-black hover:bg-green-500/10 hover:text-green-300"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -339,8 +307,7 @@ export default function ItemDetailPage() {
               <h2 className="text-xl font-bold mb-2">아이템 삭제</h2>
               <p className="text-white/60 mb-6">
                 정말로 &quot;{item?.name}&quot;을(를) 삭제하시겠습니까?
-                <br />
-                이 작업은 되돌릴 수 없습니다.
+                <br />이 작업은 되돌릴 수 없습니다.
               </p>
               <div className="flex gap-3">
                 <Button
@@ -358,11 +325,7 @@ export default function ItemDetailPage() {
                 >
                   {isDeleting ? (
                     <span className="flex items-center justify-center gap-2">
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
                         <circle
                           className="opacity-25"
                           cx="12"

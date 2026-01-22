@@ -224,7 +224,7 @@ export default function ItemForm({
           type="button"
           variant="outline"
           onClick={() => setShowPicker(!showPicker)}
-          className="w-full border-white/20 text-white/70 hover:bg-white/10 hover:text-white"
+          className="w-full border-white/20 text-black hover:bg-white/10 hover:text-white"
         >
           {showPicker ? "닫기" : selectedSketch ? "스케치 변경" : "스케치 선택"}
         </Button>
@@ -264,9 +264,7 @@ export default function ItemForm({
             )}
           </SelectContent>
         </Select>
-        {errors.category && (
-          <p className="mt-1 text-sm text-red-400">{errors.category}</p>
-        )}
+        {errors.category && <p className="mt-1 text-sm text-red-400">{errors.category}</p>}
         {categories.length === 0 && (
           <Link
             href="/categories"

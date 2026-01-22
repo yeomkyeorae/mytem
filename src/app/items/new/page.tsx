@@ -60,11 +60,7 @@ export default function NewItemPage() {
     return (
       <div className="min-h-screen bg-black text-white flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <svg
-            className="animate-spin h-5 w-5 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
+          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
             <circle
               className="opacity-25"
               cx="12"
@@ -110,24 +106,18 @@ export default function NewItemPage() {
           >
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          내 아이템로 돌아가기
+          내 아이템으로 돌아가기
         </Link>
 
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">새 아이템 등록</h1>
-          <p className="text-white/50">
-            새로운 아이템의 정보를 입력해주세요.
-          </p>
+          <p className="text-white/50">새로운 아이템의 정보를 입력해주세요.</p>
         </div>
 
         {/* Form */}
         <div className="bg-white/5 border border-white/10 rounded-xl p-6">
-          <ItemForm
-            onSubmit={handleSubmit}
-            isLoading={isSubmitting}
-            submitLabel="등록하기"
-          />
+          <ItemForm onSubmit={handleSubmit} isLoading={isSubmitting} submitLabel="등록하기" />
         </div>
       </main>
 
