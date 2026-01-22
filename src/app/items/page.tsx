@@ -163,10 +163,10 @@ export default function ItemsPage() {
                 }}
                 className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white appearance-none cursor-pointer hover:bg-white/20 transition-colors pr-10"
               >
-                <option value="created_at-desc" className="bg-black">최신순</option>
-                <option value="created_at-asc" className="bg-black">오래된순</option>
-                <option value="name-asc" className="bg-black">이름순 (가나다)</option>
-                <option value="name-desc" className="bg-black">이름순 (가나다 역순)</option>
+                <option value="created_at-desc" className="bg-black text-white">최신순</option>
+                <option value="created_at-asc" className="bg-black text-white">오래된순</option>
+                <option value="name-asc" className="bg-black text-white">이름순 (가나다)</option>
+                <option value="name-desc" className="bg-black text-white">이름순 (가나다 역순)</option>
               </select>
               {/* 드롭다운 아이콘 */}
               <svg
@@ -208,7 +208,7 @@ export default function ItemsPage() {
                   "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
                   selectedCategoryId === "all"
                     ? "bg-white text-black"
-                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                    : "bg-white/10 text-white/90 hover:bg-white/20 hover:text-white"
                 )}
               >
                 전체 ({totalCount})
@@ -223,7 +223,7 @@ export default function ItemsPage() {
                     "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
                     selectedCategoryId === category.id
                       ? "bg-white text-black"
-                      : "bg-white/10 text-white/70 hover:bg-white/20"
+                      : "bg-white/10 text-white/90 hover:bg-white/20 hover:text-white"
                   )}
                 >
                   {category.name}
