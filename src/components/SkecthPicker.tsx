@@ -228,17 +228,19 @@ export default function SketchPicker({
                 <Card
                   key={pictogram.id}
                   onClick={() => onSelect(pictogram)}
-                  className={`p-4 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
+                  className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
                     getSelectedId() === pictogram.id
                       ? "ring-2 ring-white bg-white/10"
                       : "bg-white/5 hover:bg-white/10"
                   }`}
                 >
-                  <img
-                    src={pictogram.image_url}
-                    alt={pictogram.prompt}
-                    className="w-full aspect-square object-contain"
-                  />
+                  <div className="w-full aspect-square flex items-center justify-center">
+                    <img
+                      src={pictogram.image_url}
+                      alt={pictogram.prompt}
+                      className="w-full h-full object-contain"
+                    />
+                  </div>
                 </Card>
               ))}
             </div>
@@ -260,14 +262,14 @@ export default function SketchPicker({
             <Card
               key={pictogram.id}
               onClick={() => onSelect(pictogram)}
-              className={`p-4 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
+              className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
                 getSelectedId() === pictogram.id
                   ? "ring-2 ring-white bg-white/10"
                   : "bg-white/5 hover:bg-white/10"
               }`}
             >
               <div
-                className="w-full aspect-square flex items-center justify-center"
+                className="w-full aspect-square flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
                 dangerouslySetInnerHTML={{ __html: pictogram.svg }}
               />
             </Card>
