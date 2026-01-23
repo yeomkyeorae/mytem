@@ -118,7 +118,7 @@ export default function CategoriesPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
       {/* Main Content */}
@@ -127,7 +127,7 @@ export default function CategoriesPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">카테고리 관리</h1>
-            <p className="text-white/50">
+            <p className="text-muted-foreground">
               {categories.length > 0
                 ? `총 ${categories.length}개의 카테고리를 관리하고 있습니다.`
                 : "등록된 카테고리가 없습니다."}
@@ -143,13 +143,13 @@ export default function CategoriesPage() {
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
               placeholder="새 카테고리 이름 (예: 의류, 전자기기, 책...)"
-              className="flex-1 bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30"
+              className="flex-1 bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-ring"
               disabled={isSubmitting}
             />
             <Button
               type="submit"
               disabled={isSubmitting}
-              className="bg-white text-black hover:bg-white/90"
+              className="bg-primary text-primary-foreground hover:bg-primary/90"
             >
               <svg
                 className="w-4 h-4 mr-2"
@@ -190,7 +190,7 @@ export default function CategoriesPage() {
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
               <svg
-                className="animate-spin h-5 w-5 text-white"
+                className="animate-spin h-5 w-5 text-foreground"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -208,7 +208,7 @@ export default function CategoriesPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">카테고리를 불러오는 중...</span>
+              <span className="text-muted-foreground">카테고리를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -230,9 +230,9 @@ export default function CategoriesPage() {
         {/* Empty State */}
         {!isLoading && categories.length === 0 && !error && (
           <div className="flex flex-col items-center justify-center py-20">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
+            <div className="w-20 h-20 bg-muted rounded-full flex items-center justify-center mb-6">
               <svg
-                className="w-10 h-10 text-white/30"
+                className="w-10 h-10 text-muted-foreground"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -243,7 +243,7 @@ export default function CategoriesPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2">아직 등록된 카테고리가 없습니다</h2>
-            <p className="text-white/50 mb-6 text-center">
+            <p className="text-muted-foreground mb-6 text-center">
               첫 번째 카테고리를 추가하고 아이템을 체계적으로 관리해보세요.
             </p>
           </div>
@@ -251,8 +251,8 @@ export default function CategoriesPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border mt-auto">
+        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-xs text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
         </div>
       </footer>

@@ -388,6 +388,10 @@ src/
   - [x] 4개 컴포넌트 수정 (Navbar, ItemForm, ItemCard, SketchPicker)
   - [x] bg-black → bg-background, text-white → text-foreground
   - [x] 모든 페이지에서 다크/라이트 모드 정상 작동 확인
+- [x] UI 가시성 개선
+  - [x] ThemeToggle 버튼 색상 수정 (라이트 모드에서도 명확히 보이도록)
+  - [x] 카테고리 관리 페이지 테마 적용 (categories/page.tsx)
+  - [x] CategoryTag 컴포넌트 테마 적용
 
 ### Phase 7: 추가 기능
 
