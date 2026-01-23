@@ -1,5 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
+import { uploadImageFile } from "@/lib/supabase/storage";
 import type { ItemUpdate } from "@/types/database.types";
 
 interface RouteParams {
@@ -110,9 +111,66 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
       );
     }
 
-    // 요청 본문 파싱
-    const body = await request.json();
-    const { name, description, quantity, image_url, image_type, category_id } = body;
+    // Content-Type 확인
+    const contentType = request.headers.get("content-type") || "";
+
+    let name: string | undefined;
+    let description: string | undefined;
+    let quantity: number | undefined;
+    let image_url: string | null | undefined;
+    let image_type: "default" | "custom" | "uploaded" | undefined;
+    let category_id: string | undefined;
+
+    if (contentType.includes("multipart/form-data")) {
+      // FormData 처리 (파일 업로드)
+      const formData = await request.formData();
+
+      const nameValue = formData.get("name");
+      if (nameValue !== null) name = nameValue as string;
+
+      const descriptionValue = formData.get("description");
+      if (descriptionValue !== null) description = descriptionValue as string;
+
+      const quantityValue = formData.get("quantity");
+      if (quantityValue !== null) quantity = parseInt(quantityValue as string);
+
+      const imageTypeValue = formData.get("image_type");
+      if (imageTypeValue !== null) {
+        image_type = imageTypeValue as "default" | "custom" | "uploaded";
+      }
+
+      const categoryIdValue = formData.get("category_id");
+      if (categoryIdValue !== null) category_id = categoryIdValue as string;
+
+      const uploadedFile = formData.get("uploaded_file") as File | null;
+
+      if (uploadedFile && uploadedFile.size > 0) {
+        // Storage에 파일 업로드
+        try {
+          image_url = await uploadImageFile(uploadedFile, user.id);
+          image_type = "uploaded";
+          console.log("파일 업로드 성공:", image_url);
+        } catch (uploadError) {
+          console.error("파일 업로드 오류:", uploadError);
+          return NextResponse.json(
+            { error: "파일 업로드에 실패했습니다." },
+            { status: 500 }
+          );
+        }
+      } else {
+        const imageUrlValue = formData.get("image_url");
+        if (imageUrlValue !== null) image_url = imageUrlValue as string;
+      }
+    } else {
+      // JSON 처리 (기존 방식 - 스케치만 선택)
+      const body = await request.json();
+      name = body.name;
+      description = body.description;
+      quantity = body.quantity;
+      image_url = body.image_url;
+      image_type = body.image_type;
+      category_id = body.category_id;
+    }
 
     // 업데이트 데이터 구성
     const updateData: ItemUpdate = {
@@ -181,9 +239,9 @@ export async function PUT(request: NextRequest, { params }: RouteParams) {
 
     // image_type 검증 및 추가
     if (image_type !== undefined) {
-      if (!["default", "custom"].includes(image_type)) {
+      if (!["default", "custom", "uploaded"].includes(image_type)) {
         return NextResponse.json(
-          { error: "이미지 타입은 'default' 또는 'custom'이어야 합니다." },
+          { error: "이미지 타입은 'default', 'custom', 또는 'uploaded'이어야 합니다." },
           { status: 400 }
         );
       }
