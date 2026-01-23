@@ -79,7 +79,7 @@ export default function SketchPicker({
       }
 
       const data = await response.json();
-      setCustomSketchs(data.pictograms || []);
+      setCustomSketchs(data.sketches || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
       setCustomSketchs([]);
