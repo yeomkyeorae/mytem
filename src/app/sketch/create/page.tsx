@@ -83,7 +83,7 @@ export default function SketchCreatePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           imageUrl: generatedImage,
-          prompt: prompt.trim()
+          prompt: prompt.trim(),
         }),
       });
 
@@ -182,11 +182,7 @@ export default function SketchCreatePage() {
                 >
                   {isGenerating ? (
                     <span className="flex items-center justify-center gap-2">
-                      <svg
-                        className="animate-spin h-4 w-4"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                      >
+                      <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
                         <circle
                           className="opacity-25"
                           cx="12"
@@ -232,11 +228,7 @@ export default function SketchCreatePage() {
                   >
                     {isSaving ? (
                       <span className="flex items-center justify-center gap-2">
-                        <svg
-                          className="animate-spin h-4 w-4"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                        >
+                        <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24" fill="none">
                           <circle
                             className="opacity-25"
                             cx="12"
@@ -261,7 +253,7 @@ export default function SketchCreatePage() {
                     onClick={handleReset}
                     disabled={isSaving}
                     variant="outline"
-                    className="flex-1 py-3 border-white/20 text-white hover:bg-white/10 disabled:opacity-50"
+                    className="flex-1 py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
                   >
                     다시 생성
                   </Button>
