@@ -363,10 +363,31 @@ src/
   - [x] 모든 카테고리에서 스케치 정상 출력
   - [x] 검색 기능 정상 작동
 
+### 20. 다크 모드 토글 기능 구현 ✅
+
+- [x] next-themes 패키지 설치
+- [x] ThemeProvider 컴포넌트 생성
+  - [x] src/components/ThemeProvider.tsx
+  - [x] attribute="class", defaultTheme="dark", enableSystem
+- [x] app/layout.tsx에 ThemeProvider 적용
+  - [x] suppressHydrationWarning 추가
+  - [x] disableTransitionOnChange로 깜빡임 방지
+- [x] ThemeToggle 컴포넌트 생성
+  - [x] src/components/ThemeToggle.tsx
+  - [x] 해/달 아이콘 토글 버튼
+  - [x] 부드러운 전환 애니메이션
+  - [x] hydration 이슈 해결 (mounted 상태 관리)
+- [x] Navbar에 토글 버튼 추가
+  - [x] 로그인/비로그인 상태 모두 지원
+- [x] 기능 검증
+  - [x] 테마 전환 정상 작동
+  - [x] localStorage에 선호도 저장
+  - [x] 시스템 테마 자동 감지
+
 ### Phase 7: 추가 기능
 
 - [x] 대시보드/통계 페이지
-- [ ] 다크 모드 토글
+- [x] 다크 모드 토글
 - [ ] 반응형 디자인 최적화
 - [ ] PWA 지원 (선택)
 

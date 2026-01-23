@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/hooks/useAuth";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 export default function Navbar() {
   const router = useRouter();
@@ -53,6 +54,7 @@ export default function Navbar() {
                 카테고리 관리
               </Link>
               <span className="text-sm text-white/50 hidden sm:block">{user.email}</span>
+              <ThemeToggle />
               <button
                 onClick={handleSignOut}
                 className="text-sm px-4 py-2 border border-white/20 text-white/70 rounded-full font-medium hover:bg-white/5 hover:text-white transition-colors"
@@ -75,6 +77,7 @@ export default function Navbar() {
               >
                 시작하기
               </Link>
+              <ThemeToggle />
             </>
           )}
         </div>
