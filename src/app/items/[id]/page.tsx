@@ -311,14 +311,6 @@ export default function ItemDetailPage() {
               </p>
               <div className="flex gap-3">
                 <Button
-                  variant="outline"
-                  onClick={() => setShowDeleteConfirm(false)}
-                  disabled={isDeleting}
-                  className="flex-1 border-white/20 text-white hover:bg-white/10"
-                >
-                  취소
-                </Button>
-                <Button
                   onClick={handleDelete}
                   disabled={isDeleting}
                   className="flex-1 bg-red-500 text-white hover:bg-red-600"
@@ -345,6 +337,14 @@ export default function ItemDetailPage() {
                   ) : (
                     "삭제"
                   )}
+                </Button>
+                <Button
+                  variant="outline"
+                  onClick={() => setShowDeleteConfirm(false)}
+                  disabled={isDeleting}
+                  className="flex-1 border-white/20 text-black hover:bg-green-500/10 hover:text-green-300"
+                >
+                  취소
                 </Button>
               </div>
             </div>
