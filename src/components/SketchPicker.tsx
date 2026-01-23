@@ -15,16 +15,11 @@ interface SketchPickerProps {
   showCustomTab?: boolean;
 }
 
-const CATEGORIES = [
-  { id: "my", label: "내 스케치" },
-  { id: "all", label: "전체" },
-  { id: "clothing", label: "의류" },
-  { id: "electronics", label: "전자기기" },
-  { id: "accessories", label: "액세서리" },
-  { id: "household", label: "생활용품" },
-  { id: "sports", label: "스포츠" },
-  { id: "books", label: "도서" },
-];
+// 카테고리 타입 정의
+interface Category {
+  name: string;
+  label: string;
+}
 
 // 타입 가드: CustomSketch인지 확인
 export function isCustomSketch(pictogram: SelectedSketch): pictogram is CustomSketch {
@@ -40,8 +35,15 @@ export default function SketchPicker({
   const [selectedCategory, setSelectedCategory] = useState(showCustomTab ? "my" : "all");
   const [pictograms, setSketchs] = useState<Sketch[]>([]);
   const [customSketchs, setCustomSketchs] = useState<CustomSketch[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [isCategoriesLoading, setIsCategoriesLoading] = useState(true);
   const [error, setError] = useState("");
+
+  // 컴포넌트 마운트 시 카테고리 로드
+  useEffect(() => {
+    loadCategories();
+  }, []);
 
   // 카테고리 변경 시 스케치 로드
   useEffect(() => {
@@ -66,6 +68,27 @@ export default function SketchPicker({
       }
     }
   }, [searchQuery]);
+
+  const loadCategories = async () => {
+    setIsCategoriesLoading(true);
+
+    try {
+      const response = await fetch("/api/sketches");
+
+      if (!response.ok) {
+        throw new Error("카테고리를 불러오는데 실패했습니다.");
+      }
+
+      const data = await response.json();
+      setCategories(data.categories || []);
+    } catch (err) {
+      console.error("카테고리 로드 오류:", err);
+      // 카테고리 로드 실패 시 빈 배열 유지
+      setCategories([]);
+    } finally {
+      setIsCategoriesLoading(false);
+    }
+  };
 
   const loadCustomSketchs = async () => {
     setIsLoading(true);
@@ -105,7 +128,7 @@ export default function SketchPicker({
       }
 
       const data = await response.json();
-      setSketchs(data.pictograms || []);
+      setSketchs(data.sketches || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
       setSketchs([]);
@@ -131,7 +154,7 @@ export default function SketchPicker({
       }
 
       const data = await response.json();
-      setSketchs(data.pictograms || []);
+      setSketchs(data.sketches || []);
     } catch (err) {
       setError(err instanceof Error ? err.message : "오류가 발생했습니다.");
       setSketchs([]);
@@ -151,8 +174,20 @@ export default function SketchPicker({
     return selectedSketch.id;
   };
 
-  // 카테고리 목록 (showCustomTab에 따라 필터링)
-  const displayCategories = showCustomTab ? CATEGORIES : CATEGORIES.filter((c) => c.id !== "my");
+  // 카테고리 목록 (API에서 로드한 카테고리 + "전체" + "내 스케치" 옵션)
+  const displayCategories = (() => {
+    const allCategory = { name: "all", label: "전체" };
+    const myCategory = { name: "my", label: "내 스케치" };
+
+    // "내 스케치"를 맨 앞에, "전체"를 그 다음에, 나머지 API 카테고리들을 뒤에 배치
+    const result = [allCategory, ...categories];
+
+    if (showCustomTab) {
+      return [myCategory, ...result];
+    }
+
+    return result;
+  })();
 
   return (
     <div className="w-full">
@@ -172,20 +207,26 @@ export default function SketchPicker({
       {/* 카테고리 탭 */}
       {!searchQuery && (
         <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
-          {displayCategories.map((category) => (
-            <button
-              type="button"
-              key={category.id}
-              onClick={() => handleCategoryChange(category.id)}
-              className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
-                selectedCategory === category.id
-                  ? "bg-white text-black"
-                  : "bg-white/10 text-white/70 hover:bg-white/20"
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
+          {isCategoriesLoading ? (
+            <div className="flex items-center justify-center w-full py-2">
+              <span className="text-white/40 text-sm">카테고리 로딩 중...</span>
+            </div>
+          ) : (
+            displayCategories.map((category) => (
+              <button
+                type="button"
+                key={category.name}
+                onClick={() => handleCategoryChange(category.name)}
+                className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
+                  selectedCategory === category.name
+                    ? "bg-white text-black"
+                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                }`}
+              >
+                {category.label}
+              </button>
+            ))
+          )}
         </div>
       )}
 

@@ -335,6 +335,34 @@ src/
   - [x] "추가하기" 시 Storage 업로드 및 DB 저장
   - [x] 불필요한 이미지가 Storage에 쌓이지 않음
 
+### 18. 스케치 선택 카테고리 동적 로딩 ✅
+
+- [x] 문제 분석
+  - [x] SketchPicker 컴포넌트의 하드코딩된 카테고리 확인
+  - [x] API가 이미 카테고리 목록 제공하고 있음을 확인
+- [x] SketchPicker 컴포넌트 개선
+  - [x] 하드코딩된 CATEGORIES 상수 제거
+  - [x] loadCategories() 함수 추가 - /api/sketches로부터 카테고리 동적 로딩
+  - [x] categories 상태 추가 및 로딩 상태 관리
+  - [x] displayCategories 로직 개선 (내 스케치 + 전체 + API 카테고리)
+  - [x] 카테고리 로딩 중 UI 추가
+- [x] 기대 효과
+  - [x] iconify.ts의 RECOMMENDED_ICONS 변경 시 자동 UI 반영
+  - [x] 하드코딩 제거로 유지보수성 향상
+
+### 19. 스케치 카테고리 선택 버그 수정 ✅
+
+- [x] 문제 분석
+  - [x] "내 스케치" 외의 카테고리 선택 시 스케치 미출력 확인
+  - [x] API 응답 필드명과 컴포넌트에서 읽는 필드명 불일치 발견
+  - [x] API는 `sketches` 반환, 컴포넌트는 `pictograms` 참조
+- [x] SketchPicker 컴포넌트 수정
+  - [x] loadDefaultSketchs() 함수: `data.pictograms` → `data.sketches` 수정
+  - [x] searchSketchs() 함수: `data.pictograms` → `data.sketches` 수정
+- [x] 결과
+  - [x] 모든 카테고리에서 스케치 정상 출력
+  - [x] 검색 기능 정상 작동
+
 ### Phase 7: 추가 기능
 
 - [x] 대시보드/통계 페이지
