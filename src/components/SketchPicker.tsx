@@ -75,7 +75,7 @@ export default function SketchPicker({
       const response = await fetch("/api/sketches/custom");
 
       if (!response.ok) {
-        throw new Error("내 스케치을 불러오는데 실패했습니다.");
+        throw new Error("내 스케치를 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -101,7 +101,7 @@ export default function SketchPicker({
       const response = await fetch(`/api/sketches?${params}`);
 
       if (!response.ok) {
-        throw new Error("스케치을 불러오는데 실패했습니다.");
+        throw new Error("스케치를 불러오는데 실패했습니다.");
       }
 
       const data = await response.json();
@@ -246,7 +246,7 @@ export default function SketchPicker({
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-white/40 mb-4">아직 생성한 스케치이 없습니다.</p>
+              <p className="text-white/40 mb-4">아직 생성한 스케치가 없습니다.</p>
               <Link href="/pictogram/create" className="text-white hover:underline">
                 스케치 생성하기 →
               </Link>
@@ -282,7 +282,7 @@ export default function SketchPicker({
         <div className="text-center py-12 text-white/40">
           {searchQuery
             ? `"${searchQuery}"에 대한 검색 결과가 없습니다.`
-            : "스케치을 불러오는 중..."}
+            : "스케치를 불러오는 중..."}
         </div>
       )}
 
