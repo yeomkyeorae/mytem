@@ -174,6 +174,7 @@ export default function SketchPicker({
         <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
           {displayCategories.map((category) => (
             <button
+              type="button"
               key={category.id}
               onClick={() => handleCategoryChange(category.id)}
               className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
