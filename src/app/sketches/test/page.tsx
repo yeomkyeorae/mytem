@@ -37,9 +37,9 @@ export default function SketchTestPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-white/10">
+      <header className="border-b border-border">
         <div className="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-semibold tracking-tight">
             Mytem
@@ -48,7 +48,7 @@ export default function SketchTestPage() {
             {user && (
               <Link
                 href="/dashboard"
-                className="text-sm text-white/70 hover:text-white transition-colors"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors"
               >
                 대시보드
               </Link>
@@ -61,7 +61,7 @@ export default function SketchTestPage() {
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">스케치 선택 테스트</h1>
-          <p className="text-white/50">
+          <p className="text-muted-foreground">
             검색하거나 카테고리를 선택하여 스케치를 찾아보세요.
           </p>
         </div>
@@ -76,9 +76,9 @@ export default function SketchTestPage() {
 
         {/* 선택 결과 표시 */}
         {selectedSketch && (
-          <div className="border border-white/10 rounded-xl p-6 bg-white/[0.02]">
+          <div className="border border-border rounded-xl p-6 bg-card">
             <h2 className="text-lg font-semibold mb-4">선택 결과 (JSON)</h2>
-            <pre className="bg-black/50 p-4 rounded-lg overflow-x-auto text-sm text-white/70">
+            <pre className="bg-background/50 p-4 rounded-lg overflow-x-auto text-sm text-muted-foreground">
               {JSON.stringify(getDisplayData(), null, 2)}
             </pre>
           </div>

@@ -123,10 +123,10 @@ export default function EditItemPage() {
   // 로딩 중
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
           <svg
-            className="animate-spin h-5 w-5 text-white"
+            className="animate-spin h-5 w-5 text-foreground"
             viewBox="0 0 24 24"
             fill="none"
           >
@@ -144,7 +144,7 @@ export default function EditItemPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-white/60">로딩 중...</span>
+          <span className="text-muted-foreground">로딩 중...</span>
         </div>
       </div>
     );
@@ -156,9 +156,9 @@ export default function EditItemPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Header */}
-      <header className="border-b border-white/10">
+      <header className="border-b border-border">
         <div className="max-w-3xl mx-auto px-6 py-4 flex items-center justify-between">
           <Link href="/" className="text-xl font-semibold tracking-tight">
             Mytem
@@ -166,12 +166,12 @@ export default function EditItemPage() {
           <nav className="flex items-center gap-4">
             <Link
               href="/items"
-              className="text-white/60 hover:text-white transition-colors"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
               내 아이템
             </Link>
-            <span className="text-white/30">|</span>
-            <span className="text-white/60 text-sm">{user?.email}</span>
+            <span className="text-muted">|</span>
+            <span className="text-muted-foreground text-sm">{user?.email}</span>
           </nav>
         </div>
       </header>
@@ -181,7 +181,7 @@ export default function EditItemPage() {
         {/* Back Link */}
         <Link
           href={`/items/${id}`}
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <svg
             className="w-4 h-4"
@@ -200,7 +200,7 @@ export default function EditItemPage() {
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
               <svg
-                className="animate-spin h-5 w-5 text-white"
+                className="animate-spin h-5 w-5 text-foreground"
                 viewBox="0 0 24 24"
                 fill="none"
               >
@@ -218,7 +218,7 @@ export default function EditItemPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">아이템 정보를 불러오는 중...</span>
+              <span className="text-muted-foreground">아이템 정보를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -239,11 +239,11 @@ export default function EditItemPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
-            <p className="text-white/50 mb-6">
+            <p className="text-muted-foreground mb-6">
               요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.
             </p>
             <Link href="/items">
-              <button className="px-6 py-2 border border-white/20 rounded-lg text-white hover:bg-white/10 transition-colors">
+              <button className="px-6 py-2 border border-border rounded-lg text-foreground hover:bg-muted transition-colors">
                 목록으로 돌아가기
               </button>
             </Link>
@@ -256,13 +256,13 @@ export default function EditItemPage() {
             {/* Page Header */}
             <div className="mb-8">
               <h1 className="text-2xl font-bold mb-2">아이템 수정</h1>
-              <p className="text-white/50">
+              <p className="text-muted-foreground">
                 &quot;{item.name}&quot;의 정보를 수정합니다.
               </p>
             </div>
 
             {/* Form */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+            <div className="bg-card border border-border rounded-xl p-6">
               <ItemForm
                 initialData={item}
                 onSubmit={handleSubmit}
@@ -275,8 +275,8 @@ export default function EditItemPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-auto">
-        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border mt-auto">
+        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
         </div>
       </footer>

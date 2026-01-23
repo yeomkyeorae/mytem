@@ -90,9 +90,9 @@ export default function NewItemPage() {
   // 로딩 중
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
+          <svg className="animate-spin h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none">
             <circle
               className="opacity-25"
               cx="12"
@@ -107,7 +107,7 @@ export default function NewItemPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-white/60">로딩 중...</span>
+          <span className="text-muted-foreground">로딩 중...</span>
         </div>
       </div>
     );
@@ -119,7 +119,7 @@ export default function NewItemPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
       {/* Main Content */}
@@ -127,7 +127,7 @@ export default function NewItemPage() {
         {/* Back Link */}
         <Link
           href="/items"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <svg
             className="w-4 h-4"
@@ -144,18 +144,18 @@ export default function NewItemPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">새 아이템 등록</h1>
-          <p className="text-white/50">새로운 아이템의 정보를 입력해주세요.</p>
+          <p className="text-muted-foreground">새로운 아이템의 정보를 입력해주세요.</p>
         </div>
 
         {/* Form */}
-        <div className="bg-white/5 border border-white/10 rounded-xl p-6">
+        <div className="bg-card border border-border rounded-xl p-6">
           <ItemForm onSubmit={handleSubmit} isLoading={isSubmitting} submitLabel="등록하기" />
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-auto">
-        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border mt-auto">
+        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
         </div>
       </footer>

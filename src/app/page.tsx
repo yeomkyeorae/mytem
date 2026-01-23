@@ -3,7 +3,7 @@ import Navbar from "@/components/Navbar";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       {/* Navigation */}
       <Navbar />
 
@@ -16,20 +16,20 @@ export default function Home() {
 
         <div className="relative max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-medium text-white/60 border border-white/10 rounded-full">
+          <div className="inline-flex items-center gap-2 px-3 py-1 mb-8 text-xs font-medium text-muted-foreground border border-border rounded-full">
             <span className="w-1.5 h-1.5 bg-emerald-500 rounded-full" />
             아이템 관리의 새로운 방법
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-white to-white/60 bg-clip-text text-transparent">
+          <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-6 bg-gradient-to-b from-foreground to-foreground/60 bg-clip-text text-transparent">
             당신의 모든 것을
             <br />
             한 곳에서
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-white/50 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
             아이템을 등록하고, 관리하고, 시각화하세요.
             <br className="hidden md:block" />
             AI가 만들어주는 스케치으로 더욱 직관적으로.
@@ -39,13 +39,13 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/signup"
-              className="w-full sm:w-auto px-8 py-3 bg-white text-black rounded-full font-medium hover:bg-white/90 transition-all hover:scale-105"
+              className="w-full sm:w-auto px-8 py-3 bg-primary text-primary-foreground rounded-full font-medium hover:bg-primary/90 transition-all hover:scale-105"
             >
               무료로 시작하기
             </Link>
             <Link
               href="/demo"
-              className="w-full sm:w-auto px-8 py-3 border border-white/20 text-white rounded-full font-medium hover:bg-white/5 transition-all"
+              className="w-full sm:w-auto px-8 py-3 border border-border text-foreground rounded-full font-medium hover:bg-card transition-all"
             >
               데모 둘러보기
             </Link>
@@ -56,10 +56,10 @@ export default function Home() {
         <section className="relative mt-32 max-w-6xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             {/* Feature 1 */}
-            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+            <div className="group p-6 rounded-2xl border border-border bg-card hover:bg-card/80 transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-muted">
                 <svg
-                  className="w-5 h-5 text-white/80"
+                  className="w-5 h-5 text-muted-foreground"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -73,16 +73,16 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">체계적인 관리</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 아이템을 카테고리별로 분류하고 개수와 상세 정보를 한눈에 파악하세요.
               </p>
             </div>
 
             {/* Feature 2 */}
-            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+            <div className="group p-6 rounded-2xl border border-border bg-card hover:bg-card/80 transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-muted">
                 <svg
-                  className="w-5 h-5 text-white/80"
+                  className="w-5 h-5 text-muted-foreground"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -96,16 +96,16 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">스케치 검색</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 키워드로 기본 스케치을 검색하고 아이템에 바로 적용하세요.
               </p>
             </div>
 
             {/* Feature 3 */}
-            <div className="group p-6 rounded-2xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.05] transition-colors">
-              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-white/10">
+            <div className="group p-6 rounded-2xl border border-border bg-card hover:bg-card/80 transition-colors">
+              <div className="w-10 h-10 mb-4 flex items-center justify-center rounded-lg bg-muted">
                 <svg
-                  className="w-5 h-5 text-white/80"
+                  className="w-5 h-5 text-muted-foreground"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -119,7 +119,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">AI 이미지 생성</h3>
-              <p className="text-sm text-white/50 leading-relaxed">
+              <p className="text-sm text-muted-foreground leading-relaxed">
                 원하는 스케치이 없다면? AI가 텍스트 설명으로 맞춤 이미지를 만들어드려요.
               </p>
             </div>
@@ -128,14 +128,14 @@ export default function Home() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-8 px-6">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-white/40">
+      <footer className="border-t border-border py-8 px-6">
+        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="hover:text-white/60 transition-colors">
+            <Link href="/privacy" className="hover:text-muted-foreground transition-colors">
               개인정보처리방침
             </Link>
-            <Link href="/terms" className="hover:text-white/60 transition-colors">
+            <Link href="/terms" className="hover:text-muted-foreground transition-colors">
               이용약관
             </Link>
           </div>

@@ -76,18 +76,18 @@ export default function SketchGalleryPage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
+      <main className="min-h-screen bg-background text-foreground pt-24 pb-16 px-6">
         <div className="max-w-4xl mx-auto">
           {/* 헤더 */}
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl font-bold">내 스케치</h1>
-              <p className="text-white/60 mt-2">
+              <p className="text-muted-foreground mt-2">
                 AI로 생성한 스케치를 관리하세요.
               </p>
             </div>
             <Link href="/sketch/create">
-              <Button className="bg-white text-black hover:bg-white/90">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                 새 스케치 생성
               </Button>
             </Link>
@@ -105,7 +105,7 @@ export default function SketchGalleryPage() {
             <div className="flex items-center justify-center py-20">
               <div className="flex items-center gap-3">
                 <svg
-                  className="animate-spin h-5 w-5 text-white"
+                  className="animate-spin h-5 w-5 text-foreground"
                   viewBox="0 0 24 24"
                   fill="none"
                 >
@@ -123,7 +123,7 @@ export default function SketchGalleryPage() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                <span className="text-white/60">로딩 중...</span>
+                <span className="text-muted-foreground">로딩 중...</span>
               </div>
             </div>
           )}
@@ -131,9 +131,9 @@ export default function SketchGalleryPage() {
           {/* 빈 상태 */}
           {!isLoading && sketches.length === 0 && !error && (
             <div className="text-center py-20">
-              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-white/5 flex items-center justify-center">
+              <div className="w-20 h-20 mx-auto mb-6 rounded-full bg-card flex items-center justify-center">
                 <svg
-                  className="w-10 h-10 text-white/30"
+                  className="w-10 h-10 text-muted"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -145,11 +145,11 @@ export default function SketchGalleryPage() {
                 </svg>
               </div>
               <h2 className="text-xl font-semibold mb-2">아직 생성한 스케치가 없습니다</h2>
-              <p className="text-white/50 mb-6">
+              <p className="text-muted-foreground mb-6">
                 AI를 이용해 나만의 스케치를 만들어보세요!
               </p>
               <Link href="/sketch/create">
-                <Button className="bg-white text-black hover:bg-white/90">
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                   첫 스케치 생성하기
                 </Button>
               </Link>
@@ -162,7 +162,7 @@ export default function SketchGalleryPage() {
               {sketches.map((sketch) => (
                 <Card
                   key={sketch.id}
-                  className="group relative bg-white/5 border-white/10 overflow-hidden"
+                  className="group relative bg-card border-border overflow-hidden"
                 >
                   {/* 이미지 */}
                   <div className="p-4">
@@ -174,11 +174,11 @@ export default function SketchGalleryPage() {
                   </div>
 
                   {/* 정보 */}
-                  <div className="p-4 pt-0 border-t border-white/10">
-                    <p className="text-sm text-white truncate" title={sketch.prompt}>
+                  <div className="p-4 pt-0 border-t border-border">
+                    <p className="text-sm text-foreground truncate" title={sketch.prompt}>
                       {sketch.prompt}
                     </p>
-                    <p className="text-xs text-white/40 mt-1">
+                    <p className="text-xs text-muted mt-1">
                       {formatDate(sketch.created_at)}
                     </p>
                   </div>
@@ -187,7 +187,7 @@ export default function SketchGalleryPage() {
                   <button
                     onClick={() => handleDelete(sketch.id)}
                     disabled={deletingId === sketch.id}
-                    className="absolute top-2 right-2 p-2 bg-black/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/80 disabled:opacity-50"
+                    className="absolute top-2 right-2 p-2 bg-background/50 rounded-full opacity-0 group-hover:opacity-100 transition-opacity hover:bg-red-500/80 disabled:opacity-50"
                     title="삭제"
                   >
                     {deletingId === sketch.id ? (

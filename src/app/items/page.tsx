@@ -14,7 +14,7 @@ import type { Item, Category } from "@/types/database.types";
 // 정적 JSX를 컴포넌트 외부로 호이스팅하여 리렌더링 시 재생성 방지
 const DropdownIcon = (
   <svg
-    className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-white/50 pointer-events-none"
+    className="absolute right-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none"
     viewBox="0 0 24 24"
     fill="none"
     stroke="currentColor"
@@ -117,10 +117,10 @@ export default function ItemsPage() {
   // 로딩 중
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <LoadingSpinner className="h-5 w-5 text-white" />
-          <span className="text-white/60">로딩 중...</span>
+          <LoadingSpinner className="h-5 w-5 text-foreground" />
+          <span className="text-muted-foreground">로딩 중...</span>
         </div>
       </div>
     );
@@ -132,7 +132,7 @@ export default function ItemsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
       {/* Main Content */}
@@ -141,7 +141,7 @@ export default function ItemsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">내 아이템</h1>
-            <p className="text-white/50">
+            <p className="text-muted-foreground">
               {items.length > 0
                 ? `총 ${items.length}개의 아이템을 관리하고 있습니다.`
                 : "등록된 아이템이 없습니다."}
@@ -157,19 +157,19 @@ export default function ItemsPage() {
                   setSortBy(newSortBy);
                   setSortOrder(newSortOrder);
                 }}
-                className="px-4 py-2 bg-white/10 border border-white/20 rounded-lg text-sm text-white appearance-none cursor-pointer hover:bg-white/20 transition-colors pr-10"
+                className="px-4 py-2 bg-muted border border-border rounded-lg text-sm text-foreground appearance-none cursor-pointer hover:bg-card transition-colors pr-10"
               >
-                <option value="created_at-desc" className="bg-black text-white">최신순</option>
-                <option value="created_at-asc" className="bg-black text-white">오래된순</option>
-                <option value="name-asc" className="bg-black text-white">이름순 (가나다)</option>
-                <option value="name-desc" className="bg-black text-white">이름순 (가나다 역순)</option>
+                <option value="created_at-desc" className="bg-background text-foreground">최신순</option>
+                <option value="created_at-asc" className="bg-background text-foreground">오래된순</option>
+                <option value="name-asc" className="bg-background text-foreground">이름순 (가나다)</option>
+                <option value="name-desc" className="bg-background text-foreground">이름순 (가나다 역순)</option>
               </select>
               {/* 드롭다운 아이콘 */}
               {DropdownIcon}
             </div>
 
             <Link href="/items/new">
-              <Button className="bg-white text-black hover:bg-white/90">
+              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                 <svg
                   className="w-4 h-4 mr-2"
                   viewBox="0 0 24 24"
@@ -195,8 +195,8 @@ export default function ItemsPage() {
                 className={cn(
                   "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
                   selectedCategoryId === "all"
-                    ? "bg-white text-black"
-                    : "bg-white/10 text-white/90 hover:bg-white/20 hover:text-white"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-foreground hover:bg-card hover:text-foreground"
                 )}
               >
                 전체 ({totalCount})
@@ -210,8 +210,8 @@ export default function ItemsPage() {
                   className={cn(
                     "px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors",
                     selectedCategoryId === category.id
-                      ? "bg-white text-black"
-                      : "bg-white/10 text-white/90 hover:bg-white/20 hover:text-white"
+                      ? "bg-primary text-primary-foreground"
+                      : "bg-muted text-foreground hover:bg-card hover:text-foreground"
                   )}
                 >
                   {category.name}
@@ -223,10 +223,10 @@ export default function ItemsPage() {
 
         {/* 카테고리가 없을 때 안내 메시지 */}
         {categories.length === 0 && items.length > 0 && !isLoading && (
-          <div className="mb-6 p-4 bg-white/5 border border-white/10 rounded-lg">
-            <p className="text-white/60 text-sm">
+          <div className="mb-6 p-4 bg-card border border-border rounded-lg">
+            <p className="text-muted-foreground text-sm">
               카테고리를 생성하여 아이템을 분류해보세요.{" "}
-              <Link href="/categories" className="underline hover:text-white">
+              <Link href="/categories" className="underline hover:text-foreground">
                 카테고리 관리
               </Link>
             </p>
@@ -250,8 +250,8 @@ export default function ItemsPage() {
         {isLoading && (
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
-              <LoadingSpinner className="h-5 w-5 text-white" />
-              <span className="text-white/60">아이템을 불러오는 중...</span>
+              <LoadingSpinner className="h-5 w-5 text-foreground" />
+              <span className="text-muted-foreground">아이템을 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -268,9 +268,9 @@ export default function ItemsPage() {
         {/* Empty State */}
         {!isLoading && items.length === 0 && !error && (
           <div className="flex flex-col items-center justify-center py-20">
-            <div className="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6">
+            <div className="w-20 h-20 bg-card rounded-full flex items-center justify-center mb-6">
               <svg
-                className="w-10 h-10 text-white/30"
+                className="w-10 h-10 text-muted"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -283,11 +283,11 @@ export default function ItemsPage() {
             {selectedCategoryId === "all" ? (
               <>
                 <h2 className="text-xl font-semibold mb-2">아직 등록된 아이템이 없습니다</h2>
-                <p className="text-white/50 mb-6 text-center">
+                <p className="text-muted-foreground mb-6 text-center">
                   첫 번째 아이템을 등록하고 체계적으로 관리해보세요.
                 </p>
                 <Link href="/items/new">
-                  <Button className="bg-white text-black hover:bg-white/90">
+                  <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                     <svg
                       className="w-4 h-4 mr-2"
                       viewBox="0 0 24 24"
@@ -304,19 +304,19 @@ export default function ItemsPage() {
             ) : (
               <>
                 <h2 className="text-xl font-semibold mb-2">이 카테고리에 아이템이 없습니다</h2>
-                <p className="text-white/50 mb-6 text-center">
+                <p className="text-muted-foreground mb-6 text-center">
                   {categories.find((c) => c.id === selectedCategoryId)?.name} 카테고리에 아이템을 추가해보세요.
                 </p>
                 <div className="flex gap-3">
                   <Button
                     onClick={() => setSelectedCategoryId("all")}
                     variant="outline"
-                    className="border-white/10 text-white hover:bg-white/10"
+                    className="border-border text-foreground hover:bg-muted"
                   >
                     전체 아이템 보기
                   </Button>
                   <Link href="/items/new">
-                    <Button className="bg-white text-black hover:bg-white/90">
+                    <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
                       <svg
                         className="w-4 h-4 mr-2"
                         viewBox="0 0 24 24"
@@ -337,8 +337,8 @@ export default function ItemsPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-auto">
-        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border mt-auto">
+        <div className="max-w-6xl mx-auto px-6 py-6 text-center text-xs text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
         </div>
       </footer>

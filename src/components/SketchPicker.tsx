@@ -209,7 +209,7 @@ export default function SketchPicker({
         <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
           {isCategoriesLoading ? (
             <div className="flex items-center justify-center w-full py-2">
-              <span className="text-white/40 text-sm">카테고리 로딩 중...</span>
+              <span className="text-muted text-sm">카테고리 로딩 중...</span>
             </div>
           ) : (
             displayCategories.map((category) => (
@@ -219,8 +219,8 @@ export default function SketchPicker({
                 onClick={() => handleCategoryChange(category.name)}
                 className={`px-4 py-2 rounded-full text-sm font-medium whitespace-nowrap transition-colors ${
                   selectedCategory === category.name
-                    ? "bg-white text-black"
-                    : "bg-white/10 text-white/70 hover:bg-white/20"
+                    ? "bg-primary text-primary-foreground"
+                    : "bg-muted text-muted-foreground hover:bg-card"
                 }`}
               >
                 {category.label}
@@ -241,7 +241,7 @@ export default function SketchPicker({
       {isLoading && (
         <div className="flex items-center justify-center py-12">
           <div className="flex items-center gap-3">
-            <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
+            <svg className="animate-spin h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none">
               <circle
                 className="opacity-25"
                 cx="12"
@@ -256,7 +256,7 @@ export default function SketchPicker({
                 d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
               />
             </svg>
-            <span className="text-white/60">로딩 중...</span>
+            <span className="text-muted-foreground">로딩 중...</span>
           </div>
         </div>
       )}
@@ -270,10 +270,10 @@ export default function SketchPicker({
                 <Card
                   key={pictogram.id}
                   onClick={() => onSelect(pictogram)}
-                  className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
+                  className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-foreground ${
                     getSelectedId() === pictogram.id
-                      ? "ring-2 ring-white bg-white/10"
-                      : "bg-white/5 hover:bg-white/10"
+                      ? "ring-2 ring-white bg-muted"
+                      : "bg-card hover:bg-muted"
                   }`}
                 >
                   <div className="w-full aspect-square flex items-center justify-center">
@@ -288,8 +288,8 @@ export default function SketchPicker({
             </div>
           ) : (
             <div className="text-center py-12">
-              <p className="text-white/40 mb-4">아직 생성한 스케치가 없습니다.</p>
-              <Link href="/pictogram/create" className="text-white hover:underline">
+              <p className="text-muted mb-4">아직 생성한 스케치가 없습니다.</p>
+              <Link href="/pictogram/create" className="text-foreground hover:underline">
                 스케치 생성하기 →
               </Link>
             </div>
@@ -304,14 +304,14 @@ export default function SketchPicker({
             <Card
               key={pictogram.id}
               onClick={() => onSelect(pictogram)}
-              className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-white ${
+              className={`p-3 cursor-pointer transition-all hover:scale-105 hover:shadow-lg text-foreground ${
                 getSelectedId() === pictogram.id
-                  ? "ring-2 ring-white bg-white/10"
-                  : "bg-white/5 hover:bg-white/10"
+                  ? "ring-2 ring-white bg-muted"
+                  : "bg-card hover:bg-muted"
               }`}
             >
               <div
-                className="w-full aspect-square flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+                className="w-full aspect-square flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-foreground"
                 dangerouslySetInnerHTML={{ __html: pictogram.svg }}
               />
             </Card>
@@ -321,7 +321,7 @@ export default function SketchPicker({
 
       {/* 검색 결과 없음 */}
       {!isLoading && selectedCategory !== "my" && pictograms.length === 0 && !error && (
-        <div className="text-center py-12 text-white/40">
+        <div className="text-center py-12 text-muted">
           {searchQuery
             ? `"${searchQuery}"에 대한 검색 결과가 없습니다.`
             : "스케치를 불러오는 중..."}
@@ -330,30 +330,30 @@ export default function SketchPicker({
 
       {/* 선택된 스케치 정보 */}
       {selectedSketch && (
-        <div className="mt-6 p-4 border border-white/10 rounded-lg bg-white/5">
-          <p className="text-sm text-white/50 mb-2">선택된 스케치</p>
+        <div className="mt-6 p-4 border border-border rounded-lg bg-card">
+          <p className="text-sm text-muted-foreground mb-2">선택된 스케치</p>
           <div className="flex items-center gap-4">
             {isCustomSketch(selectedSketch) ? (
               <>
                 <img
                   src={selectedSketch.image_url}
                   alt={selectedSketch.prompt}
-                  className="w-16 h-16 object-contain bg-white/10 rounded-lg"
+                  className="w-16 h-16 object-contain bg-muted rounded-lg"
                 />
                 <div>
-                  <p className="font-medium text-white">{selectedSketch.prompt}</p>
-                  <p className="text-sm text-white/50">내 스케치</p>
+                  <p className="font-medium text-foreground">{selectedSketch.prompt}</p>
+                  <p className="text-sm text-muted-foreground">내 스케치</p>
                 </div>
               </>
             ) : (
               <>
                 <div
-                  className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg"
+                  className="w-16 h-16 flex items-center justify-center bg-muted rounded-lg"
                   dangerouslySetInnerHTML={{ __html: selectedSketch.svg }}
                 />
                 <div>
-                  <p className="font-medium text-white">{selectedSketch.name}</p>
-                  <p className="text-sm text-white/50">{selectedSketch.collection}</p>
+                  <p className="font-medium text-foreground">{selectedSketch.name}</p>
+                  <p className="text-sm text-muted-foreground">{selectedSketch.collection}</p>
                 </div>
               </>
             )}

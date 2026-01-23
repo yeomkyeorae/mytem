@@ -383,6 +383,11 @@ src/
   - [x] 테마 전환 정상 작동
   - [x] localStorage에 선호도 저장
   - [x] 시스템 테마 자동 감지
+- [x] 하드코딩된 색상을 CSS 변수로 변경
+  - [x] 11개 페이지 파일 수정 (page.tsx, login, signup, dashboard, items 등)
+  - [x] 4개 컴포넌트 수정 (Navbar, ItemForm, ItemCard, SketchPicker)
+  - [x] bg-black → bg-background, text-white → text-foreground
+  - [x] 모든 페이지에서 다크/라이트 모드 정상 작동 확인
 
 ### Phase 7: 추가 기능
 

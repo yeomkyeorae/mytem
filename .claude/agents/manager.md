@@ -100,6 +100,7 @@
 | 2026-01-24 | 스케치 선택 카테고리 DB 기반 변경 | 완료 | @frontend에게 위임, 하드코딩 제거하고 API 기반 동적 로딩 |
 | 2026-01-24 | 스케치 카테고리 선택 시 결과 미출력 문제 해결 | 완료 | @frontend에게 위임, API 필드명 불일치 수정 (pictograms → sketches) |
 | 2026-01-24 | 다크 모드 토글 기능 구현 | 완료 | @frontend에게 위임, next-themes 적용, ThemeToggle 컴포넌트, Navbar 통합 |
+| 2026-01-24 | 다크 모드 작동 안 함 문제 해결 | 완료 | @frontend에게 위임, 15개 파일 bg-black → bg-background 변경 |
 
 ---
 

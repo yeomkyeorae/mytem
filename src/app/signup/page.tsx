@@ -64,7 +64,7 @@ export default function SignupPage() {
   // 회원가입 성공 시 이메일 확인 안내 화면
   if (success) {
     return (
-      <div className="min-h-screen bg-black text-white flex flex-col">
+      <div className="min-h-screen bg-background text-foreground flex flex-col">
         <Navbar />
         <main className="flex-1 flex items-center justify-center px-6 pt-16">
           <div className="w-full max-w-sm text-center">
@@ -84,14 +84,14 @@ export default function SignupPage() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold mb-4">이메일을 확인해주세요</h1>
-            <p className="text-white/60 mb-6">
-              <span className="text-white font-medium">{email}</span>로 확인 메일을 보냈습니다.
+            <p className="text-muted-foreground mb-6">
+              <span className="text-foreground font-medium">{email}</span>로 확인 메일을 보냈습니다.
               <br />
               메일의 링크를 클릭하여 가입을 완료해주세요.
             </p>
             <Link
               href="/login"
-              className="inline-block px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all"
+              className="inline-block px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all"
             >
               로그인 페이지로 이동
             </Link>
@@ -102,7 +102,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
 
       {/* Main Content */}
@@ -111,7 +111,7 @@ export default function SignupPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">계정 만들기</h1>
-            <p className="text-white/50 text-sm">
+            <p className="text-muted-foreground text-sm">
               Mytem에 가입하고 아이템을 관리하세요
             </p>
           </div>
@@ -127,7 +127,7 @@ export default function SignupPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm text-white/70 mb-2">
+              <label htmlFor="email" className="block text-sm text-muted-foreground mb-2">
                 이메일
               </label>
               <input
@@ -137,13 +137,13 @@ export default function SignupPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
             {/* Password Input */}
             <div>
-              <label htmlFor="password" className="block text-sm text-white/70 mb-2">
+              <label htmlFor="password" className="block text-sm text-muted-foreground mb-2">
                 비밀번호
               </label>
               <input
@@ -153,13 +153,13 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="최소 6자 이상"
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
             {/* Confirm Password Input */}
             <div>
-              <label htmlFor="confirmPassword" className="block text-sm text-white/70 mb-2">
+              <label htmlFor="confirmPassword" className="block text-sm text-muted-foreground mb-2">
                 비밀번호 확인
               </label>
               <input
@@ -169,7 +169,7 @@ export default function SignupPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="비밀번호를 다시 입력하세요"
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
@@ -177,7 +177,7 @@ export default function SignupPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -211,10 +211,10 @@ export default function SignupPage() {
           {/* Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10" />
+              <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="px-4 bg-black text-white/40">또는</span>
+              <span className="px-4 bg-background text-muted">또는</span>
             </div>
           </div>
 
@@ -222,7 +222,7 @@ export default function SignupPage() {
           <div className="space-y-3">
             <button
               type="button"
-              className="w-full py-3 border border-white/10 rounded-lg font-medium text-white/70 hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-3"
+              className="w-full py-3 border border-border rounded-lg font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-all flex items-center justify-center gap-3"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path
@@ -247,7 +247,7 @@ export default function SignupPage() {
 
             <button
               type="button"
-              className="w-full py-3 border border-white/10 rounded-lg font-medium text-white/70 hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-3"
+              className="w-full py-3 border border-border rounded-lg font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-all flex items-center justify-center gap-3"
             >
               <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
@@ -257,24 +257,24 @@ export default function SignupPage() {
           </div>
 
           {/* Login Link */}
-          <p className="text-center text-sm text-white/50 mt-8">
+          <p className="text-center text-sm text-muted-foreground mt-8">
             이미 계정이 있으신가요?{" "}
             <Link
               href="/login"
-              className="text-white hover:text-white/80 transition-colors font-medium"
+              className="text-foreground hover:text-foreground/80 transition-colors font-medium"
             >
               로그인
             </Link>
           </p>
 
           {/* Terms */}
-          <p className="text-center text-xs text-white/30 mt-4">
+          <p className="text-center text-xs text-muted mt-4">
             회원가입 시{" "}
-            <Link href="/terms" className="underline hover:text-white/50 transition-colors">
+            <Link href="/terms" className="underline hover:text-muted-foreground transition-colors">
               이용약관
             </Link>
             {" "}및{" "}
-            <Link href="/privacy" className="underline hover:text-white/50 transition-colors">
+            <Link href="/privacy" className="underline hover:text-muted-foreground transition-colors">
               개인정보 처리방침
             </Link>
             에 동의하게 됩니다.
@@ -283,7 +283,7 @@ export default function SignupPage() {
       </main>
 
       {/* Footer */}
-      <footer className="p-6 text-center text-xs text-white/30">
+      <footer className="p-6 text-center text-xs text-muted">
         <p>&copy; 2025 Mytem. All rights reserved.</p>
       </footer>
     </div>

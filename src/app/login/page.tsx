@@ -56,7 +56,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
 
       {/* Main Content */}
@@ -65,7 +65,7 @@ export default function LoginPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">다시 만나서 반가워요</h1>
-            <p className="text-white/50 text-sm">
+            <p className="text-muted-foreground text-sm">
               계정에 로그인하여 아이템을 관리하세요
             </p>
           </div>
@@ -81,7 +81,7 @@ export default function LoginPage() {
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email Input */}
             <div>
-              <label htmlFor="email" className="block text-sm text-white/70 mb-2">
+              <label htmlFor="email" className="block text-sm text-muted-foreground mb-2">
                 이메일
               </label>
               <input
@@ -91,19 +91,19 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
             {/* Password Input */}
             <div>
               <div className="flex items-center justify-between mb-2">
-                <label htmlFor="password" className="text-sm text-white/70">
+                <label htmlFor="password" className="text-sm text-muted-foreground">
                   비밀번호
                 </label>
                 <Link
                   href="/forgot-password"
-                  className="text-xs text-white/50 hover:text-white/70 transition-colors"
+                  className="text-xs text-muted-foreground hover:text-foreground transition-colors"
                 >
                   비밀번호 찾기
                 </Link>
@@ -115,7 +115,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isLoading}
-              className="w-full py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
+              className="w-full py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all disabled:opacity-50 disabled:cursor-not-allowed mt-6"
             >
               {isLoading ? (
                 <span className="flex items-center justify-center gap-2">
@@ -157,17 +157,17 @@ export default function LoginPage() {
           {/* Divider */}
           <div className="relative my-8">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-white/10" />
+              <div className="w-full border-t border-border" />
             </div>
             <div className="relative flex justify-center text-xs">
-              <span className="px-4 bg-black text-white/40">또는</span>
+              <span className="px-4 bg-background text-muted">또는</span>
             </div>
           </div>
 
           {/* Social Login */}
           <button
             type="button"
-            className="w-full py-3 border border-white/10 rounded-lg font-medium text-white/70 hover:bg-white/5 hover:text-white transition-all flex items-center justify-center gap-3"
+            className="w-full py-3 border border-border rounded-lg font-medium text-muted-foreground hover:bg-muted hover:text-foreground transition-all flex items-center justify-center gap-3"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -191,11 +191,11 @@ export default function LoginPage() {
           </button>
 
           {/* Sign Up Link */}
-          <p className="text-center text-sm text-white/50 mt-8">
+          <p className="text-center text-sm text-muted-foreground mt-8">
             아직 계정이 없으신가요?{" "}
             <Link
               href="/signup"
-              className="text-white hover:text-white/80 transition-colors font-medium"
+              className="text-foreground hover:text-foreground/80 transition-colors font-medium"
             >
               회원가입
             </Link>
@@ -204,7 +204,7 @@ export default function LoginPage() {
       </main>
 
       {/* Footer */}
-      <footer className="p-6 text-center text-xs text-white/30">
+      <footer className="p-6 text-center text-xs text-muted">
         <p>&copy; 2025 Mytem. All rights reserved.</p>
       </footer>
     </div>

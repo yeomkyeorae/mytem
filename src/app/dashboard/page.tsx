@@ -59,7 +59,7 @@ export default function DashboardPage() {
 
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
           <LoadingSpinner />
           <span>로딩 중...</span>
@@ -69,14 +69,14 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Navbar />
 
       {/* Main Content */}
       <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-8 pt-24">
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">대시보드</h1>
-          <p className="text-white/50">나의 아이템을 관리하세요</p>
+          <p className="text-muted-foreground">나의 아이템을 관리하세요</p>
         </div>
 
         {/* Error Message */}
@@ -91,14 +91,14 @@ export default function DashboardPage() {
 
         {/* Quick Stats - 2 columns */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02]">
-            <p className="text-sm text-white/50 mb-1">전체 아이템</p>
+          <div className="p-6 border border-border rounded-xl bg-card">
+            <p className="text-sm text-muted-foreground mb-1">전체 아이템</p>
             <p className="text-3xl font-bold">
               {isItemsLoading ? <LoadingSpinner /> : stats.totalCount}
             </p>
           </div>
-          <div className="p-6 border border-white/10 rounded-xl bg-white/[0.02]">
-            <p className="text-sm text-white/50 mb-1">커스텀 스케치</p>
+          <div className="p-6 border border-border rounded-xl bg-card">
+            <p className="text-sm text-muted-foreground mb-1">커스텀 스케치</p>
             <p className="text-3xl font-bold">
               {isItemsLoading ? <LoadingSpinner /> : stats.customSketchCount}
             </p>
@@ -111,12 +111,12 @@ export default function DashboardPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Link
               href="/items/new"
-              className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
+              className="p-6 border border-border rounded-xl bg-card hover:bg-card/80 transition-colors group"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-muted/80 transition-colors">
                   <svg
-                    className="w-6 h-6 text-white/70"
+                    className="w-6 h-6 text-muted-foreground"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -131,18 +131,18 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="font-medium">아이템 등록</p>
-                  <p className="text-sm text-white/50">새로운 아이템을 추가하세요</p>
+                  <p className="text-sm text-muted-foreground">새로운 아이템을 추가하세요</p>
                 </div>
               </div>
             </Link>
             <Link
               href="/sketch/create"
-              className="p-6 border border-white/10 rounded-xl bg-white/[0.02] hover:bg-white/[0.05] transition-colors group"
+              className="p-6 border border-border rounded-xl bg-card hover:bg-card/80 transition-colors group"
             >
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-lg bg-white/5 flex items-center justify-center group-hover:bg-white/10 transition-colors">
+                <div className="w-12 h-12 rounded-lg bg-muted flex items-center justify-center group-hover:bg-muted/80 transition-colors">
                   <svg
-                    className="w-6 h-6 text-white/70"
+                    className="w-6 h-6 text-muted-foreground"
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
@@ -157,7 +157,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="font-medium">스케치 생성</p>
-                  <p className="text-sm text-white/50">AI로 커스텀 이미지를 만드세요</p>
+                  <p className="text-sm text-muted-foreground">AI로 커스텀 이미지를 만드세요</p>
                 </div>
               </div>
             </Link>
@@ -169,7 +169,7 @@ export default function DashboardPage() {
           <div className="mb-8">
             <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">최근 등록된 아이템</h2>
-              <Link href="/items" className="text-sm text-white/50 hover:text-white">
+              <Link href="/items" className="text-sm text-muted-foreground hover:text-foreground">
                 전체 보기 →
               </Link>
             </div>
@@ -183,10 +183,10 @@ export default function DashboardPage() {
 
         {/* Empty State */}
         {!isItemsLoading && items.length === 0 && !error && (
-          <div className="border border-dashed border-white/20 rounded-xl p-12 text-center">
-            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-white/5 flex items-center justify-center">
+          <div className="border border-dashed border-border rounded-xl p-12 text-center">
+            <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-muted flex items-center justify-center">
               <svg
-                className="w-8 h-8 text-white/30"
+                className="w-8 h-8 text-muted-foreground"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -200,12 +200,12 @@ export default function DashboardPage() {
               </svg>
             </div>
             <h3 className="text-lg font-medium mb-2">아직 등록된 아이템이 없습니다</h3>
-            <p className="text-white/50 mb-6">
+            <p className="text-muted-foreground mb-6">
               첫 번째 아이템을 등록하고 관리를 시작하세요
             </p>
             <Link
               href="/items/new"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black rounded-lg font-medium hover:bg-white/90 transition-all"
+              className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all"
             >
               <svg
                 className="w-5 h-5"
@@ -227,7 +227,7 @@ export default function DashboardPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border py-6 text-center text-xs text-muted">
         <p>&copy; 2025 Mytem. All rights reserved.</p>
       </footer>
     </div>

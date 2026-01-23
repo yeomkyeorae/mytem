@@ -124,27 +124,27 @@ export default function SketchCreatePage() {
   return (
     <>
       <Navbar />
-      <main className="min-h-screen bg-black text-white pt-24 pb-16 px-6">
+      <main className="min-h-screen bg-background text-foreground pt-24 pb-16 px-6">
         <div className="max-w-2xl mx-auto">
           {/* 헤더 */}
           <div className="mb-8">
             <Link
               href="/sketch/gallery"
-              className="text-sm text-white/50 hover:text-white transition-colors mb-4 inline-block"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-4 inline-block"
             >
               ← 갤러리로 돌아가기
             </Link>
             <h1 className="text-3xl font-bold">AI 스케치 생성</h1>
-            <p className="text-white/60 mt-2">
+            <p className="text-muted-foreground mt-2">
               원하는 이미지를 텍스트로 설명하면 AI가 스케치를 만들어드립니다.
             </p>
           </div>
 
           {/* 생성 폼 */}
-          <div className="bg-white/5 border border-white/10 rounded-2xl p-6 mb-8">
+          <div className="bg-card border border-border rounded-2xl p-6 mb-8">
             <div className="space-y-4">
               <div>
-                <Label htmlFor="prompt" className="text-white/70 mb-2 block">
+                <Label htmlFor="prompt" className="text-muted-foreground mb-2 block">
                   이미지 설명 <span className="text-red-400">*</span>
                 </Label>
                 <Input
@@ -153,7 +153,7 @@ export default function SketchCreatePage() {
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
                   placeholder="예: 가방, 노트북, 운동화, 책상 위의 커피잔..."
-                  className="bg-white/5 border-white/10 text-white placeholder:text-white/30"
+                  className="bg-card border-border text-foreground placeholder:text-muted"
                   disabled={isGenerating}
                   onKeyDown={(e) => {
                     if (e.key === "Enter" && !isGenerating) {
@@ -161,7 +161,7 @@ export default function SketchCreatePage() {
                     }
                   }}
                 />
-                <p className="mt-2 text-sm text-white/40">
+                <p className="mt-2 text-sm text-muted">
                   간단하고 명확한 설명이 좋은 결과를 만듭니다.
                 </p>
               </div>
@@ -178,7 +178,7 @@ export default function SketchCreatePage() {
                 <Button
                   onClick={handleGenerate}
                   disabled={isGenerating || !prompt.trim()}
-                  className="w-full py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
+                  className="w-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
                 >
                   {isGenerating ? (
                     <span className="flex items-center justify-center gap-2">
@@ -210,8 +210,8 @@ export default function SketchCreatePage() {
             {generatedImage && (
               <div className="mt-6 space-y-4">
                 <div className="text-center">
-                  <p className="text-sm text-white/50 mb-4">생성된 스케치</p>
-                  <div className="inline-block p-4 bg-white/10 rounded-xl">
+                  <p className="text-sm text-muted-foreground mb-4">생성된 스케치</p>
+                  <div className="inline-block p-4 bg-muted rounded-xl">
                     <img
                       src={generatedImage}
                       alt="Generated sketch"
@@ -224,7 +224,7 @@ export default function SketchCreatePage() {
                   <Button
                     onClick={handleAddToGallery}
                     disabled={isSaving}
-                    className="flex-1 py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
+                    className="flex-1 py-3 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
                   >
                     {isSaving ? (
                       <span className="flex items-center justify-center gap-2">
@@ -253,7 +253,7 @@ export default function SketchCreatePage() {
                     onClick={handleReset}
                     disabled={isSaving}
                     variant="outline"
-                    className="flex-1 py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
+                    className="flex-1 py-3 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
                   >
                     다시 생성
                   </Button>
@@ -269,7 +269,7 @@ export default function SketchCreatePage() {
                 <h2 className="text-lg font-semibold">최근 생성한 스케치</h2>
                 <Link
                   href="/sketch/gallery"
-                  className="text-sm text-white/50 hover:text-white transition-colors"
+                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   전체 보기 →
                 </Link>
@@ -278,7 +278,7 @@ export default function SketchCreatePage() {
                 {recentSketches.map((sketch) => (
                   <Card
                     key={sketch.id}
-                    className="p-3 bg-white/5 border-white/10 hover:bg-white/10 transition-colors"
+                    className="p-3 bg-card border-border hover:bg-muted transition-colors"
                   >
                     <img
                       src={sketch.image_url}
@@ -292,9 +292,9 @@ export default function SketchCreatePage() {
           )}
 
           {/* 사용 팁 */}
-          <div className="mt-8 p-6 bg-white/5 border border-white/10 rounded-xl">
+          <div className="mt-8 p-6 bg-card border border-border rounded-xl">
             <h3 className="font-semibold mb-3">사용 팁</h3>
-            <ul className="space-y-2 text-sm text-white/60">
+            <ul className="space-y-2 text-sm text-muted-foreground">
               <li>• 단일 물체를 간단히 설명하세요 (예: "가방", "노트북")</li>
               <li>• 구체적인 설명이 더 좋은 결과를 만듭니다</li>
               <li>• 생성된 스케치는 아이템 등록 시 사용할 수 있습니다</li>

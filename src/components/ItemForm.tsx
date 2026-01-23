@@ -266,7 +266,7 @@ export default function ItemForm({
       return {
         imageElement: (
           <div
-            className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+            className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-foreground"
             dangerouslySetInnerHTML={{ __html: selectedSketch.svg }}
           />
         ),
@@ -282,15 +282,15 @@ export default function ItemForm({
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* 이미지 파일 업로드 */}
       <div>
-        <Label className="text-white/70 mb-2 block">
-          이미지 파일 <span className="text-white/40 text-xs">(스케치와 둘 중 하나 필수)</span>
+        <Label className="text-muted-foreground mb-2 block">
+          이미지 파일 <span className="text-muted text-xs">(스케치와 둘 중 하나 필수)</span>
         </Label>
 
         {uploadedFile && uploadedFilePreview ? (
           // 업로드된 파일 미리보기
           <div className="mb-3">
-            <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
-              <div className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg overflow-hidden">
+            <div className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg">
+              <div className="w-16 h-16 flex items-center justify-center bg-muted rounded-lg overflow-hidden">
                 <img
                   src={uploadedFilePreview}
                   alt="업로드된 이미지"
@@ -298,8 +298,8 @@ export default function ItemForm({
                 />
               </div>
               <div className="flex-1">
-                <p className="font-medium text-white">{uploadedFile.name}</p>
-                <p className="text-sm text-white/50">
+                <p className="font-medium text-foreground">{uploadedFile.name}</p>
+                <p className="text-sm text-muted-foreground">
                   {(uploadedFile.size / 1024).toFixed(1)} KB
                 </p>
               </div>
@@ -308,7 +308,7 @@ export default function ItemForm({
                 variant="ghost"
                 size="sm"
                 onClick={handleRemoveUploadedFile}
-                className="text-white/50 hover:text-white hover:bg-white/10"
+                className="text-muted-foreground hover:text-foreground hover:bg-muted"
               >
                 제거
               </Button>
@@ -320,15 +320,15 @@ export default function ItemForm({
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
             onDrop={handleDrop}
-            className={`mb-3 flex flex-col items-center justify-center gap-3 p-8 bg-white/5 border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
+            className={`mb-3 flex flex-col items-center justify-center gap-3 p-8 bg-card border-2 border-dashed rounded-lg cursor-pointer transition-colors ${
               isDragging
-                ? "border-white/50 bg-white/10"
-                : "border-white/20 hover:border-white/30 hover:bg-white/[0.07]"
+                ? "border-ring bg-muted"
+                : "border-border hover:border-ring hover:bg-accent"
             }`}
             onClick={() => document.getElementById("file-input")?.click()}
           >
             <svg
-              className="w-12 h-12 text-white/30"
+              className="w-12 h-12 text-muted"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -337,10 +337,10 @@ export default function ItemForm({
               <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12" />
             </svg>
             <div className="text-center">
-              <p className="text-sm text-white/70 mb-1">
+              <p className="text-sm text-muted-foreground mb-1">
                 이미지를 드래그하거나 클릭하여 업로드
               </p>
-              <p className="text-xs text-white/40">
+              <p className="text-xs text-muted">
                 PNG, JPG, WEBP (최대 5MB)
               </p>
             </div>
@@ -361,21 +361,21 @@ export default function ItemForm({
 
       {/* 스케치 선택 */}
       <div>
-        <Label className="text-white/70 mb-2 block">
-          스케치 이미지 <span className="text-white/40 text-xs">(파일과 둘 중 하나 필수)</span>
+        <Label className="text-muted-foreground mb-2 block">
+          스케치 이미지 <span className="text-muted text-xs">(파일과 둘 중 하나 필수)</span>
         </Label>
 
         {/* 선택된 스케치 미리보기 */}
         <div className="mb-3">
           {selectedSketch && displayInfo ? (
-            <div className="flex items-center gap-4 p-4 bg-white/5 border border-white/10 rounded-lg">
-              <div className="w-16 h-16 flex items-center justify-center bg-white/10 rounded-lg">
+            <div className="flex items-center gap-4 p-4 bg-card border border-border rounded-lg">
+              <div className="w-16 h-16 flex items-center justify-center bg-muted rounded-lg">
                 {displayInfo.imageElement}
               </div>
               <div className="flex-1">
-                <p className="font-medium text-white">{displayInfo.name}</p>
+                <p className="font-medium text-foreground">{displayInfo.name}</p>
                 {displayInfo.collection && (
-                  <p className="text-sm text-white/50">{displayInfo.collection}</p>
+                  <p className="text-sm text-muted-foreground">{displayInfo.collection}</p>
                 )}
               </div>
               <Button
@@ -383,7 +383,7 @@ export default function ItemForm({
                 variant="ghost"
                 size="sm"
                 onClick={() => setSelectedSketch(null)}
-                className="text-white/50 hover:text-white hover:bg-white/10"
+                className="text-muted-foreground hover:text-foreground hover:bg-muted"
               >
                 제거
               </Button>
@@ -391,10 +391,10 @@ export default function ItemForm({
           ) : (
             <div
               onClick={() => setShowPicker(true)}
-              className="flex flex-col items-center justify-center gap-2 p-8 bg-white/5 border border-dashed border-white/20 rounded-lg cursor-pointer hover:bg-white/10 hover:border-white/30 transition-colors"
+              className="flex flex-col items-center justify-center gap-2 p-8 bg-card border border-dashed border-border rounded-lg cursor-pointer hover:bg-muted hover:border-ring transition-colors"
             >
               <svg
-                className="w-10 h-10 text-white/30"
+                className="w-10 h-10 text-muted"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -403,7 +403,7 @@ export default function ItemForm({
                 <rect x="3" y="3" width="18" height="18" rx="2" />
                 <path d="M12 8v8M8 12h8" />
               </svg>
-              <p className="text-sm text-white/50">스케치를 선택해주세요</p>
+              <p className="text-sm text-muted-foreground">스케치를 선택해주세요</p>
             </div>
           )}
         </div>
@@ -413,14 +413,14 @@ export default function ItemForm({
           type="button"
           variant="outline"
           onClick={() => setShowPicker(!showPicker)}
-          className="w-full border-white/20 text-black hover:bg-white/10 hover:text-white"
+          className="w-full border-border text-black hover:bg-muted hover:text-foreground"
         >
           {showPicker ? "닫기" : selectedSketch ? "스케치 변경" : "스케치 선택"}
         </Button>
 
         {/* 스케치 선택기 */}
         {showPicker && (
-          <div className="mt-4 p-4 border border-white/10 rounded-lg bg-black/50">
+          <div className="mt-4 p-4 border border-border rounded-lg bg-background/50">
             <SketchPicker
               onSelect={handleSketchSelect}
               selectedSketch={selectedSketch}
@@ -436,11 +436,11 @@ export default function ItemForm({
 
       {/* 카테고리 선택 */}
       <div>
-        <Label htmlFor="category" className="text-white/70 mb-2 block">
+        <Label htmlFor="category" className="text-muted-foreground mb-2 block">
           카테고리 <span className="text-red-400">*</span>
         </Label>
         <Select value={selectedCategoryId} onValueChange={setSelectedCategoryId}>
-          <SelectTrigger className="bg-white/5 border-white/10 text-white">
+          <SelectTrigger className="bg-card border-border text-foreground">
             <SelectValue placeholder="카테고리를 선택하세요" />
           </SelectTrigger>
           <SelectContent>
@@ -461,7 +461,7 @@ export default function ItemForm({
         {categories.length === 0 && (
           <Link
             href="/categories"
-            className="mt-2 inline-block text-sm text-white/50 hover:text-white underline"
+            className="mt-2 inline-block text-sm text-muted-foreground hover:text-foreground underline"
           >
             카테고리를 먼저 생성하세요
           </Link>
@@ -470,7 +470,7 @@ export default function ItemForm({
 
       {/* 이름 입력 */}
       <div>
-        <Label htmlFor="name" className="text-white/70 mb-2 block">
+        <Label htmlFor="name" className="text-muted-foreground mb-2 block">
           아이템 이름 <span className="text-red-400">*</span>
         </Label>
         <Input
@@ -479,14 +479,14 @@ export default function ItemForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="예: 노트북, 가방, 책"
-          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30"
+          className="bg-card border-border text-foreground placeholder:text-muted focus:border-ring"
         />
         {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
       </div>
 
       {/* 개수 입력 */}
       <div>
-        <Label htmlFor="quantity" className="text-white/70 mb-2 block">
+        <Label htmlFor="quantity" className="text-muted-foreground mb-2 block">
           개수 <span className="text-red-400">*</span>
         </Label>
         <Input
@@ -495,14 +495,14 @@ export default function ItemForm({
           min={1}
           value={quantity}
           onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-          className="bg-white/5 border-white/10 text-white placeholder:text-white/30 focus:border-white/30"
+          className="bg-card border-border text-foreground placeholder:text-muted focus:border-ring"
         />
         {errors.quantity && <p className="mt-1 text-sm text-red-400">{errors.quantity}</p>}
       </div>
 
       {/* 설명 입력 */}
       <div>
-        <Label htmlFor="description" className="text-white/70 mb-2 block">
+        <Label htmlFor="description" className="text-muted-foreground mb-2 block">
           설명 (선택)
         </Label>
         <textarea
@@ -511,7 +511,7 @@ export default function ItemForm({
           onChange={(e) => setDescription(e.target.value)}
           placeholder="아이템에 대한 간단한 설명을 입력해주세요."
           rows={4}
-          className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-lg text-white placeholder:text-white/30 focus:outline-none focus:border-white/30 focus:bg-white/[0.07] transition-colors resize-none"
+          className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors resize-none"
         />
       </div>
 
@@ -519,7 +519,7 @@ export default function ItemForm({
       <Button
         type="submit"
         disabled={isLoading}
-        className="w-full py-3 bg-white text-black hover:bg-white/90 disabled:opacity-50"
+        className="w-full py-3 bg-primary text-primary-foreground hover:bg-primary/90 disabled:opacity-50"
       >
         {isLoading ? (
           <span className="flex items-center justify-center gap-2">

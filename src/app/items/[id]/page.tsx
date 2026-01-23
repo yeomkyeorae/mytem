@@ -98,7 +98,7 @@ export default function ItemDetailPage() {
     if (!item?.image_url) {
       return (
         <svg
-          className="w-24 h-24 text-white/30"
+          className="w-24 h-24 text-muted"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -113,7 +113,7 @@ export default function ItemDetailPage() {
     if (item.image_url.trim().startsWith("<svg")) {
       return (
         <div
-          className="w-32 h-32 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+          className="w-32 h-32 flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-foreground"
           dangerouslySetInnerHTML={{ __html: item.image_url }}
         />
       );
@@ -128,9 +128,9 @@ export default function ItemDetailPage() {
   // 로딩 중
   if (authLoading) {
     return (
-      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+      <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
-          <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
+          <svg className="animate-spin h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none">
             <circle
               className="opacity-25"
               cx="12"
@@ -145,7 +145,7 @@ export default function ItemDetailPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-white/60">로딩 중...</span>
+          <span className="text-muted-foreground">로딩 중...</span>
         </div>
       </div>
     );
@@ -157,7 +157,7 @@ export default function ItemDetailPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-background text-foreground">
       <Navbar />
 
       {/* Main Content */}
@@ -165,7 +165,7 @@ export default function ItemDetailPage() {
         {/* Back Link */}
         <Link
           href="/items"
-          className="inline-flex items-center gap-2 text-white/50 hover:text-white transition-colors mb-6"
+          className="inline-flex items-center gap-2 text-muted-foreground hover:text-foreground transition-colors mb-6"
         >
           <svg
             className="w-4 h-4"
@@ -183,7 +183,7 @@ export default function ItemDetailPage() {
         {isLoading && (
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
-              <svg className="animate-spin h-5 w-5 text-white" viewBox="0 0 24 24" fill="none">
+              <svg className="animate-spin h-5 w-5 text-foreground" viewBox="0 0 24 24" fill="none">
                 <circle
                   className="opacity-25"
                   cx="12"
@@ -198,7 +198,7 @@ export default function ItemDetailPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-white/60">아이템 정보를 불러오는 중...</span>
+              <span className="text-muted-foreground">아이템 정보를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -219,9 +219,9 @@ export default function ItemDetailPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
-            <p className="text-white/50 mb-6">요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.</p>
+            <p className="text-muted-foreground mb-6">요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.</p>
             <Link href="/items">
-              <Button variant="outline" className="border-white/20 text-white hover:bg-white/10">
+              <Button variant="outline" className="border-border text-foreground hover:bg-muted">
                 목록으로 돌아가기
               </Button>
             </Link>
@@ -230,9 +230,9 @@ export default function ItemDetailPage() {
 
         {/* Item Detail */}
         {item && !isLoading && (
-          <div className="bg-white/5 border border-white/10 rounded-xl overflow-hidden">
+          <div className="bg-card border border-border rounded-xl overflow-hidden">
             {/* Item Image */}
-            <div className="flex items-center justify-center py-12 bg-white/5">{renderImage()}</div>
+            <div className="flex items-center justify-center py-12 bg-card">{renderImage()}</div>
 
             {/* Item Info */}
             <div className="p-6">
@@ -240,31 +240,31 @@ export default function ItemDetailPage() {
 
               {/* Quantity */}
               <div className="flex items-center gap-2 mb-4">
-                <span className="text-white/50">개수:</span>
+                <span className="text-muted-foreground">개수:</span>
                 <span className="font-medium">{item.quantity}개</span>
               </div>
 
               {/* Description */}
               {item.description && (
                 <div className="mb-6">
-                  <h2 className="text-sm text-white/50 mb-2">설명</h2>
-                  <p className="text-white/80 whitespace-pre-wrap">{item.description}</p>
+                  <h2 className="text-sm text-muted-foreground mb-2">설명</h2>
+                  <p className="text-muted-foreground whitespace-pre-wrap">{item.description}</p>
                 </div>
               )}
 
               {/* Meta Info */}
-              <div className="text-xs text-white/30 pt-4 border-t border-white/10">
+              <div className="text-xs text-muted pt-4 border-t border-border">
                 <p>등록일: {new Date(item.created_at).toLocaleDateString("ko-KR")}</p>
                 <p>수정일: {new Date(item.updated_at).toLocaleDateString("ko-KR")}</p>
               </div>
             </div>
 
             {/* Actions */}
-            <div className="p-6 bg-white/5 border-t border-white/10 flex gap-3">
+            <div className="p-6 bg-card border-t border-border flex gap-3">
               <Link href={`/items/${id}/edit`} className="flex-1">
                 <Button
                   variant="outline"
-                  className="w-full border-white/20 text-black hover:bg-green-500/10 hover:text-green-300"
+                  className="w-full border-border text-black hover:bg-green-500/10 hover:text-green-300"
                 >
                   <svg
                     className="w-4 h-4 mr-2"
@@ -302,10 +302,10 @@ export default function ItemDetailPage() {
 
         {/* Delete Confirmation Modal */}
         {showDeleteConfirm && (
-          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-6">
-            <div className="bg-zinc-900 border border-white/10 rounded-xl p-6 max-w-sm w-full">
+          <div className="fixed inset-0 bg-background/80 flex items-center justify-center z-50 p-6">
+            <div className="bg-zinc-900 border border-border rounded-xl p-6 max-w-sm w-full">
               <h2 className="text-xl font-bold mb-2">아이템 삭제</h2>
-              <p className="text-white/60 mb-6">
+              <p className="text-muted-foreground mb-6">
                 정말로 &quot;{item?.name}&quot;을(를) 삭제하시겠습니까?
                 <br />이 작업은 되돌릴 수 없습니다.
               </p>
@@ -313,7 +313,7 @@ export default function ItemDetailPage() {
                 <Button
                   onClick={handleDelete}
                   disabled={isDeleting}
-                  className="flex-1 bg-red-500 text-white hover:bg-red-600"
+                  className="flex-1 bg-red-500 text-foreground hover:bg-red-600"
                 >
                   {isDeleting ? (
                     <span className="flex items-center justify-center gap-2">
@@ -342,7 +342,7 @@ export default function ItemDetailPage() {
                   variant="outline"
                   onClick={() => setShowDeleteConfirm(false)}
                   disabled={isDeleting}
-                  className="flex-1 border-white/20 text-black hover:bg-green-500/10 hover:text-green-300"
+                  className="flex-1 border-border text-black hover:bg-green-500/10 hover:text-green-300"
                 >
                   취소
                 </Button>
@@ -353,8 +353,8 @@ export default function ItemDetailPage() {
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-white/10 mt-auto">
-        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-white/30">
+      <footer className="border-t border-border mt-auto">
+        <div className="max-w-3xl mx-auto px-6 py-6 text-center text-xs text-muted">
           <p>&copy; 2025 Mytem. All rights reserved.</p>
         </div>
       </footer>

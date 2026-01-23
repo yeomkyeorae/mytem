@@ -23,7 +23,7 @@ export default function ItemCard({ item }: ItemCardProps) {
       // 기본 아이콘 (이미지가 없는 경우)
       return (
         <svg
-          className="w-3/4 h-3/4 text-white/30"
+          className="w-3/4 h-3/4 text-muted"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -39,7 +39,7 @@ export default function ItemCard({ item }: ItemCardProps) {
     if (item.image_url.trim().startsWith("<svg")) {
       return (
         <div
-          className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-white"
+          className="w-full h-full flex items-center justify-center [&_svg]:w-full [&_svg]:h-full [&_svg]:text-foreground"
           dangerouslySetInnerHTML={{ __html: item.image_url }}
         />
       );
@@ -58,20 +58,20 @@ export default function ItemCard({ item }: ItemCardProps) {
 
   return (
     <Link href={`/items/${item.id}`}>
-      <Card className="p-4 bg-white/5 border-white/10 hover:bg-white/10 hover:border-white/20 transition-all cursor-pointer group">
+      <Card className="p-4 bg-card border-border hover:bg-muted hover:border-border transition-all cursor-pointer group">
         {/* 스케치 이미지 */}
-        <div className="w-full aspect-square flex items-center justify-center bg-white/5 rounded-lg mb-3 group-hover:bg-white/10 transition-colors">
+        <div className="w-full aspect-square flex items-center justify-center bg-card rounded-lg mb-3 group-hover:bg-muted transition-colors">
           {renderImage()}
         </div>
 
         {/* 이름 */}
-        <h3 className="font-medium text-white truncate mb-1">{item.name}</h3>
+        <h3 className="font-medium text-foreground truncate mb-1">{item.name}</h3>
 
         {/* 개수 및 카테고리 */}
         <div className="flex items-center justify-between gap-2">
-          <p className="text-sm text-white/50">{item.quantity}개</p>
+          <p className="text-sm text-muted-foreground">{item.quantity}개</p>
           {item.categories && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-white/10 text-white/60">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
               {item.categories.name}
             </span>
           )}
