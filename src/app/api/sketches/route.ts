@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getPictograms, RECOMMENDED_ICONS } from "@/lib/iconify";
+import { getSketchs, RECOMMENDED_ICONS } from "@/lib/iconify";
+
+// API 라우트를 dynamic으로 설정
+export const dynamic = 'force-dynamic';
 
 /**
  * 기본 스케치 목록 API
@@ -23,7 +26,7 @@ export async function GET(request: NextRequest) {
     }
 
     // 아이콘 데이터 가져오기
-    const sketches = await getPictograms(iconIds);
+    const sketches = await getSketchs(iconIds);
 
     // 카테고리별로 그룹화
     const categories = Object.keys(RECOMMENDED_ICONS).map((cat) => ({

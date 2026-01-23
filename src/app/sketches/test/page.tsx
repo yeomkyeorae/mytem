@@ -5,7 +5,7 @@ import Link from "next/link";
 import SketchPicker, {
   SelectedSketch,
   isCustomSketch,
-} from "@/components/SkecthPicker";
+} from "@/components/SketchPicker";
 import { useAuth } from "@/hooks/useAuth";
 
 export default function SketchTestPage() {

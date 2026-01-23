@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SkecthPicker";
+import SketchPicker, { SelectedSketch, isCustomSketch } from "@/components/SketchPicker";
 import type { Item, Category } from "@/types/database.types";
 
 export interface ItemFormData {

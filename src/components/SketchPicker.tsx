@@ -72,7 +72,7 @@ export default function SketchPicker({
     setError("");
 
     try {
-      const response = await fetch("/api/pictograms/custom");
+      const response = await fetch("/api/sketches/custom");
 
       if (!response.ok) {
         throw new Error("내 스케치을 불러오는데 실패했습니다.");
@@ -98,7 +98,7 @@ export default function SketchPicker({
         params.set("category", selectedCategory);
       }
 
-      const response = await fetch(`/api/pictograms?${params}`);
+      const response = await fetch(`/api/sketches?${params}`);
 
       if (!response.ok) {
         throw new Error("스케치을 불러오는데 실패했습니다.");
@@ -124,7 +124,7 @@ export default function SketchPicker({
         limit: "30",
       });
 
-      const response = await fetch(`/api/pictograms/search?${params}`);
+      const response = await fetch(`/api/sketches/search?${params}`);
 
       if (!response.ok) {
         throw new Error("검색에 실패했습니다.");

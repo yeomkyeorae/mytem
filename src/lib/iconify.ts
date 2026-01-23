@@ -1,8 +1,8 @@
 import type {
   IconifyIcon,
   IconifySearchResult,
-  Pictogram,
-} from "@/types/pictogram.types";
+  Sketch,
+} from "@/types/sketch.types";
 
 const ICONIFY_API_BASE = "https://api.iconify.design";
 
@@ -91,7 +91,7 @@ export function iconToSvg(icon: IconifyIcon): string {
  * @param iconId 아이콘 ID
  * @returns 스케치 데이터
  */
-export async function getPictogram(iconId: string): Promise<Pictogram | null> {
+export async function getSketch(iconId: string): Promise<Sketch | null> {
   const iconData = await getIconData(iconId);
 
   if (!iconData) {
@@ -115,15 +115,15 @@ export async function getPictogram(iconId: string): Promise<Pictogram | null> {
  * @param iconIds 아이콘 ID 배열
  * @returns 스케치 배열
  */
-export async function getPictograms(
+export async function getSketchs(
   iconIds: string[]
-): Promise<Pictogram[]> {
-  const promises = iconIds.map((id) => getPictogram(id));
+): Promise<Sketch[]> {
+  const promises = iconIds.map((id) => getSketch(id));
   const results = await Promise.allSettled(promises);
 
   return results
     .filter(
-      (result): result is PromiseFulfilledResult<Pictogram> =>
+      (result): result is PromiseFulfilledResult<Sketch> =>
         result.status === "fulfilled" && result.value !== null
     )
     .map((result) => result.value);

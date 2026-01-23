@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { searchIcons, getPictograms } from "@/lib/iconify";
+import { searchIcons, getSketchs } from "@/lib/iconify";
+
+// API 라우트를 dynamic으로 설정
+export const dynamic = 'force-dynamic';
 
 /**
  * 스케치 검색 API
@@ -30,7 +33,7 @@ export async function GET(request: NextRequest) {
     const searchResult = await searchIcons(query, limit);
 
     // 아이콘 ID를 스케치 데이터로 변환
-    const sketches = await getPictograms(searchResult.icons);
+    const sketches = await getSketchs(searchResult.icons);
 
     return NextResponse.json({
       sketches,
