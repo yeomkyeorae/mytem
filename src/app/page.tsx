@@ -29,7 +29,7 @@ export default function Home() {
           </h1>
 
           {/* Subheadline */}
-          <p className="text-lg md:text-xl text-foreground/70 max-w-2xl mx-auto mb-12 leading-relaxed">
+          <p className="text-lg md:text-xl text-foreground/90 max-w-2xl mx-auto mb-12 leading-relaxed">
             아이템을 등록하고, 관리하고, 시각화하세요.
             <br className="hidden md:block" />
             AI가 만들어주는 스케치으로 더욱 직관적으로.
@@ -73,7 +73,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">체계적인 관리</h3>
-              <p className="text-sm text-foreground/70 leading-relaxed">
+              <p className="text-sm text-foreground/90 leading-relaxed">
                 아이템을 카테고리별로 분류하고 개수와 상세 정보를 한눈에 파악하세요.
               </p>
             </div>
@@ -96,7 +96,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">스케치 검색</h3>
-              <p className="text-sm text-foreground/70 leading-relaxed">
+              <p className="text-sm text-foreground/90 leading-relaxed">
                 키워드로 기본 스케치을 검색하고 아이템에 바로 적용하세요.
               </p>
             </div>
@@ -119,7 +119,7 @@ export default function Home() {
                 </svg>
               </div>
               <h3 className="text-lg font-semibold mb-2">AI 이미지 생성</h3>
-              <p className="text-sm text-foreground/70 leading-relaxed">
+              <p className="text-sm text-foreground/90 leading-relaxed">
                 원하는 스케치이 없다면? AI가 텍스트 설명으로 맞춤 이미지를 만들어드려요.
               </p>
             </div>

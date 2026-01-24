@@ -120,7 +120,7 @@ export default function ItemsPage() {
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
           <LoadingSpinner className="h-5 w-5 text-foreground" />
-          <span className="text-foreground/70">로딩 중...</span>
+          <span className="text-foreground/90">로딩 중...</span>
         </div>
       </div>
     );
@@ -141,7 +141,7 @@ export default function ItemsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">내 아이템</h1>
-            <p className="text-foreground/70">
+            <p className="text-foreground/90">
               {items.length > 0
                 ? `총 ${items.length}개의 아이템을 관리하고 있습니다.`
                 : "등록된 아이템이 없습니다."}

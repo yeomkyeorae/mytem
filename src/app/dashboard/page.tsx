@@ -76,7 +76,7 @@ export default function DashboardPage() {
       <main className="flex-1 max-w-6xl mx-auto w-full px-6 py-8 pt-24">
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">대시보드</h1>
-          <p className="text-foreground/70">나의 아이템을 관리하세요</p>
+          <p className="text-foreground/90">나의 아이템을 관리하세요</p>
         </div>
 
         {/* Error Message */}
@@ -131,7 +131,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="font-medium">아이템 등록</p>
-                  <p className="text-sm text-foreground/70">새로운 아이템을 추가하세요</p>
+                  <p className="text-sm text-foreground/90">새로운 아이템을 추가하세요</p>
                 </div>
               </div>
             </Link>
@@ -157,7 +157,7 @@ export default function DashboardPage() {
                 </div>
                 <div>
                   <p className="font-medium">스케치 생성</p>
-                  <p className="text-sm text-foreground/70">AI로 커스텀 이미지를 만드세요</p>
+                  <p className="text-sm text-foreground/90">AI로 커스텀 이미지를 만드세요</p>
                 </div>
               </div>
             </Link>
@@ -200,7 +200,7 @@ export default function DashboardPage() {
               </svg>
             </div>
             <h3 className="text-lg font-medium mb-2">아직 등록된 아이템이 없습니다</h3>
-            <p className="text-foreground/70 mb-6">
+            <p className="text-foreground/90 mb-6">
               첫 번째 아이템을 등록하고 관리를 시작하세요
             </p>
             <Link

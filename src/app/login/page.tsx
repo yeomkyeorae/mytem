@@ -65,7 +65,7 @@ export default function LoginPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">다시 만나서 반가워요</h1>
-            <p className="text-foreground/70 text-sm">
+            <p className="text-foreground/90 text-sm">
               계정에 로그인하여 아이템을 관리하세요
             </p>
           </div>
@@ -91,7 +91,7 @@ export default function LoginPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
                 required
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
@@ -115,7 +115,7 @@ export default function LoginPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="••••••••"
                 required
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 

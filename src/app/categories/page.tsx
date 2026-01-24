@@ -127,7 +127,7 @@ export default function CategoriesPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">카테고리 관리</h1>
-            <p className="text-foreground/70">
+            <p className="text-foreground/90">
               {categories.length > 0
                 ? `총 ${categories.length}개의 카테고리를 관리하고 있습니다.`
                 : "등록된 카테고리가 없습니다."}
@@ -143,7 +143,7 @@ export default function CategoriesPage() {
               value={categoryName}
               onChange={(e) => setCategoryName(e.target.value)}
               placeholder="새 카테고리 이름 (예: 의류, 전자기기, 책...)"
-              className="flex-1 bg-card border-border text-foreground placeholder:text-muted-foreground focus:border-ring"
+              className="flex-1 bg-card border-border text-foreground placeholder:text-foreground/50 focus:border-ring"
               disabled={isSubmitting}
             />
             <Button

@@ -299,7 +299,7 @@ export default function ItemForm({
               </div>
               <div className="flex-1">
                 <p className="font-medium text-foreground">{uploadedFile.name}</p>
-                <p className="text-sm text-foreground/70">
+                <p className="text-sm text-foreground/90">
                   {(uploadedFile.size / 1024).toFixed(1)} KB
                 </p>
               </div>
@@ -375,7 +375,7 @@ export default function ItemForm({
               <div className="flex-1">
                 <p className="font-medium text-foreground">{displayInfo.name}</p>
                 {displayInfo.collection && (
-                  <p className="text-sm text-foreground/70">{displayInfo.collection}</p>
+                  <p className="text-sm text-foreground/90">{displayInfo.collection}</p>
                 )}
               </div>
               <Button
@@ -479,7 +479,7 @@ export default function ItemForm({
           value={name}
           onChange={(e) => setName(e.target.value)}
           placeholder="예: 노트북, 가방, 책"
-          className="bg-card border-border text-foreground placeholder:text-muted focus:border-ring"
+          className="bg-card border-border text-foreground placeholder:text-foreground/50 focus:border-ring"
         />
         {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
       </div>
@@ -495,7 +495,7 @@ export default function ItemForm({
           min={1}
           value={quantity}
           onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-          className="bg-card border-border text-foreground placeholder:text-muted focus:border-ring"
+          className="bg-card border-border text-foreground placeholder:text-foreground/50 focus:border-ring"
         />
         {errors.quantity && <p className="mt-1 text-sm text-red-400">{errors.quantity}</p>}
       </div>
@@ -511,7 +511,7 @@ export default function ItemForm({
           onChange={(e) => setDescription(e.target.value)}
           placeholder="아이템에 대한 간단한 설명을 입력해주세요."
           rows={4}
-          className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors resize-none"
+          className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors resize-none"
         />
       </div>
 

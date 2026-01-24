@@ -145,7 +145,7 @@ export default function ItemDetailPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-foreground/70">로딩 중...</span>
+          <span className="text-foreground/90">로딩 중...</span>
         </div>
       </div>
     );
@@ -219,7 +219,7 @@ export default function ItemDetailPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2 text-red-400">{error}</h2>
-            <p className="text-foreground/70 mb-6">요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.</p>
+            <p className="text-foreground/90 mb-6">요청한 아이템을 찾을 수 없거나 접근할 수 없습니다.</p>
             <Link href="/items">
               <Button variant="outline" className="border-border text-foreground hover:bg-muted">
                 목록으로 돌아가기
@@ -248,7 +248,7 @@ export default function ItemDetailPage() {
               {item.description && (
                 <div className="mb-6">
                   <h2 className="text-sm text-muted-foreground mb-2">설명</h2>
-                  <p className="text-foreground/70 whitespace-pre-wrap">{item.description}</p>
+                  <p className="text-foreground/90 whitespace-pre-wrap">{item.description}</p>
                 </div>
               )}
 
@@ -305,7 +305,7 @@ export default function ItemDetailPage() {
           <div className="fixed inset-0 bg-background/80 flex items-center justify-center z-50 p-6">
             <div className="bg-zinc-900 border border-border rounded-xl p-6 max-w-sm w-full">
               <h2 className="text-xl font-bold mb-2">아이템 삭제</h2>
-              <p className="text-foreground/70 mb-6">
+              <p className="text-foreground/90 mb-6">
                 정말로 &quot;{item?.name}&quot;을(를) 삭제하시겠습니까?
                 <br />이 작업은 되돌릴 수 없습니다.
               </p>

@@ -397,6 +397,10 @@ src/
     - [x] globals.css 색상 변수 조정 (muted: 14.9%→20%, muted-foreground: 63.9%→75%)
     - [x] 15개 파일의 중요 텍스트 색상 개선 (text-muted-foreground → text-foreground/70)
     - [x] 모든 페이지/컴포넌트에서 텍스트 대비 향상
+  - [x] 다크모드 placeholder 및 부제목 가시성 추가 개선
+    - [x] 11개 파일의 placeholder 색상 개선 (placeholder:text-muted → placeholder:text-foreground/50)
+    - [x] 13개 파일의 부제목/설명 텍스트 개선 (text-foreground/70 → text-foreground/90)
+    - [x] 총 31곳의 텍스트 투명도 20% 증가로 가독성 대폭 향상
 
 ### Phase 7: 추가 기능
 

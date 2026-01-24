@@ -84,7 +84,7 @@ export default function SignupPage() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold mb-4">이메일을 확인해주세요</h1>
-            <p className="text-foreground/70 mb-6">
+            <p className="text-foreground/90 mb-6">
               <span className="text-foreground font-medium">{email}</span>로 확인 메일을 보냈습니다.
               <br />
               메일의 링크를 클릭하여 가입을 완료해주세요.
@@ -111,7 +111,7 @@ export default function SignupPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">계정 만들기</h1>
-            <p className="text-foreground/70 text-sm">
+            <p className="text-foreground/90 text-sm">
               Mytem에 가입하고 아이템을 관리하세요
             </p>
           </div>
@@ -137,7 +137,7 @@ export default function SignupPage() {
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="name@example.com"
                 required
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
@@ -153,7 +153,7 @@ export default function SignupPage() {
                 onChange={(e) => setPassword(e.target.value)}
                 placeholder="최소 6자 이상"
                 required
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
@@ -169,7 +169,7 @@ export default function SignupPage() {
                 onChange={(e) => setConfirmPassword(e.target.value)}
                 placeholder="비밀번호를 다시 입력하세요"
                 required
-                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-muted focus:outline-none focus:border-ring focus:bg-accent transition-colors"
+                className="w-full px-4 py-3 bg-card border border-border rounded-lg text-foreground placeholder:text-foreground/50 focus:outline-none focus:border-ring focus:bg-accent transition-colors"
               />
             </div>
 
