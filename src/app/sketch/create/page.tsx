@@ -161,7 +161,7 @@ export default function SketchCreatePage() {
                     }
                   }}
                 />
-                <p className="mt-2 text-sm text-muted">
+                <p className="mt-2 text-sm text-foreground/90">
                   간단하고 명확한 설명이 좋은 결과를 만듭니다.
                 </p>
               </div>

@@ -283,7 +283,7 @@ export default function ItemForm({
       {/* 이미지 파일 업로드 */}
       <div>
         <Label className="text-muted-foreground mb-2 block">
-          이미지 파일 <span className="text-muted text-xs">(스케치와 둘 중 하나 필수)</span>
+          이미지 파일 <span className="text-foreground/90 text-xs">(스케치와 둘 중 하나 필수)</span>
         </Label>
 
         {uploadedFile && uploadedFilePreview ? (
@@ -362,7 +362,7 @@ export default function ItemForm({
       {/* 스케치 선택 */}
       <div>
         <Label className="text-muted-foreground mb-2 block">
-          스케치 이미지 <span className="text-muted text-xs">(파일과 둘 중 하나 필수)</span>
+          스케치 이미지 <span className="text-foreground/90 text-xs">(파일과 둘 중 하나 필수)</span>
         </Label>
 
         {/* 선택된 스케치 미리보기 */}
