@@ -82,7 +82,7 @@ export default function SketchGalleryPage() {
           <div className="flex items-center justify-between mb-8">
             <div>
               <h1 className="text-3xl font-bold">내 스케치</h1>
-              <p className="text-muted-foreground mt-2">
+              <p className="text-foreground/70 mt-2">
                 AI로 생성한 스케치를 관리하세요.
               </p>
             </div>
@@ -123,7 +123,7 @@ export default function SketchGalleryPage() {
                     d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                   />
                 </svg>
-                <span className="text-muted-foreground">로딩 중...</span>
+                <span className="text-foreground/70">로딩 중...</span>
               </div>
             </div>
           )}
@@ -145,7 +145,7 @@ export default function SketchGalleryPage() {
                 </svg>
               </div>
               <h2 className="text-xl font-semibold mb-2">아직 생성한 스케치가 없습니다</h2>
-              <p className="text-muted-foreground mb-6">
+              <p className="text-foreground/70 mb-6">
                 AI를 이용해 나만의 스케치를 만들어보세요!
               </p>
               <Link href="/sketch/create">

@@ -84,7 +84,7 @@ export default function SignupPage() {
               </svg>
             </div>
             <h1 className="text-2xl font-bold mb-4">이메일을 확인해주세요</h1>
-            <p className="text-muted-foreground mb-6">
+            <p className="text-foreground/70 mb-6">
               <span className="text-foreground font-medium">{email}</span>로 확인 메일을 보냈습니다.
               <br />
               메일의 링크를 클릭하여 가입을 완료해주세요.
@@ -111,7 +111,7 @@ export default function SignupPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">계정 만들기</h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-foreground/70 text-sm">
               Mytem에 가입하고 아이템을 관리하세요
             </p>
           </div>

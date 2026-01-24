@@ -393,6 +393,10 @@ src/
   - [x] 카테고리 관리 페이지 테마 적용 (categories/page.tsx)
   - [x] CategoryTag 컴포넌트 테마 적용
   - [x] CategoryTag 가시성 개선 (배경색, border, shadow 추가)
+  - [x] 다크모드 텍스트 가시성 전체 개선
+    - [x] globals.css 색상 변수 조정 (muted: 14.9%→20%, muted-foreground: 63.9%→75%)
+    - [x] 15개 파일의 중요 텍스트 색상 개선 (text-muted-foreground → text-foreground/70)
+    - [x] 모든 페이지/컴포넌트에서 텍스트 대비 향상
 
 ### Phase 7: 추가 기능
 

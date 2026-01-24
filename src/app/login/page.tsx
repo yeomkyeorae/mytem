@@ -65,7 +65,7 @@ export default function LoginPage() {
           {/* Title */}
           <div className="text-center mb-8">
             <h1 className="text-2xl font-bold mb-2">다시 만나서 반가워요</h1>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-foreground/70 text-sm">
               계정에 로그인하여 아이템을 관리하세요
             </p>
           </div>

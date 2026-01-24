@@ -61,7 +61,7 @@ export default function SketchTestPage() {
       <main className="max-w-6xl mx-auto px-6 py-8">
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">스케치 선택 테스트</h1>
-          <p className="text-muted-foreground">
+          <p className="text-foreground/70">
             검색하거나 카테고리를 선택하여 스케치를 찾아보세요.
           </p>
         </div>

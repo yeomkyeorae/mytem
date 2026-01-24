@@ -127,7 +127,7 @@ export default function CategoriesPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">카테고리 관리</h1>
-            <p className="text-muted-foreground">
+            <p className="text-foreground/70">
               {categories.length > 0
                 ? `총 ${categories.length}개의 카테고리를 관리하고 있습니다.`
                 : "등록된 카테고리가 없습니다."}
@@ -208,7 +208,7 @@ export default function CategoriesPage() {
                   d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
                 />
               </svg>
-              <span className="text-muted-foreground">카테고리를 불러오는 중...</span>
+              <span className="text-foreground/70">카테고리를 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -243,7 +243,7 @@ export default function CategoriesPage() {
               </svg>
             </div>
             <h2 className="text-xl font-semibold mb-2">아직 등록된 카테고리가 없습니다</h2>
-            <p className="text-muted-foreground mb-6 text-center">
+            <p className="text-foreground/70 mb-6 text-center">
               첫 번째 카테고리를 추가하고 아이템을 체계적으로 관리해보세요.
             </p>
           </div>

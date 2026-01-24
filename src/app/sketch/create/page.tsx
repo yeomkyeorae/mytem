@@ -135,7 +135,7 @@ export default function SketchCreatePage() {
               ← 갤러리로 돌아가기
             </Link>
             <h1 className="text-3xl font-bold">AI 스케치 생성</h1>
-            <p className="text-muted-foreground mt-2">
+            <p className="text-foreground/70 mt-2">
               원하는 이미지를 텍스트로 설명하면 AI가 스케치를 만들어드립니다.
             </p>
           </div>
@@ -210,7 +210,7 @@ export default function SketchCreatePage() {
             {generatedImage && (
               <div className="mt-6 space-y-4">
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground mb-4">생성된 스케치</p>
+                  <p className="text-sm text-foreground/70 mb-4">생성된 스케치</p>
                   <div className="inline-block p-4 bg-muted rounded-xl">
                     <img
                       src={generatedImage}
@@ -294,7 +294,7 @@ export default function SketchCreatePage() {
           {/* 사용 팁 */}
           <div className="mt-8 p-6 bg-card border border-border rounded-xl">
             <h3 className="font-semibold mb-3">사용 팁</h3>
-            <ul className="space-y-2 text-sm text-muted-foreground">
+            <ul className="space-y-2 text-sm text-foreground/70">
               <li>• 단일 물체를 간단히 설명하세요 (예: "가방", "노트북")</li>
               <li>• 구체적인 설명이 더 좋은 결과를 만듭니다</li>
               <li>• 생성된 스케치는 아이템 등록 시 사용할 수 있습니다</li>

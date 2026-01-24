@@ -120,7 +120,7 @@ export default function ItemsPage() {
       <div className="min-h-screen bg-background text-foreground flex items-center justify-center">
         <div className="flex items-center gap-3">
           <LoadingSpinner className="h-5 w-5 text-foreground" />
-          <span className="text-muted-foreground">로딩 중...</span>
+          <span className="text-foreground/70">로딩 중...</span>
         </div>
       </div>
     );
@@ -141,7 +141,7 @@ export default function ItemsPage() {
         <div className="flex items-center justify-between mb-8">
           <div>
             <h1 className="text-2xl font-bold mb-1">내 아이템</h1>
-            <p className="text-muted-foreground">
+            <p className="text-foreground/70">
               {items.length > 0
                 ? `총 ${items.length}개의 아이템을 관리하고 있습니다.`
                 : "등록된 아이템이 없습니다."}
@@ -224,7 +224,7 @@ export default function ItemsPage() {
         {/* 카테고리가 없을 때 안내 메시지 */}
         {categories.length === 0 && items.length > 0 && !isLoading && (
           <div className="mb-6 p-4 bg-card border border-border rounded-lg">
-            <p className="text-muted-foreground text-sm">
+            <p className="text-foreground/70 text-sm">
               카테고리를 생성하여 아이템을 분류해보세요.{" "}
               <Link href="/categories" className="underline hover:text-foreground">
                 카테고리 관리
@@ -251,7 +251,7 @@ export default function ItemsPage() {
           <div className="flex items-center justify-center py-20">
             <div className="flex items-center gap-3">
               <LoadingSpinner className="h-5 w-5 text-foreground" />
-              <span className="text-muted-foreground">아이템을 불러오는 중...</span>
+              <span className="text-foreground/70">아이템을 불러오는 중...</span>
             </div>
           </div>
         )}
@@ -283,7 +283,7 @@ export default function ItemsPage() {
             {selectedCategoryId === "all" ? (
               <>
                 <h2 className="text-xl font-semibold mb-2">아직 등록된 아이템이 없습니다</h2>
-                <p className="text-muted-foreground mb-6 text-center">
+                <p className="text-foreground/70 mb-6 text-center">
                   첫 번째 아이템을 등록하고 체계적으로 관리해보세요.
                 </p>
                 <Link href="/items/new">
@@ -304,7 +304,7 @@ export default function ItemsPage() {
             ) : (
               <>
                 <h2 className="text-xl font-semibold mb-2">이 카테고리에 아이템이 없습니다</h2>
-                <p className="text-muted-foreground mb-6 text-center">
+                <p className="text-foreground/70 mb-6 text-center">
                   {categories.find((c) => c.id === selectedCategoryId)?.name} 카테고리에 아이템을 추가해보세요.
                 </p>
                 <div className="flex gap-3">

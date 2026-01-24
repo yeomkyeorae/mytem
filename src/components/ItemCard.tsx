@@ -69,9 +69,9 @@ export default function ItemCard({ item }: ItemCardProps) {
 
         {/* 개수 및 카테고리 */}
         <div className="flex items-center justify-between gap-2">
-          <p className="text-sm text-muted-foreground">{item.quantity}개</p>
+          <p className="text-sm text-foreground/70">{item.quantity}개</p>
           {item.categories && (
-            <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
+            <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-foreground/70">
               {item.categories.name}
             </span>
           )}

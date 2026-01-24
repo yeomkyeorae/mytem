@@ -103,6 +103,7 @@
 | 2026-01-24 | 다크 모드 작동 안 함 문제 해결 | 완료 | @frontend에게 위임, 15개 파일 bg-black → bg-background 변경 |
 | 2026-01-24 | 다크 모드 UI 개선 | 완료 | @frontend에게 위임, ThemeToggle 가시성 개선, 카테고리 페이지 테마 적용 |
 | 2026-01-24 | 카테고리 태그 가시성 개선 | 완료 | CategoryTag 컴포넌트 배경색, border, shadow 추가 |
+| 2026-01-24 | 다크모드 텍스트 가시성 전체 개선 | 완료 | @frontend에게 위임, globals.css 색상 조정, 15개 파일 텍스트 개선 |
 
 ---
 

@@ -299,7 +299,7 @@ export default function ItemForm({
               </div>
               <div className="flex-1">
                 <p className="font-medium text-foreground">{uploadedFile.name}</p>
-                <p className="text-sm text-muted-foreground">
+                <p className="text-sm text-foreground/70">
                   {(uploadedFile.size / 1024).toFixed(1)} KB
                 </p>
               </div>
@@ -375,7 +375,7 @@ export default function ItemForm({
               <div className="flex-1">
                 <p className="font-medium text-foreground">{displayInfo.name}</p>
                 {displayInfo.collection && (
-                  <p className="text-sm text-muted-foreground">{displayInfo.collection}</p>
+                  <p className="text-sm text-foreground/70">{displayInfo.collection}</p>
                 )}
               </div>
               <Button

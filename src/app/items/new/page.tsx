@@ -107,7 +107,7 @@ export default function NewItemPage() {
               d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
             />
           </svg>
-          <span className="text-muted-foreground">로딩 중...</span>
+          <span className="text-foreground/70">로딩 중...</span>
         </div>
       </div>
     );
@@ -144,7 +144,7 @@ export default function NewItemPage() {
         {/* Page Header */}
         <div className="mb-8">
           <h1 className="text-2xl font-bold mb-2">새 아이템 등록</h1>
-          <p className="text-muted-foreground">새로운 아이템의 정보를 입력해주세요.</p>
+          <p className="text-foreground/70">새로운 아이템의 정보를 입력해주세요.</p>
         </div>
 
         {/* Form */}
